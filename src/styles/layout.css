@@ -1,8 +1,8 @@
 .layout-header {
+    display: flex;
     background-color: #1E6CF5;
-    color: #e9c46a;
-    text-align: center;
-    padding: 20px;
+    padding: 5px;
+    align-items: center;
 }
 
 .layout-footer {
@@ -14,4 +14,9 @@
     position: fixed;
     bottom: 0;
     left: 0;
+}
+
+.title-span {
+    text-align: center;
+    color: white;
 }
