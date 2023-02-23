@@ -1,8 +1,6 @@
 import { Button, FormControl, TextField } from "@mui/material";
 import styles from "@/styles/AuthenticationPage.module.css";
 import Router from "next/router";
-import Footer from "@/components/Footer";
-import { ReactElement } from "react";
 
 const Authentication = () => {
   return (
@@ -29,11 +27,10 @@ const Authentication = () => {
 };
 export default Authentication;
 
-Authentication.getLayout = function PageLayout(page: ReactElement){
+Authentication.getLayout = function PageLayout(page: JSX.Element){
         return (
             <>
                 {page}
-                <Footer/>
             </>
         )
 }
