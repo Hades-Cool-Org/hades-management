@@ -22,7 +22,7 @@ export default function Configuration() {
         <Link href={"./configuration/edit-profile"}>
           <ListItem itemText="Ajuda" />
         </Link>
-        <Link href={"./configuration/edit-profile"}>
+        <Link href={".login"}>
           <ListItem itemText="Sair" />
         </Link>
       </List>

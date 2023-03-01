@@ -5,7 +5,7 @@ const InicialComprador = () => {
   return (
     <>
       <Head>
-        <title>Login</title>
+        <title>Comprador</title>
       </Head>
       <main className={styles.main}>InicialComprador</main>
     </>
