@@ -1,17 +1,32 @@
-import { Menu } from "@mui/icons-material";
+import React, { useEffect } from "react";
+import { ArrowBackIos, Menu } from "@mui/icons-material";
 import { IconButton } from "@mui/material";
-import Router from "next/router";
+import Link from "next/link";
+import Router, { useRouter } from "next/router";
 
 const Header = () => {
+  const router = useRouter();
+
+  useEffect(() => {
+    console.log(router.pathname.includes("configuration"));
+  }, []);
+
+  const handleClick = () => {
+    router.back();
+  };
+
   return (
     <>
       <div className="layout-header">
-        <IconButton
-          aria-label="config-button"
-          onClick={() => Router.push("./configuration")}
-        >
-          <Menu fontSize="large" style={{ fill: "white" }} />
-        </IconButton>
+        {router.pathname.includes("configuration") ? (
+          <IconButton onClick={handleClick}>
+            <ArrowBackIos fontSize="small" style={{ fill: "white" }} />
+          </IconButton>
+        ) : (
+          <Link href={"./configuration"}>
+            <Menu fontSize="large" style={{ fill: "white" }} />
+          </Link>
+        )}
         <span className="title-span">Perfil - Comprador</span>
       </div>
     </>

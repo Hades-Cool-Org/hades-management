@@ -3,13 +3,14 @@ import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 
 interface ListItemValues {
     itemText: string;
+    handleClick?: any;
 }
 
 const ListItem: React.FC<ListItemValues> = (props:ListItemValues) => {
-    const {itemText} = props;
-    
+    const {itemText, handleClick} = props;
+
     return(
-        <ListItemButton>
+        <ListItemButton onClick={handleClick}>
             <ListItemText primary={itemText} />
             <ListItemIcon>
                 <ArrowForwardIosIcon fontSize="small"/>
