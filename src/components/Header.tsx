@@ -27,7 +27,7 @@ const Header = () => {
             <Menu fontSize="large" style={{ fill: "white" }} />
           </Link>
         )}
-        <span className="title-span">Perfil - Comprador</span>
+        <span className="title-span">Perfil - </span>
       </div>
     </>
   );

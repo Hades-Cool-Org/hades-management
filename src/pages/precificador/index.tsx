@@ -1,15 +1,15 @@
 import Head from "next/head";
 import styles from "@/styles/Root.module.css";
 
-const Comprador = () => {
+const Precificador = () => {
   return (
     <>
       <Head>
         <title>Comprador</title>
       </Head>
-      <main className={styles.main}>Comprador</main>
+      <main className={styles.main}>Precificador</main>
     </>
   );
 };
 
-export default Comprador;
+export default Precificador;
