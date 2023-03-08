@@ -42,3 +42,9 @@ export interface Product {
   details: string;
   measuringUnit: string;
 }
+
+export interface Context {
+  state: {
+    user: User;
+  };
+}

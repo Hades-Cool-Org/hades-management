@@ -1,9 +1,28 @@
 import { Button, FormControl, TextField } from "@mui/material";
 import styles from "@/styles/AuthenticationPage.module.css";
-import Router from "next/router";
+import { useRouter } from "next/router";
 import Head from "next/head";
+import { User } from "@/types";
+import React from "react";
+import Context from "@/components/Context";
 
 const Authentication = () => {
+  const [email, setEmail] = React.useState("");
+  const router = useRouter();
+  const context = React.useContext(Context);
+
+  const handleChangeEmail = (event: any) => {
+    setEmail(event.target.value);
+  };
+
+  const checkUser: any = () => {
+    switch (email) {
+      case "comprador":
+        router.push("/comprador");
+        break;
+    }
+  };
+
   return (
     <>
       <Head>
@@ -12,17 +31,19 @@ const Authentication = () => {
       </Head>
       <main className={styles.main}>
         <form>
-          <TextField id="standard-basic" label="Login" variant="standard" />
+          <TextField
+            id="standard-basic"
+            label="Login"
+            variant="standard"
+            onChange={handleChangeEmail}
+          />
           <TextField
             id="standard-basic"
             label="Password"
             variant="standard"
             type="password"
           />
-          <Button
-            variant="contained"
-            onClick={() => Router.push("./inicial_comprador")}
-          >
+          <Button variant="contained" onClick={checkUser}>
             Submit
           </Button>
         </form>

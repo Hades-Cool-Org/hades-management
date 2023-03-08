@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import { ArrowBackIos, Menu } from "@mui/icons-material";
 import { IconButton } from "@mui/material";
 import Link from "next/link";
-import Router, { useRouter } from "next/router";
+import { useRouter } from "next/router";
 
 const Header = () => {
   const router = useRouter();
