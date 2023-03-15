@@ -5,22 +5,20 @@ import Head from "next/head";
 import { User } from "@/types";
 import React from "react";
 import Context from "@/components/Context";
+import axios from "axios";
 
 const Authentication = () => {
-  const [email, setEmail] = React.useState("");
+  const [email, setEmail] = React.useState<string>("guilhermeX@gmail.com");
+  const [password, setPassword] = React.useState<string>("guilherme");
+
   const router = useRouter();
   const context = React.useContext(Context);
 
-  const handleChangeEmail = (event: any) => {
-    setEmail(event.target.value);
-  };
-
-  const checkUser: any = () => {
-    switch (email) {
-      case "comprador":
-        router.push("/comprador");
-        break;
-    }
+  const handleSubmit = async (event: any) => {
+    console.log(email, password);
+    event.preventDefault();
+    const data = await axios.post("api/login", {email, password});
+    
   };
 
   return (
@@ -35,15 +33,20 @@ const Authentication = () => {
             id="standard-basic"
             label="Login"
             variant="standard"
-            onChange={handleChangeEmail}
+            onChange={(e) => {
+              setEmail(e.target.value);
+            }}
           />
           <TextField
             id="standard-basic"
             label="Password"
             variant="standard"
             type="password"
+            onChange={(e) => {
+              setPassword(e.target.value);
+            }}
           />
-          <Button variant="contained" onClick={checkUser}>
+          <Button variant="contained" onClick={handleSubmit}>
             Submit
           </Button>
         </form>
