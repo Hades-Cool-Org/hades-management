@@ -15,10 +15,9 @@ const Authentication = () => {
   const context = React.useContext(Context);
 
   const handleSubmit = async (event: any) => {
-    console.log(email, password);
     event.preventDefault();
-    const data = await axios.post("api/login", {email, password});
-    
+    const data = await axios.post("http://localhost:3333/login", {email, password});
+    console.log(data);
   };
 
   return (
