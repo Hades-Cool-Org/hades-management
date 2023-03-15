@@ -10,13 +10,7 @@ export default function App({ Component, pageProps }: AppProps) {
   }
 
   return (
-    <Context.Provider
-      value={{
-        state: {
-          test: "test",
-        },
-      }}
-    >
+    <Context.Provider>
       <Layout>
         <Component {...pageProps} />
       </Layout>

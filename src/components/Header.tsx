@@ -7,10 +7,6 @@ import { useRouter } from "next/router";
 const Header = () => {
   const router = useRouter();
 
-  useEffect(() => {
-    console.log(router.pathname.includes("configuration"));
-  }, []);
-
   const handleClick = () => {
     router.back();
   };
