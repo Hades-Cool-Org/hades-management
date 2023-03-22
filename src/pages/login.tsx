@@ -1,24 +1,40 @@
 import { Button, FormControl, TextField } from "@mui/material";
 import styles from "@/styles/AuthenticationPage.module.css";
-import { useRouter } from "next/router";
 import Head from "next/head";
-import { User } from "@/types";
-import React from "react";
-import Context from "@/components/Context";
+import { User } from "@/types/types";
+import React, { useEffect, useContext } from "react";
+import { Context } from "@/components/Context";
 import axios from "axios";
 
 const Authentication = () => {
   const [email, setEmail] = React.useState<string>("guilhermeX@gmail.com");
   const [password, setPassword] = React.useState<string>("guilherme");
 
-  const router = useRouter();
-  const context = React.useContext(Context);
+  const context = useContext(Context);
+
+  function parseJwt(token: any) {
+    if (!token) {
+      return;
+    }
+    const base64Url = token.split(".")[1];
+    const base64 = base64Url.replace("-", "+").replace("_", "/");
+    return JSON.parse(window.atob(base64));
+  }
 
   const handleSubmit = async (event: any) => {
     event.preventDefault();
-    const data = await axios.post("http://localhost:3333/login", {email, password});
-    console.log(data);
+    const data = await axios.post("http://localhost:3333/login", {
+      email,
+      password,
+    });
+    const userData = parseJwt(data.data.jwt);
+    // context.state.setUser({ name: userData.name, id: userData.user_id });
+    console.log(context);
   };
+
+  useEffect(() => {
+    console.log(context);
+  }, []);
 
   return (
     <>
