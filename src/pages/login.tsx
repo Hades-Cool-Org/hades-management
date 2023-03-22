@@ -1,25 +1,16 @@
 import { Button, FormControl, TextField } from "@mui/material";
 import styles from "@/styles/AuthenticationPage.module.css";
 import Head from "next/head";
-import { User } from "@/types/types";
-import React, { useEffect, useContext } from "react";
+import React, { useState, useContext } from "react";
 import axios from "axios";
 import UserContext, { UserContextProvider } from "@/components/Context";
+import parseJwt from "@/utils/parseJwt";
 
 const Authentication = () => {
-  const [email, setEmail] = React.useState<string>("guilhermeX@gmail.com");
-  const [password, setPassword] = React.useState<string>("guilherme");
+  const [email, setEmail] = useState<string>("guilhermeX@gmail.com");
+  const [password, setPassword] = useState<string>("guilherme");
 
-  const context = useContext(UserContext);
-
-  function parseJwt(token: any) {
-    if (!token) {
-      return;
-    }
-    const base64Url = token.split(".")[1];
-    const base64 = base64Url.replace("-", "+").replace("_", "/");
-    return JSON.parse(window.atob(base64));
-  }
+  const userContext = useContext(UserContext);
 
   const handleSubmit = async (event: any) => {
     event.preventDefault();
@@ -28,13 +19,9 @@ const Authentication = () => {
       password,
     });
     const userData = parseJwt(data.data.jwt);
-    // context.state.setUser({ name: userData.name, id: userData.user_id });
-    context.setUser({ name: userData.name, id: userData.user_id });
+    userContext.setUser(userData);
+    console.log(userContext);
   };
-
-  useEffect(() => {
-    console.log(context);
-  }, [context]);
 
   return (
     <>
