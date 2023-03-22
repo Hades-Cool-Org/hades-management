@@ -12,15 +12,14 @@ const Authentication = () => {
 
   const userContext = useContext(UserContext);
 
-  const handleSubmit = async (event: any) => {
+  const handleSubmit = async (event: React.MouseEvent<HTMLElement>) => {
     event.preventDefault();
     const data = await axios.post("http://localhost:3333/login", {
       email,
       password,
     });
     const userData = parseJwt(data.data.jwt);
-    userContext.setUser(userData);
-    console.log(userContext);
+    userContext.setUser?.(userData);
   };
 
   return (
