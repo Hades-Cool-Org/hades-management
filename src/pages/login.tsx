@@ -3,14 +3,14 @@ import styles from "@/styles/AuthenticationPage.module.css";
 import Head from "next/head";
 import { User } from "@/types/types";
 import React, { useEffect, useContext } from "react";
-import { Context } from "@/components/Context";
 import axios from "axios";
+import UserContext, { UserContextProvider } from "@/components/Context";
 
 const Authentication = () => {
   const [email, setEmail] = React.useState<string>("guilhermeX@gmail.com");
   const [password, setPassword] = React.useState<string>("guilherme");
 
-  const context = useContext(Context);
+  const context = useContext(UserContext);
 
   function parseJwt(token: any) {
     if (!token) {
@@ -29,12 +29,12 @@ const Authentication = () => {
     });
     const userData = parseJwt(data.data.jwt);
     // context.state.setUser({ name: userData.name, id: userData.user_id });
-    console.log(context);
+    context.setUser({ name: userData.name, id: userData.user_id });
   };
 
   useEffect(() => {
     console.log(context);
-  }, []);
+  }, [context]);
 
   return (
     <>
@@ -72,5 +72,5 @@ const Authentication = () => {
 export default Authentication;
 
 Authentication.getLayout = function PageLayout(page: JSX.Element) {
-  return <>{page}</>;
+  return <UserContextProvider>{page}</UserContextProvider>;
 };
