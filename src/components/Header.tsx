@@ -19,7 +19,7 @@ const Header = () => {
             <ArrowBackIos fontSize="small" style={{ fill: "white" }} />
           </IconButton>
         ) : (
-          <Link href={"./configuration"}>
+          <Link href={"/configuration"}>
             <Menu fontSize="large" style={{ fill: "white" }} />
           </Link>
         )}

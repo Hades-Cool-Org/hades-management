@@ -1,9 +1,10 @@
 import UserContext from "@/components/Context";
-import { Typography } from "@mui/material";
+import { Button, Typography } from "@mui/material";
 import styles from "@/styles/Root.module.css";
 import { useContext, useEffect, useState } from "react";
 import axios from "axios";
 import { Product } from "@/types/types";
+import Link from "next/link";
 
 const VendorPage = () => {
   const [products, setProducts] = useState([]);
@@ -16,8 +17,7 @@ const VendorPage = () => {
         .get("http://localhost:3333/v1/products")
         .then((response) => {
           if (response.status === 200) {
-            console.log(response.data)
-            setProducts(response.data.products)
+            setProducts(response.data.products);
             return response;
           }
         })
@@ -32,7 +32,13 @@ const VendorPage = () => {
   return (
     <main className={styles.main}>
       <Typography variant="h5">{vendor.name}</Typography>
-      {products && products.map((product:Product, index)=>{return(<p>{product.name}</p>)})}
+      <Link href={'/produto/adicionar'}>
+        <Button variant="contained">Adicionar Produto</Button>
+      </Link>
+      {products &&
+        products.map((product: Product, index) => {
+          return <p>{product.name}</p>;
+        })}
     </main>
   );
 };
