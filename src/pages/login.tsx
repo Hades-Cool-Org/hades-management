@@ -26,9 +26,9 @@ const Authentication = () => {
       })
       .then((response) => {
         if (response.status === 200) {
-          cookieCutter.set("loggedIn", true);
+          cookieCutter.set("user", JSON.stringify((parseJwt(response.data.jwt))));
           userContext.setUser?.(parseJwt(response.data.jwt));
-          router.push("/");
+          router.push("/comprador");
           return response;
         }
       })
