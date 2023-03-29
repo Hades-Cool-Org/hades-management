@@ -37,10 +37,11 @@ export interface Contact {
 }
 
 export interface Product {
-  productId: string;
+  id: string;
   name: string;
   details: string;
-  measuringUnit: string;
+  measuring_unit: string;
+  image_url:string;
 }
 
 export interface Context {
