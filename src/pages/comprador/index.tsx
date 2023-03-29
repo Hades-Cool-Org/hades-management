@@ -34,12 +34,7 @@ const Comprador = () => {
       <main className={styles.main}>
         {vendors &&
           vendors.map((vendor, index) => {
-            return (
-              <VendorCard
-                vendor={vendor}
-                index={index}
-              />
-            );
+            return <VendorCard vendor={vendor} index={index} />;
           })}
       </main>
     </>
