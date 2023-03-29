@@ -4,6 +4,8 @@ import styles from "@/styles/Root.module.css";
 import axios from "axios";
 import VendorCard from "@/components/VendorCards";
 import { Vendor } from "@/types/types";
+import { Button } from "@mui/material";
+import Link from "next/link";
 
 const Comprador = () => {
   const [vendors, setVendors] = useState<Vendor[]>([]);
@@ -36,6 +38,9 @@ const Comprador = () => {
           vendors.map((vendor, index) => {
             return <VendorCard vendor={vendor} index={index} />;
           })}
+        <Link href={"/fornecedor/adicionar"}>
+          <Button variant="contained">Adicionar</Button>
+        </Link>
       </main>
     </>
   );
