@@ -3,9 +3,14 @@ import type { NextRequest } from "next/server";
 
 export function middleware(request: NextRequest) {
   const { origin } = request.nextUrl;
-  const verify = request.cookies.get("user");
-  if (!verify) {
+  const user = request.cookies.get("user");
+  if (!user) {
     return NextResponse.redirect(`${origin}/login`);
+  } else {
+    const userData = JSON.parse(user.value);
+    if(userData.roles[0] === 'buyer'){
+    
+    }
   }
 }
 

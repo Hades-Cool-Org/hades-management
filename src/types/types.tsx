@@ -20,7 +20,7 @@ export interface Role {
 }
 
 export interface Vendor {
-  vendorId: string;
+  id: string;
   name: string;
   email: string;
   phone: string;

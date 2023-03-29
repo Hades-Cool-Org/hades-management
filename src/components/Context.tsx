@@ -1,10 +1,18 @@
 import React, { useState } from "react";
 
-const UserContext = React.createContext<IUserContext>({user:null,setUser:null});
+interface AppContextState {
+  user: Object;
+  vendor: Object;
+}
+
+const UserContext = React.createContext<IUserContext>({
+  state: { user: null, vendor: null },
+  setState: (state: AppContextState) => {},
+});
 
 interface IUserContext {
-  user: null;
-  setUser: React.Dispatch<React.SetStateAction<null>> | null;
+  state: Object;
+  setState: (state: AppContextState) => any;
 }
 
 interface UserContextProps {
@@ -12,9 +20,9 @@ interface UserContextProps {
 }
 
 export const UserContextProvider = ({ children }: UserContextProps) => {
-  const [user, setUser] = useState(null);
+  const [state, setState] = useState({});
   return (
-    <UserContext.Provider value={{ user, setUser }}>
+    <UserContext.Provider value={{ state, setState }}>
       {children}
     </UserContext.Provider>
   );
