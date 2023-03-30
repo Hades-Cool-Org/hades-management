@@ -4,7 +4,7 @@ import styles from "@/styles/Root.module.css";
 import axios from "axios";
 import VendorCard from "@/components/VendorCard";
 import { Vendor } from "@/types/types";
-import { Button } from "@mui/material";
+import { Button, Typography } from "@mui/material";
 import Link from "next/link";
 import UserContext from "@/components/Context";
 
@@ -36,6 +36,7 @@ const Comprador = () => {
         <title>Comprador</title>
       </Head>
       <main className={styles.main}>
+        <Typography variant="h5">Fornecedores</Typography>
         {vendors &&
           vendors.map((vendor, index) => {
             return (
