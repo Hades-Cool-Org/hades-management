@@ -10,15 +10,12 @@ import { login } from "./api/apis";
 const Authentication = () => {
   const [email, setEmail] = useState<string>("guilhermeX@gmail.com");
   const [password, setPassword] = useState<string>("guilherme");
-
-  const userContext = useContext(UserContext);
-
   const router = useRouter();
 
   const handleSubmit = async (event: React.MouseEvent<HTMLElement>) => {
     const body = { email, password };
-    event.preventDefault();
     login(body, router.push);
+    event.preventDefault();
   };
 
   return (
