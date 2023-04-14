@@ -2,12 +2,10 @@ import { Button, FormControl, TextField } from "@mui/material";
 import styles from "@/styles/AuthenticationPage.module.css";
 import Head from "next/head";
 import React, { useState, useContext } from "react";
-import axios from "axios";
 import UserContext, { UserContextProvider } from "@/components/Context";
-import parseJwt from "@/utils/parseJwt";
-// @ts-ignore
-import cookieCutter from "cookie-cutter";
+
 import { useRouter } from "next/router";
+import { login } from "./api/apis";
 
 const Authentication = () => {
   const [email, setEmail] = useState<string>("guilhermeX@gmail.com");
@@ -18,23 +16,9 @@ const Authentication = () => {
   const router = useRouter();
 
   const handleSubmit = async (event: React.MouseEvent<HTMLElement>) => {
+    const body = { email, password };
     event.preventDefault();
-    const data = await axios
-      .post("http://localhost:3333/login", {
-        email,
-        password,
-      })
-      .then((response) => {
-        if (response.status === 200) {
-          cookieCutter.set("user", JSON.stringify((parseJwt(response.data.jwt))));
-          userContext.setUser?.(parseJwt(response.data.jwt));
-          router.push("/comprador");
-          return response;
-        }
-      })
-      .catch((error) => {
-        console.log(`Error: ${error}`);
-      });
+    login(body, router.push);
   };
 
   return (

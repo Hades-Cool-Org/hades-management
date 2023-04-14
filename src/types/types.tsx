@@ -41,11 +41,23 @@ export interface Product {
   name: string;
   details: string;
   measuring_unit: string;
-  image_url:string;
+  image_url: string;
 }
 
 export interface Context {
   state: {
     user: User;
   };
+}
+
+export interface ProductBody {
+  name: string;
+  details: string;
+  measuring_unit: string;
+  image_url: string;
+}
+
+export interface LoginBody {
+  email: string;
+  password: string;
 }

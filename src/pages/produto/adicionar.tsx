@@ -1,10 +1,10 @@
 import React, { useState } from "react";
-import axios from "axios";
 
 import styles from "@/styles/AuthenticationPage.module.css";
 import { Button } from "@mui/material";
 import TextFieldStandard from "@/components/TextField";
 import { useRouter } from "next/router";
+import { addProduct } from "../api/apis";
 
 export default function AddProduct() {
   const [name, setName] = useState<string>("");
@@ -12,7 +12,7 @@ export default function AddProduct() {
 
   const router = useRouter();
 
-  const handleSubmit = async (event: any) => {
+  const handleSubmit = async (event: React.MouseEvent<HTMLElement>) => {
     event.preventDefault();
     const body = {
       name,
@@ -20,18 +20,7 @@ export default function AddProduct() {
       image_url: "blablabla",
       measuring_unit: "UN",
     };
-    const data = await axios
-      .post("http://localhost:3333/v1/products", body)
-      .then((response) => {
-        if (response.status === 201) {
-          router.back();
-          return response;
-        }
-      })
-      .catch((error) => {
-        console.log(`Error: ${error}`);
-      });
-    console.log(data);
+    addProduct(body, router.back);
   };
 
   return (
