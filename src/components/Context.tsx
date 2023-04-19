@@ -11,7 +11,7 @@ const UserContext = React.createContext<IUserContext>({
 });
 
 interface IUserContext {
-  state: Object;
+  state: AppContextState;
   setState: (state: AppContextState) => any;
 }
 

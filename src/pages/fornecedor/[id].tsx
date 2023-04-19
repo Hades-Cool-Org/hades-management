@@ -57,7 +57,6 @@ const VendorPage = () => {
                   key={index}
                   label="Qtd"
                   handleChange={handleItemChange}
-                  disabled={false}
                   fieldName={product.name}
                 />
               </CardContent>

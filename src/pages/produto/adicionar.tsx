@@ -46,15 +46,13 @@ export default function AddProduct() {
           fieldName="name"
           label="Nome"
           handleChange={handleChange}
-          disabled={loading}
         />
         <TextFieldStandard
           fieldName="details"
           label="Detalhes"
           handleChange={handleChange}
-          disabled={loading}
         />
-        <Button variant="contained" onClick={handleSubmit}>
+        <Button variant="contained" onClick={handleSubmit} disabled={loading}>
           Salvar
         </Button>
       </form>

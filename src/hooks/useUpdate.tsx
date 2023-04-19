@@ -1,16 +1,16 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 
-function usePost(url: string) {
+function useUpdate(url: string) {
   const [data, setData] = useState(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
   const [status, setStatus] = useState<number | null>(null);
 
-  const post = (body: any) => {
+  const put = (body: any) => {
     setLoading(true);
     axios
-      .post(url, body)
+      .put(url, body)
       .then((response) => {
         setStatus(response.status);
         setData(response.data);
@@ -23,7 +23,7 @@ function usePost(url: string) {
       });
   };
 
-  return { data, loading, error, post, status };
+  return { data, loading, error, put, status };
 }
 
-export default usePost;
+export default useUpdate;

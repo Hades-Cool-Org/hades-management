@@ -5,13 +5,12 @@ interface TextFieldValues {
   fieldName: string;
   value?: string;
   handleChange: (fieldName: string, value: string) => any;
-  disabled: boolean;
 }
 
 const TextFieldStandard: React.FC<TextFieldValues> = (
   props: TextFieldValues
 ) => {
-  const { fieldName, label, value, handleChange, disabled } = props;
+  const { fieldName, label, value, handleChange } = props;
   return (
     <TextField
       id="standard-basic"
@@ -21,7 +20,6 @@ const TextFieldStandard: React.FC<TextFieldValues> = (
       onChange={(e) => {
         handleChange(fieldName, e.target.value);
       }}
-      disabled={disabled}
     />
   );
 };
