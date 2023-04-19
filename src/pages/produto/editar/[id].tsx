@@ -22,7 +22,7 @@ export default function AddProduct() {
     `http://localhost:3333/v1/products/${id}`
   );
 
-  const { status, put, loadingRequest } = useRequest();
+  const { success, put, loadingRequest } = useRequest();
 
   console.log("ping");
 
@@ -47,10 +47,10 @@ export default function AddProduct() {
   };
 
   useEffect(() => {
-    if (status === 200) {
+    if (success) {
       router.back();
     }
-  }, [status]);
+  }, [success]);
 
   return (
     <main className={styles.main}>

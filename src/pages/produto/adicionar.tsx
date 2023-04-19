@@ -4,7 +4,6 @@ import styles from "@/styles/AuthenticationPage.module.css";
 import { Button } from "@mui/material";
 import TextFieldStandard from "@/components/TextField";
 import { useRouter } from "next/router";
-import { addProduct } from "../../utils/apis";
 import useRequest from "@/hooks/useRequest";
 
 export default function AddProduct() {
@@ -17,7 +16,7 @@ export default function AddProduct() {
 
   const router = useRouter();
 
-  const { loadingRequest, error, post, status } = useRequest();
+  const { loadingRequest, error, post, success } = useRequest();
 
   const handleChange = (name: string, value: string) => {
     setBody((prevState) => ({
@@ -32,10 +31,10 @@ export default function AddProduct() {
   };
 
   useEffect(() => {
-    if (status === 201) {
+    if (success) {
       router.back();
     }
-  }, [status]);
+  }, [success]);
 
   return (
     <main className={styles.main}>

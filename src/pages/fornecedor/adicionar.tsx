@@ -10,7 +10,7 @@ import useRequest from "@/hooks/useRequest";
 export default function AddVendor() {
   const router = useRouter();
 
-  const { post, status, loadingRequest, error } = useRequest();
+  const { post, success, loadingRequest, error } = useRequest();
 
   const [body, setBody] = useState({
     name: "",
@@ -37,8 +37,8 @@ export default function AddVendor() {
   };
 
   useEffect(() => {
-    if (status === 201) router.push("/comprador");
-  }, [status]);
+    if (success) router.push("/comprador");
+  }, [success]);
 
   const handleSubmit = async (event: any) => {
     event.preventDefault();
