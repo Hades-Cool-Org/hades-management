@@ -41,7 +41,7 @@ const VendorPage = () => {
 
   return (
     <main className={styles.main}>
-      <Typography variant="h5">{vendor.name}</Typography>
+      <Typography variant="h5">{vendor?.name}</Typography>
       <Link href={"/produto/adicionar"}>
         <Button variant="contained">Adicionar Produto</Button>
       </Link>
