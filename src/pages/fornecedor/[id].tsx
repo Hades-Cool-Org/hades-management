@@ -15,42 +15,29 @@ import Link from "next/link";
 import TextFieldStandard from "@/components/TextField";
 import { ShoppingCart } from "@mui/icons-material";
 import { useRouter } from "next/router";
+import useFetch from "@/hooks/useFetch";
 
 const VendorPage = () => {
-  const [products, setProducts] = useState([]);
   const [itemsList, setItemsList] = useState<any>({});
   let context = useContext(UserContext);
   const { vendor } = context.state;
 
   const router = useRouter();
 
-  useEffect(() => {
-    async function fetchProducts() {
-      const data = await axios
-        .get("http://localhost:3333/v1/products")
-        .then((response) => {
-          if (response.status === 200) {
-            setProducts(response.data.products);
-            return response;
-          }
-        })
-        .catch((error) => {
-          console.log(`Error: ${error}`);
-        });
-    }
+  const { data, loading, error } = useFetch(
+    "http://localhost:3333/v1/products"
+  );
 
-    fetchProducts();
-  }, []);
-
-  const handleItemChange = (e: any) => {
-    const { name, value } = e;
-    itemsList[name] = value;
-    setItemsList({ ...itemsList });
+  const handleItemChange = (name: string, value: string) => {
+    setItemsList((prevState: any) => ({
+      ...prevState,
+      [name]: value,
+    }));
   };
 
-  useEffect(() => {
-    console.log(itemsList);
-  }, [itemsList]);
+  if (loading) return <h1>Loading</h1>;
+
+  if (error) console.log(error);
 
   return (
     <main className={styles.main}>
@@ -58,23 +45,31 @@ const VendorPage = () => {
       <Link href={"/produto/adicionar"}>
         <Button variant="contained">Adicionar Produto</Button>
       </Link>
-      {products &&
-        products.map((product: Product, index) => {
+      {
+        // @ts-ignore: Object is possibly 'null'
+        data?.products.map((product: Product, index) => {
           return (
             <Card key={index}>
               <CardContent>
                 <Typography variant="h5">{product.name}</Typography>
                 <Typography>Quantidade sugerida:</Typography>
-                <TextField
+                <TextFieldStandard
                   key={index}
                   label="Qtd"
-                  onChange={handleItemChange}
+                  handleChange={handleItemChange}
+                  disabled={false}
+                  fieldName={product.name}
                 />
               </CardContent>
             </Card>
           );
-        })}
-      <IconButton onClick={() => {router.back()}}>
+        })
+      }
+      <IconButton
+        onClick={() => {
+          router.back();
+        }}
+      >
         <ShoppingCart fontSize="small" style={{ fill: "black" }} />
       </IconButton>
     </main>

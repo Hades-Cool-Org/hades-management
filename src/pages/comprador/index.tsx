@@ -18,6 +18,8 @@ const Comprador = () => {
 
   if (loading) return <h1>Loading</h1>;
 
+  if (error) console.log(error);
+
   return (
     <>
       <Head>
