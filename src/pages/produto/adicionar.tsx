@@ -1,33 +1,59 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
 import styles from "@/styles/AuthenticationPage.module.css";
 import { Button } from "@mui/material";
 import TextFieldStandard from "@/components/TextField";
 import { useRouter } from "next/router";
 import { addProduct } from "../../utils/apis";
+import usePost from "@/hooks/usePost";
 
 export default function AddProduct() {
-  const [name, setName] = useState<string>("");
-  const [details, setDetails] = useState<string>("");
+  const [body, setBody] = useState({
+    name: "",
+    details: "",
+    image_url: "blablabla",
+    measuring_unit: "UN",
+  });
 
   const router = useRouter();
 
+  const { data, loading, error, post, status } = usePost(
+    "http://localhost:3333/v1/products"
+  );
+
+  const handleChange = (name: string, value: string) => {
+    setBody((prevState) => ({
+      ...prevState,
+      [name]: value,
+    }));
+  };
+
   const handleSubmit = async (event: React.MouseEvent<HTMLElement>) => {
     event.preventDefault();
-    const body = {
-      name,
-      details,
-      image_url: "blablabla",
-      measuring_unit: "UN",
-    };
-    addProduct(body, router.back);
+    post(body);
   };
+
+  useEffect(() => {
+    if (status === 201) {
+      router.back();
+    }
+  }, [status]);
 
   return (
     <main className={styles.main}>
       <form>
-        <TextFieldStandard label="Nome" handleChange={setName} />
-        <TextFieldStandard label="Detalhes" handleChange={setDetails} />
+        <TextFieldStandard
+          fieldName="name"
+          label="Nome"
+          handleChange={handleChange}
+          disabled={loading}
+        />
+        <TextFieldStandard
+          fieldName="details"
+          label="Detalhes"
+          handleChange={handleChange}
+          disabled={loading}
+        />
         <Button variant="contained" onClick={handleSubmit}>
           Salvar
         </Button>

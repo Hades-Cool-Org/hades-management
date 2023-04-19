@@ -51,20 +51,6 @@ export const updateProduct = async (body: ProductBody, back: () => void) => {
   return data;
 };
 
-export const getProduct = async (id: string | string[] | undefined) => {
-  const data = await axios
-    .get(`http://localhost:3333/v1/products/${id}`)
-    .then((response) => {
-      if (response.status === 200) {
-        return response;
-      }
-    })
-    .catch((error) => {
-      console.log(`Error: ${error}`);
-    });
-  return data;
-};
-
 export const deleteProduct = async (id: string | string[] | undefined) => {
   const data = await axios
     .delete(`http://localhost:3333/v1/products/${id}`)

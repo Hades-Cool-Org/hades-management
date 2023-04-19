@@ -2,14 +2,16 @@ import { TextField, TextFieldProps } from "@mui/material";
 
 interface TextFieldValues {
   label: string;
+  fieldName: string;
   value?: string;
-  handleChange: (event: any) => any;
+  handleChange: (fieldName: string, value: string) => any;
+  disabled: boolean;
 }
 
 const TextFieldStandard: React.FC<TextFieldValues> = (
   props: TextFieldValues
 ) => {
-  const { label, value, handleChange } = props;
+  const { fieldName, label, value, handleChange, disabled } = props;
   return (
     <TextField
       id="standard-basic"
@@ -17,8 +19,9 @@ const TextFieldStandard: React.FC<TextFieldValues> = (
       value={value}
       variant="standard"
       onChange={(e) => {
-        handleChange(e.target.value);
+        handleChange(fieldName, e.target.value);
       }}
+      disabled={disabled}
     />
   );
 };

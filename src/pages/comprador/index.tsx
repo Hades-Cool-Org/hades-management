@@ -7,7 +7,7 @@ import { Vendor } from "@/types/types";
 import { Button, Typography } from "@mui/material";
 import Link from "next/link";
 import UserContext from "@/components/Context";
-import useFetch from "@/utils/useFetch";
+import useFetch from "@/hooks/useFetch";
 
 const Comprador = () => {
   const [vendors, setVendors] = useState<Vendor[]>([]);

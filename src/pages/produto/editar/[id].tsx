@@ -5,7 +5,7 @@ import { Button, TextField } from "@mui/material";
 import TextFieldStandard from "@/components/TextField";
 import { useRouter } from "next/router";
 import { addProduct } from "../../../utils/apis";
-import useFetch from "@/utils/useFetch";
+import useFetch from "@/hooks/useFetch";
 
 export default function AddProduct() {
   const [name, setName] = useState<string>("");
