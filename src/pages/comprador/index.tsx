@@ -7,28 +7,16 @@ import { Vendor } from "@/types/types";
 import { Button, Typography } from "@mui/material";
 import Link from "next/link";
 import UserContext from "@/components/Context";
+import useFetch from "@/utils/useFetch";
 
 const Comprador = () => {
   const [vendors, setVendors] = useState<Vendor[]>([]);
 
-  let context = useContext(UserContext);
-  useEffect(() => {
-    async function fetchVendors() {
-      const data = await axios
-        .get("http://localhost:3333/v1/vendors")
-        .then((response) => {
-          if (response.status === 200) {
-            setVendors(response.data.vendors);
-            return response;
-          }
-        })
-        .catch((error) => {
-          console.log(`Error: ${error}`);
-        });
-    }
+  const { data, loading, error } = useFetch("http://localhost:3333/v1/vendors");
 
-    fetchVendors();
-  }, []);
+  let context = useContext(UserContext);
+
+  if (loading) return <h1>Loading</h1>;
 
   return (
     <>
@@ -37,8 +25,10 @@ const Comprador = () => {
       </Head>
       <main className={styles.main}>
         <Typography variant="h5">Fornecedores</Typography>
-        {vendors &&
-          vendors.map((vendor, index) => {
+
+        {
+          // @ts-ignore: Object is possibly 'null'
+          data?.vendors.map((vendor, index) => {
             return (
               <VendorCard
                 vendor={vendor}
@@ -46,7 +36,8 @@ const Comprador = () => {
                 handleClick={context.setState}
               />
             );
-          })}
+          })
+        }
         <Link href={"/fornecedor/adicionar"}>
           <Button variant="contained">Adicionar</Button>
         </Link>

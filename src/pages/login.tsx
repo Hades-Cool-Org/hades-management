@@ -5,7 +5,7 @@ import React, { useState, useContext } from "react";
 import UserContext, { UserContextProvider } from "@/components/Context";
 
 import { useRouter } from "next/router";
-import { login } from "./api/apis";
+import { login } from "../utils/apis";
 
 const Authentication = () => {
   const [email, setEmail] = useState<string>("guilhermeX@gmail.com");

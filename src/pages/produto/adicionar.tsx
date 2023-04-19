@@ -4,7 +4,7 @@ import styles from "@/styles/AuthenticationPage.module.css";
 import { Button } from "@mui/material";
 import TextFieldStandard from "@/components/TextField";
 import { useRouter } from "next/router";
-import { addProduct } from "../api/apis";
+import { addProduct } from "../../utils/apis";
 
 export default function AddProduct() {
   const [name, setName] = useState<string>("");
