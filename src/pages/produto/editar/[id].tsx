@@ -5,7 +5,7 @@ import { Button, TextField } from "@mui/material";
 import TextFieldStandard from "@/components/TextField";
 import { useRouter } from "next/router";
 import useFetch from "@/hooks/useFetch";
-import useUpdate from "@/hooks/useUpdate";
+import useRequest from "@/hooks/useRequest";
 
 export default function AddProduct() {
   const [body, setBody] = useState({
@@ -22,11 +22,7 @@ export default function AddProduct() {
     `http://localhost:3333/v1/products/${id}`
   );
 
-  const {
-    status,
-    put,
-    loading: putLoading,
-  } = useUpdate(`http://localhost:3333/v1/products/${id}`);
+  const { status, put, loadingRequest } = useRequest();
 
   console.log("ping");
 
@@ -47,7 +43,7 @@ export default function AddProduct() {
 
   const handleSubmit = async (event: React.MouseEvent<HTMLElement>) => {
     event.preventDefault();
-    put(body);
+    put(`http://localhost:3333/v1/products/${id}`, body);
   };
 
   useEffect(() => {
@@ -74,7 +70,7 @@ export default function AddProduct() {
         <Button
           variant="contained"
           onClick={handleSubmit}
-          disabled={putLoading}
+          disabled={loadingRequest}
         >
           Salvar
         </Button>

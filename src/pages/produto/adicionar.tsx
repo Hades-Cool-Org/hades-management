@@ -5,7 +5,7 @@ import { Button } from "@mui/material";
 import TextFieldStandard from "@/components/TextField";
 import { useRouter } from "next/router";
 import { addProduct } from "../../utils/apis";
-import usePost from "@/hooks/usePost";
+import useRequest from "@/hooks/useRequest";
 
 export default function AddProduct() {
   const [body, setBody] = useState({
@@ -17,9 +17,7 @@ export default function AddProduct() {
 
   const router = useRouter();
 
-  const { data, loading, error, post, status } = usePost(
-    "http://localhost:3333/v1/products"
-  );
+  const { loadingRequest, error, post, status } = useRequest();
 
   const handleChange = (name: string, value: string) => {
     setBody((prevState) => ({
@@ -30,7 +28,7 @@ export default function AddProduct() {
 
   const handleSubmit = async (event: React.MouseEvent<HTMLElement>) => {
     event.preventDefault();
-    post(body);
+    post("http://localhost:3333/v1/products", body);
   };
 
   useEffect(() => {
@@ -52,7 +50,11 @@ export default function AddProduct() {
           label="Detalhes"
           handleChange={handleChange}
         />
-        <Button variant="contained" onClick={handleSubmit} disabled={loading}>
+        <Button
+          variant="contained"
+          onClick={handleSubmit}
+          disabled={loadingRequest}
+        >
           Salvar
         </Button>
       </form>
