@@ -4,26 +4,24 @@ import styles from "@/styles/AuthenticationPage.module.css";
 import { Button, TextField } from "@mui/material";
 import TextFieldStandard from "@/components/TextField";
 import { useRouter } from "next/router";
-import { addProduct, getProduct } from "../../../utils/apis";
+import { addProduct } from "../../../utils/apis";
+import useFetch from "@/utils/useFetch";
 
 export default function AddProduct() {
   const [name, setName] = useState<string>("");
   const [details, setDetails] = useState<string>("");
   const router = useRouter();
 
-  async function fetchProduct() {
-    const { id } = router.query;
-    return await getProduct(id);
-  }
+  const { id } = router.query;
+
+  const { data, loading, error } = useFetch(
+    `http://localhost:3333/v1/products/${id}`
+  );
 
   useEffect(() => {
-    if (router.isReady) {
-      fetchProduct().then((response) => {
-        setName(response?.data.name);
-        setDetails(response?.data.details);
-      });
-    }
-  }, [router.isReady]);
+    setName(data?.name);
+    setDetails(data?.details);
+  }, [data]);
 
   const handleSubmit = async (event: React.MouseEvent<HTMLElement>) => {
     event.preventDefault();
