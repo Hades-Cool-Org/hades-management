@@ -19,9 +19,14 @@ const Header = () => {
             <ArrowBackIos fontSize="small" style={{ fill: "white" }} />
           </IconButton>
         ) : (
-          <Link href={"/configuration"}>
-            <Menu fontSize="large" style={{ fill: "white" }} />
-          </Link>
+          <>
+            <Link href={"/configuration"}>
+              <Menu fontSize="large" style={{ fill: "white" }} />
+            </Link>
+            <IconButton onClick={handleClick}>
+              <ArrowBackIos fontSize="small" style={{ fill: "white" }} />
+            </IconButton>
+          </>
         )}
         <span className="title-span">Perfil - </span>
       </div>

@@ -5,10 +5,11 @@ interface AppContextState {
   user: Object | null;
   vendor: Vendor | null;
   product: Product | null;
+  session: Object | null;
 }
 
 const UserContext = React.createContext<IUserContext>({
-  state: { user: null, vendor: null, product: null },
+  state: { user: null, vendor: null, product: null, session: null },
   setState: (state: AppContextState) => {},
 });
 
@@ -26,6 +27,7 @@ export const UserContextProvider = ({ children }: UserContextProps) => {
     user: null,
     vendor: null,
     product: null,
+    session: null,
   });
   return (
     <UserContext.Provider value={{ state, setState }}>
