@@ -1,13 +1,14 @@
-import { Vendor } from "@/types/types";
+import { Product, Vendor } from "@/types/types";
 import React, { useState } from "react";
 
 interface AppContextState {
   user: Object | null;
   vendor: Vendor | null;
+  product: Product | null;
 }
 
 const UserContext = React.createContext<IUserContext>({
-  state: { user: null, vendor: null },
+  state: { user: null, vendor: null, product: null },
   setState: (state: AppContextState) => {},
 });
 
@@ -24,6 +25,7 @@ export const UserContextProvider = ({ children }: UserContextProps) => {
   const [state, setState] = useState<AppContextState>({
     user: null,
     vendor: null,
+    product: null,
   });
   return (
     <UserContext.Provider value={{ state, setState }}>

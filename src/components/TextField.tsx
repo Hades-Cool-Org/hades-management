@@ -5,12 +5,13 @@ interface TextFieldValues {
   fieldName: string;
   value?: string;
   handleChange: (fieldName: string, value: string) => any;
+  number?: boolean;
 }
 
 const TextFieldStandard: React.FC<TextFieldValues> = (
   props: TextFieldValues
 ) => {
-  const { fieldName, label, value, handleChange } = props;
+  const { fieldName, label, value, handleChange, number } = props;
   return (
     <TextField
       id="standard-basic"
@@ -20,6 +21,7 @@ const TextFieldStandard: React.FC<TextFieldValues> = (
       onChange={(e) => {
         handleChange(fieldName, e.target.value);
       }}
+      type={number ? "number" : "text"}
     />
   );
 };

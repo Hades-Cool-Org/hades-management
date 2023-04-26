@@ -49,18 +49,22 @@ const VendorPage = () => {
         // @ts-ignore: Object is possibly 'null'
         data?.products.map((product: Product, index) => {
           return (
-            <Card key={index}>
-              <CardContent>
-                <Typography variant="h5">{product.name}</Typography>
-                <Typography>Quantidade sugerida:</Typography>
-                <TextFieldStandard
-                  key={index}
-                  label="Qtd"
-                  handleChange={handleItemChange}
-                  fieldName={product.name}
-                />
-              </CardContent>
-            </Card>
+            <Link
+              href={{ pathname: `/produto/${product.id}` }}
+              onClick={() => {
+                context.setState((prevState: any) => ({
+                  ...prevState,
+                  product: product,
+                }));
+              }}
+            >
+              <Card key={index}>
+                <CardContent>
+                  <Typography variant="h5">{product.name}</Typography>
+                  <Typography>Quantidade sugerida:</Typography>
+                </CardContent>
+              </Card>
+            </Link>
           );
         })
       }
