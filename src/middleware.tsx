@@ -8,8 +8,11 @@ export function middleware(request: NextRequest) {
     return NextResponse.redirect(`${origin}/login`);
   } else {
     const userData = JSON.parse(user.value);
-    if(userData.roles[0] === 'buyer'){
-    
+    const expiracy = new Date(userData.exp * 1000);
+    const now = new Date();
+    if (expiracy < now) {
+      request.cookies.clear();
+      return NextResponse.redirect(`${origin}/login`);
     }
   }
 }

@@ -8,6 +8,7 @@ function useRequest() {
   const [loadingRequest, setLoadingRequest] = useState(false);
   const [error, setError] = useState(null);
   const [success, setSuccess] = useState(false);
+  const [tokenData, setTokenData] = useState(null);
 
   const login = (body: any) => {
     setLoadingRequest(true);
@@ -15,7 +16,9 @@ function useRequest() {
       .post("http://localhost:3333/login", body)
       .then((response) => {
         if (response.status === 200) {
-          cookieCutter.set("user", JSON.stringify(parseJwt(response.data.jwt)));
+          const parsedToken = parseJwt(response.data.jwt);
+          setTokenData(parsedToken);
+          cookieCutter.set("user", JSON.stringify(parsedToken));
           setSuccess(true);
           return response;
         }
@@ -73,7 +76,16 @@ function useRequest() {
       });
   };
 
-  return { loadingRequest, error, success, login, post, put, deleteItem };
+  return {
+    loadingRequest,
+    error,
+    success,
+    tokenData,
+    login,
+    post,
+    put,
+    deleteItem,
+  };
 }
 
 export default useRequest;

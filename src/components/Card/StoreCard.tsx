@@ -7,7 +7,7 @@ import {
   Typography,
 } from "@mui/material";
 import React, { Dispatch, SetStateAction } from "react";
-import TextFieldStandard from "./TextField";
+import TextFieldStandard from "../TextField";
 
 interface VendorCardProps {
   store: Store;

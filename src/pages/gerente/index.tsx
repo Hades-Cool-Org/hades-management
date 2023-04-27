@@ -4,7 +4,7 @@ import { List } from "@mui/material";
 import Link from "next/link";
 import ListItem from "@/components/ListItem";
 import useFetch from "@/hooks/useFetch";
-import DriverCard from "@/components/DriverCard";
+import DriverCard from "@/components/Card/DriverCard";
 import { useContext } from "react";
 import UserContext from "@/components/Context";
 

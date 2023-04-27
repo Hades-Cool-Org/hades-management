@@ -7,7 +7,7 @@ import UserContext, { UserContextProvider } from "@/components/Context";
 import useRequest from "@/hooks/useRequest";
 
 const Authentication = () => {
-  const { login, success, loadingRequest, error } = useRequest();
+  const { login, tokenData, success, loadingRequest, error } = useRequest();
 
   const [email, setEmail] = useState<string>("guilhermeX@gmail.com");
   const [password, setPassword] = useState<string>("guilherme");
@@ -20,7 +20,24 @@ const Authentication = () => {
   };
 
   useEffect(() => {
-    if (success) router.push("/comprador");
+    if (success) {
+      console.log(tokenData);
+      switch (tokenData.roles[0]) {
+        case "admin":
+          router.push("/gerente");
+          break;
+        case "fornecedor":
+          router.push("/fornecedor");
+          break;
+        case "entregador":
+          router.push("/entregador");
+        case "precificador":
+          router.push("/precificador");
+        default:
+        case "comprador":
+          router.push("/comprador");
+      }
+    }
   }, [success]);
 
   if (error) console.log(error);

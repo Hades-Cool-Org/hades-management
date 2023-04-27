@@ -2,7 +2,7 @@ import React, { useEffect, useState, useContext } from "react";
 import Head from "next/head";
 import styles from "@/styles/Root.module.css";
 import axios from "axios";
-import VendorCard from "@/components/VendorCard";
+import VendorCard from "@/components/Card/VendorCard";
 import { Vendor } from "@/types/types";
 import { Button, Typography } from "@mui/material";
 import Link from "next/link";

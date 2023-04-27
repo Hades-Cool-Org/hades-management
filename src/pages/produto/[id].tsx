@@ -13,7 +13,7 @@ import { useRouter } from "next/router";
 import useFetch from "@/hooks/useFetch";
 import useRequest from "@/hooks/useRequest";
 import UserContext from "@/components/Context";
-import StoreCard from "@/components/StoreCard";
+import StoreCard from "@/components/Card/StoreCard";
 import { Store } from "@/types/types";
 
 export default function Product() {
