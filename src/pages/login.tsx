@@ -26,15 +26,15 @@ const Authentication = () => {
         case "admin":
           router.push("/gerente");
           break;
-        case "fornecedor":
+        case "vendor":
           router.push("/fornecedor");
           break;
-        case "motorista":
+        case "driver":
           router.push("/motorista");
         case "precificador":
           router.push("/precificador");
         default:
-        case "comprador":
+        case "buyer":
           router.push("/comprador");
       }
     }

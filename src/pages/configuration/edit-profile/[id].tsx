@@ -32,8 +32,8 @@ export default function EditProfile() {
   };
 
   return (
-    <main className={styles.main}>
-      <form>
+    <main className="main-form">
+      <form className="form">
         <TextFieldStandard
           label="Username"
           handleChange={handleChange}
@@ -61,16 +61,17 @@ export default function EditProfile() {
         <Autocomplete
           multiple
           id="tags-standard"
-          options={[{ name: "admin" }, { name: "castor" }]}
+          options={[{ name: "buyer" }, { name: "vendor" }]}
           getOptionLabel={(option) => option.name}
           renderInput={(params) => (
             <TextField {...params} variant="standard" label="Roles" />
           )}
         />
-        <Button variant="contained" onClick={handleSubmit}>
-          Salvar
-        </Button>
       </form>
+
+      <Button variant="contained" onClick={handleSubmit}>
+        Salvar
+      </Button>
     </main>
   );
 }
