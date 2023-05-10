@@ -1,4 +1,4 @@
-import { Button, FormControl, TextField } from "@mui/material";
+import { Button, Card, FormControl, TextField } from "@mui/material";
 import { useRouter } from "next/router";
 import styles from "@/styles/AuthenticationPage.module.css";
 import Head from "next/head";
@@ -9,7 +9,7 @@ import useRequest from "@/hooks/useRequest";
 const Authentication = () => {
   const { login, tokenData, success, loadingRequest, error } = useRequest();
 
-  const [email, setEmail] = useState<string>("guilhermeX@gmail.com");
+  const [email, setEmail] = useState<string>("guilhermeXx@gmail.com");
   const [password, setPassword] = useState<string>("guilherme");
   const router = useRouter();
 
@@ -22,15 +22,15 @@ const Authentication = () => {
   useEffect(() => {
     if (success) {
       console.log(tokenData);
-      switch (tokenData.roles[0]) {
+      switch ("motorista") {
         case "admin":
           router.push("/gerente");
           break;
         case "fornecedor":
           router.push("/fornecedor");
           break;
-        case "entregador":
-          router.push("/entregador");
+        case "motorista":
+          router.push("/motorista");
         case "precificador":
           router.push("/precificador");
         default:
@@ -49,32 +49,34 @@ const Authentication = () => {
         <title>Login</title>
       </Head>
       <main className={styles.main}>
-        <form>
-          <TextField
-            id="standard-basic"
-            label="Login"
-            variant="standard"
-            onChange={(e) => {
-              setEmail(e.target.value);
-            }}
-          />
-          <TextField
-            id="standard-basic"
-            label="Password"
-            variant="standard"
-            type="password"
-            onChange={(e) => {
-              setPassword(e.target.value);
-            }}
-          />
-          <Button
-            variant="contained"
-            onClick={handleSubmit}
-            disabled={loadingRequest}
-          >
-            Submit
-          </Button>
-        </form>
+        <Card className={styles.formCard}>
+          <form className={styles.form}>
+            <TextField
+              id="standard-basic"
+              label="Login"
+              variant="standard"
+              onChange={(e) => {
+                setEmail(e.target.value);
+              }}
+            />
+            <TextField
+              id="standard-basic"
+              label="Password"
+              variant="standard"
+              type="password"
+              onChange={(e) => {
+                setPassword(e.target.value);
+              }}
+            />
+            <Button
+              variant="contained"
+              onClick={handleSubmit}
+              disabled={loadingRequest}
+            >
+              Submit
+            </Button>
+          </form>
+        </Card>
       </main>
     </>
   );
