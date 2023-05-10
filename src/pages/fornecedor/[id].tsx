@@ -3,11 +3,11 @@ import {
   Button,
   Card,
   CardContent,
+  createTheme,
   IconButton,
-  TextField,
+  ThemeProvider,
   Typography,
 } from "@mui/material";
-import styles from "@/styles/Root.module.css";
 import { useContext, useEffect, useState } from "react";
 import axios from "axios";
 import { Product } from "@/types/types";
@@ -16,6 +16,20 @@ import TextFieldStandard from "@/components/TextField";
 import { ShoppingCart } from "@mui/icons-material";
 import { useRouter } from "next/router";
 import useFetch from "@/hooks/useFetch";
+import styles from "@/styles/BuyerPage.module.css";
+
+const theme = createTheme({
+  components: {
+    MuiCard: {
+      defaultProps: {
+        sx: {
+          backgroundColor: "transparent",
+          borderRadius: "0",
+        },
+      },
+    },
+  },
+});
 
 const VendorPage = () => {
   const [itemsList, setItemsList] = useState<any>({});
@@ -40,34 +54,38 @@ const VendorPage = () => {
   if (error) console.log(error);
 
   return (
-    <main className={styles.main}>
+    <main className="main">
       <Typography variant="h5">{vendor?.name}</Typography>
       <Link href={"/produto/adicionar"}>
         <Button variant="contained">Adicionar Produto</Button>
       </Link>
-      {
-        // @ts-ignore: Object is possibly 'null'
-        data?.products.map((product: Product, index) => {
-          return (
-            <Link
-              href={{ pathname: `/produto/${product.id}` }}
-              onClick={() => {
-                context.setState((prevState: any) => ({
-                  ...prevState,
-                  product: product,
-                }));
-              }}
-            >
-              <Card key={index}>
-                <CardContent>
-                  <Typography variant="h5">{product.name}</Typography>
-                  <Typography>Quantidade sugerida:</Typography>
-                </CardContent>
-              </Card>
-            </Link>
-          );
-        })
-      }
+      <section className={styles.cards}>
+        <ThemeProvider theme={theme}>
+          {
+            // @ts-ignore: Object is possibly 'null'
+            data?.products.map((product: Product, index) => {
+              return (
+                <Link
+                  href={{ pathname: `/produto/${product.id}` }}
+                  onClick={() => {
+                    context.setState((prevState: any) => ({
+                      ...prevState,
+                      product: product,
+                    }));
+                  }}
+                >
+                  <Card key={index}>
+                    <CardContent>
+                      <Typography variant="h5">{product.name}</Typography>
+                      <Typography>Quantidade sugerida:</Typography>
+                    </CardContent>
+                  </Card>
+                </Link>
+              );
+            })
+          }
+        </ThemeProvider>
+      </section>
       <IconButton
         onClick={() => {
           router.back();

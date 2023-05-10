@@ -5,7 +5,8 @@ import {
   Button,
   Card,
   CardContent,
-  TextField,
+  createTheme,
+  ThemeProvider,
   Typography,
 } from "@mui/material";
 import TextFieldStandard from "@/components/TextField";
@@ -15,6 +16,19 @@ import useRequest from "@/hooks/useRequest";
 import UserContext from "@/components/Context";
 import StoreCard from "@/components/Card/StoreCard";
 import { Store } from "@/types/types";
+
+const theme = createTheme({
+  components: {
+    MuiCard: {
+      defaultProps: {
+        sx: {
+          alignSelf: "stretch",
+          margin: "6rem",
+        },
+      },
+    },
+  },
+});
 
 export default function Product() {
   const context = useContext(UserContext);
@@ -64,14 +78,16 @@ export default function Product() {
   };
 
   return (
-    <main className={styles.main}>
-      <Card>
-        <CardContent>
-          <Typography variant="h5">{product?.name}</Typography>
-          <Typography>{product?.measuring_unit}</Typography>
-        </CardContent>
-      </Card>
-      <form>
+    <main className="main-form">
+      <ThemeProvider theme={theme}>
+        <Card>
+          <CardContent>
+            <Typography variant="h5">{product?.name}</Typography>
+            <Typography>{product?.measuring_unit}</Typography>
+          </CardContent>
+        </Card>
+      </ThemeProvider>
+      <form className="form">
         <TextFieldStandard
           label={"Qtde. Total"}
           fieldName={"totalQuantity"}
@@ -85,9 +101,9 @@ export default function Product() {
           number
         />
       </form>
-      {
+      {data ? (
         // @ts-ignore: Object is possibly 'null'
-        data?.stores.map((store, index) => {
+        data?.stores?.map((store, index) => {
           return (
             <StoreCard
               store={store}
@@ -96,7 +112,9 @@ export default function Product() {
             />
           );
         })
-      }
+      ) : (
+        <h1>No Stores Avaiable Right Now</h1>
+      )}
       <Button
         variant="contained"
         onClick={handleSubmit}

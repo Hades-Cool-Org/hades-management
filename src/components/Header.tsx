@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { ArrowBackIos, Menu } from "@mui/icons-material";
 import { IconButton } from "@mui/material";
 import Link from "next/link";
@@ -28,7 +28,7 @@ const Header = () => {
             </IconButton>
           </>
         )}
-        <span className="title-span">Perfil - </span>
+        {role && <span className="title-span">Perfil - {Role[role]}</span>}
       </div>
     </>
   );

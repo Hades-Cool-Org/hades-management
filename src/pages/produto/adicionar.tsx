@@ -37,8 +37,8 @@ export default function AddProduct() {
   }, [success]);
 
   return (
-    <main className={styles.main}>
-      <form>
+    <main className="main-form">
+      <form className="form">
         <TextFieldStandard
           fieldName="name"
           label="Nome"
@@ -49,14 +49,15 @@ export default function AddProduct() {
           label="Detalhes"
           handleChange={handleChange}
         />
-        <Button
-          variant="contained"
-          onClick={handleSubmit}
-          disabled={loadingRequest}
-        >
-          Salvar
-        </Button>
       </form>
+
+      <Button
+        variant="contained"
+        onClick={handleSubmit}
+        disabled={loadingRequest}
+      >
+        Salvar
+      </Button>
     </main>
   );
 }
