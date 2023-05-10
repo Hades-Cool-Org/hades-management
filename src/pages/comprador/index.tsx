@@ -1,17 +1,32 @@
-import React, { useEffect, useState, useContext } from "react";
+import React, { useContext } from "react";
 import Head from "next/head";
-import axios from "axios";
 import VendorCard from "@/components/Card/VendorCard";
-import { Vendor } from "@/types/types";
-import { Button, TextField, Typography } from "@mui/material";
+import {
+  Button,
+  createTheme,
+  TextField,
+  ThemeProvider,
+  Typography,
+} from "@mui/material";
 import Link from "next/link";
 import UserContext from "@/components/Context";
 import useFetch from "@/hooks/useFetch";
 import styles from "@/styles/BuyerPage.module.css";
 
-const Comprador = () => {
-  const [vendors, setVendors] = useState<Vendor[]>([]);
+const theme = createTheme({
+  components: {
+    MuiCard: {
+      defaultProps: {
+        sx: {
+          backgroundColor: "transparent",
+          borderRadius: "0",
+        },
+      },
+    },
+  },
+});
 
+const Comprador = () => {
   const { data, loading, error } = useFetch("http://localhost:3333/v1/vendors");
 
   let context = useContext(UserContext);
@@ -33,18 +48,20 @@ const Comprador = () => {
             label="Buscar Fornecedor"
             className={styles.search}
           />
-          {
-            // @ts-ignore: Object is possibly 'null'
-            data?.vendors.map((vendor, index) => {
-              return (
-                <VendorCard
-                  vendor={vendor}
-                  index={index}
-                  handleClick={context.setState}
-                />
-              );
-            })
-          }
+          <ThemeProvider theme={theme}>
+            {
+              // @ts-ignore: Object is possibly 'null'
+              data?.vendors.map((vendor, index) => {
+                return (
+                  <VendorCard
+                    vendor={vendor}
+                    index={index}
+                    handleClick={context.setState}
+                  />
+                );
+              })
+            }
+          </ThemeProvider>
         </section>
         <Link href={"/fornecedor/adicionar"}>
           <Button variant="contained">Adicionar</Button>
