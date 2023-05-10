@@ -1,8 +1,23 @@
 .main {
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
+    justify-content: center;
     align-items: center;
     padding: 6rem;
-    min-height: 100vh;
+    padding-bottom: 20rem;
+    min-height: 100vh;  
+    background-color: #1E6CF5;
   }
+
+.formCard{
+  background-color: aliceblue;
+  padding: 2rem;
+}
+
+.form{
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 10rem;
+}
+  

@@ -61,7 +61,7 @@ const Motorista = ({ user }) => {
           >
             {
               // @ts-ignore: Object is possibly 'null'
-              data?.vehicles.map((vehicle: Product, index) => {
+              data?.vehicles?.map((vehicle: Product, index) => {
                 return (
                   <ToggleButton value={vehicle.id}>
                     {
