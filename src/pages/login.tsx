@@ -22,7 +22,7 @@ const Authentication = () => {
   useEffect(() => {
     if (success) {
       console.log(tokenData);
-      switch ("motorista") {
+      switch (tokenData.roles[0]) {
         case "admin":
           router.push("/gerente");
           break;

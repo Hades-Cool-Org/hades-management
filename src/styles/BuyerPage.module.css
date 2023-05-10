@@ -1,0 +1,11 @@
+.cards{
+    border: 1px solid grey;
+    border-radius: 4px;
+    min-height: 70vh;
+    min-width: 20rem;
+}
+
+.search{
+    display: flex;
+    align-self: stretch;
+}

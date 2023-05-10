@@ -1,13 +1,13 @@
 import React, { useEffect, useState, useContext } from "react";
 import Head from "next/head";
-import styles from "@/styles/Root.module.css";
 import axios from "axios";
 import VendorCard from "@/components/Card/VendorCard";
 import { Vendor } from "@/types/types";
-import { Button, Typography } from "@mui/material";
+import { Button, TextField, Typography } from "@mui/material";
 import Link from "next/link";
 import UserContext from "@/components/Context";
 import useFetch from "@/hooks/useFetch";
+import styles from "@/styles/BuyerPage.module.css";
 
 const Comprador = () => {
   const [vendors, setVendors] = useState<Vendor[]>([]);
@@ -25,21 +25,27 @@ const Comprador = () => {
       <Head>
         <title>Comprador</title>
       </Head>
-      <main className={styles.main}>
+      <main className="main">
         <Typography variant="h5">Fornecedores</Typography>
-
-        {
-          // @ts-ignore: Object is possibly 'null'
-          data?.vendors.map((vendor, index) => {
-            return (
-              <VendorCard
-                vendor={vendor}
-                index={index}
-                handleClick={context.setState}
-              />
-            );
-          })
-        }
+        <section className={styles.cards}>
+          <TextField
+            variant="standard"
+            label="Buscar Fornecedor"
+            className={styles.search}
+          />
+          {
+            // @ts-ignore: Object is possibly 'null'
+            data?.vendors.map((vendor, index) => {
+              return (
+                <VendorCard
+                  vendor={vendor}
+                  index={index}
+                  handleClick={context.setState}
+                />
+              );
+            })
+          }
+        </section>
         <Link href={"/fornecedor/adicionar"}>
           <Button variant="contained">Adicionar</Button>
         </Link>

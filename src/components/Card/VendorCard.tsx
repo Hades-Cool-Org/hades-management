@@ -28,7 +28,7 @@ export default function VendorCard({
       <Card key={index}>
         <CardContent>
           <Typography variant="h5">{name}</Typography>
-          <Typography>{location}</Typography>
+          <Typography>Local: {location}</Typography>
         </CardContent>
       </Card>
     </Link>

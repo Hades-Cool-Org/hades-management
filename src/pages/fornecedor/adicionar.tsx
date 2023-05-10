@@ -48,8 +48,8 @@ export default function AddVendor() {
   if (error) console.log(error);
 
   return (
-    <main className={styles.main}>
-      <form>
+    <main className="main-form">
+      <form className="form">
         <TextFieldStandard
           label="Nome do Fornecedor"
           fieldName="name"
@@ -95,14 +95,15 @@ export default function AddVendor() {
           fieldName="email"
           handleChange={handleContactChange}
         />
-        <Button
-          variant="contained"
-          onClick={handleSubmit}
-          disabled={loadingRequest}
-        >
-          Salvar
-        </Button>
       </form>
+
+      <Button
+        variant="contained"
+        onClick={handleSubmit}
+        disabled={loadingRequest}
+      >
+        Salvar
+      </Button>
     </main>
   );
 }

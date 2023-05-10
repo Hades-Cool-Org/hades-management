@@ -6,7 +6,6 @@ const Layout = (props: { children: JSX.Element }) => {
     <>
       <Header />
       {props.children}
-      <Footer />
     </>
   );
 };
