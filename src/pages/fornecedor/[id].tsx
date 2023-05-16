@@ -81,6 +81,7 @@ const VendorPage = () => {
                     key={index}
                     selected
                     handleLinkClick={() => handleLinkClick(product)}
+                    index={index}
                   />
                 );
               } else {
@@ -89,6 +90,7 @@ const VendorPage = () => {
                     product={product}
                     key={index}
                     handleLinkClick={() => handleLinkClick(product)}
+                    index={index}
                   />
                 );
               }

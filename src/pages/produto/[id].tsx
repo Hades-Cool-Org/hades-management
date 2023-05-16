@@ -54,7 +54,6 @@ export default function Product() {
       (p: Product) => p.id == state.product.id
     );
     if (currentProduct.length > 0) {
-      console.log("current:", currentProduct[0]);
       setBody((prevState) => ({
         ...prevState,
         totalQuantity: currentProduct[0].totalQuantity,
@@ -62,10 +61,6 @@ export default function Product() {
       }));
     }
   }, []);
-
-  useEffect(() => {
-    console.log("body", body);
-  }, [body]);
 
   const handleChange = (name: string, value: string) => {
     setBody((prevState) => ({
@@ -107,14 +102,38 @@ export default function Product() {
       ...value,
       id: key,
     }));
+
     if (state.products.length > 0) {
-      setState((prevState) => ({
-        ...prevState,
-        products: [
-          ...prevState.products,
-          { ...body, stores: storesArray, id: state.product.id },
-        ],
-      }));
+      if (
+        state.products.filter((product: any) => product.id == state.product.id)
+          .length > 0
+      ) {
+        const productsArray = state.products.map((product: any) => {
+          if (product.id == state.product.id) {
+            return {
+              ...product,
+              totalQuantity: body.totalQuantity,
+              totalValue: body.totalValue,
+              stores: storesArray,
+            };
+          } else {
+            return product;
+          }
+        });
+
+        setState((prevState) => ({
+          ...prevState,
+          products: [...productsArray],
+        }));
+      } else {
+        setState((prevState) => ({
+          ...prevState,
+          products: [
+            ...prevState.products,
+            { ...body, stores: storesArray, id: state.product.id },
+          ],
+        }));
+      }
     } else {
       setState((prevState) => ({
         ...prevState,
