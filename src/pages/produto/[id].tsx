@@ -88,13 +88,20 @@ export default function Product() {
       ...value,
       id: key,
     }));
-    setState((prevState) => ({
-      ...prevState,
-      products: [
-        ...prevState.products,
-        { ...body, stores: storesArray, id: state.product.id },
-      ],
-    }));
+    if (state.products.length > 0) {
+      setState((prevState) => ({
+        ...prevState,
+        products: [
+          ...prevState.products,
+          { ...body, stores: storesArray, id: state.product.id },
+        ],
+      }));
+    } else {
+      setState((prevState) => ({
+        ...prevState,
+        products: [{ ...body, stores: storesArray, id: state.product.id }],
+      }));
+    }
     router.back();
   };
 
