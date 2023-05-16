@@ -7,7 +7,7 @@ export interface User {
 }
 
 export interface Store {
-  userId: string;
+  id: string;
   name: string;
   address: string;
   user: User;

@@ -1,4 +1,4 @@
-import { Button, Card, FormControl, TextField } from "@mui/material";
+import { Button, Card, TextField } from "@mui/material";
 import { useRouter } from "next/router";
 import styles from "@/styles/AuthenticationPage.module.css";
 import Head from "next/head";

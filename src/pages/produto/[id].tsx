@@ -12,7 +12,6 @@ import {
 import TextFieldStandard from "@/components/TextField";
 import { useRouter } from "next/router";
 import useFetch from "@/hooks/useFetch";
-import useRequest from "@/hooks/useRequest";
 import UserContext from "@/components/Context";
 import StoreCard from "@/components/Card/StoreCard";
 import { Store } from "@/types/types";
@@ -34,7 +33,17 @@ export default function Product() {
   const context = useContext(UserContext);
   const router = useRouter();
 
-  const { data, loading, error } = useFetch("http://localhost:3333/v1/store");
+  const {
+    data: storeData,
+    loading: storeLoading,
+    error: storeError,
+  } = useFetch("http://localhost:3333/v1/store");
+
+  const {
+    data: vehiclesData,
+    loading: vehiclesLoading,
+    error: vehiclesError,
+  } = useFetch("http://localhost:3333/v1/deliveries/vehicles");
 
   const { product } = context.state;
 
@@ -49,13 +58,6 @@ export default function Product() {
     }));
   };
 
-  const handleStoresQuantity = (name: string, value: string) => {
-    setStores((prevState) => ({
-      ...prevState,
-      [name]: { quantity: value },
-    }));
-  };
-
   const sumQuantity = (stores: any) => {
     let sum = 0;
     for (let item in stores) {
@@ -65,16 +67,34 @@ export default function Product() {
   };
 
   useEffect(() => {
-    console.log("total", body.totalQuantity);
-    console.log("sum", sumQuantity(stores));
-    if (body.totalQuantity > 1) {
-      console.log(!(body?.totalQuantity == sumQuantity(stores)));
+    if (body.totalQuantity > 0) {
       setSubmitDisabled(!(body?.totalQuantity == sumQuantity(stores)));
     }
   }, [body, stores]);
 
+  const handleStoresQuantity = (id: string, value: string) => {
+    setStores((prevState) => ({
+      ...prevState,
+      [id]: { ...stores[id], quantity: value },
+    }));
+  };
+
+  const handleVehicleChange = (store: any, value: any) => {
+    setStores((prevState) => ({
+      ...prevState,
+      [store.id]: { ...stores[store.id], courier: value?.id },
+    }));
+  };
+
   const handleSubmit = () => {
-    console.log(body);
+    const storesArray = Object.entries(stores).map(([key, value]) => ({
+      ...value,
+      id: key,
+    }));
+    setBody((prevState) => ({
+      ...prevState,
+      stores: storesArray,
+    }));
   };
 
   return (
@@ -101,13 +121,15 @@ export default function Product() {
           number
         />
       </form>
-      {data ? (
+      {storeData ? (
         // @ts-ignore: Object is possibly 'null'
-        data?.stores?.map((store, index) => {
+        storeData?.stores?.map((store, index) => {
           return (
             <StoreCard
               store={store}
               index={index}
+              vehicles={vehiclesData?.vehicles}
+              handleVehicleChange={handleVehicleChange}
               handleStoresQuantity={handleStoresQuantity}
             />
           );

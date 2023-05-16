@@ -1,7 +1,7 @@
 import { Product, Vendor } from "@/types/types";
 import React, { useState } from "react";
 
-interface AppContextState {
+export interface AppContextState {
   user: Object | null;
   vendor: Vendor | null;
   product: Product | null;

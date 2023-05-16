@@ -28,7 +28,7 @@ const Header = () => {
             </IconButton>
           </>
         )}
-        {role && <span className="title-span">Perfil - {Role[role]}</span>}
+        <span className="title-span">Perfil -</span>
       </div>
     </>
   );
