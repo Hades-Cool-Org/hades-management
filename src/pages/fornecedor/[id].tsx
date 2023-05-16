@@ -33,8 +33,8 @@ const theme = createTheme({
 
 const VendorPage = () => {
   const [itemsList, setItemsList] = useState<any>({});
-  let context = useContext(UserContext);
-  const { vendor } = context.state;
+  const { setState, state } = useContext(UserContext);
+  const { vendor, products } = state;
 
   const router = useRouter();
 
@@ -64,24 +64,47 @@ const VendorPage = () => {
           {
             // @ts-ignore: Object is possibly 'null'
             data?.products.map((product: Product, index) => {
-              return (
-                <Link
-                  href={{ pathname: `/produto/${product.id}` }}
-                  onClick={() => {
-                    context.setState((prevState: any) => ({
-                      ...prevState,
-                      product: product,
-                    }));
-                  }}
-                >
-                  <Card key={index}>
-                    <CardContent>
-                      <Typography variant="h5">{product.name}</Typography>
-                      <Typography>Quantidade sugerida:</Typography>
-                    </CardContent>
-                  </Card>
-                </Link>
-              );
+              if (
+                products.filter((p: Product) => p.id === product.id).length > 0
+              ) {
+                return (
+                  <Link
+                    href={{ pathname: `/produto/${product.id}` }}
+                    onClick={() => {
+                      setState((prevState: any) => ({
+                        ...prevState,
+                        product: product,
+                      }));
+                    }}
+                  >
+                    <Card key={index} style={{ backgroundColor: "#777777" }}>
+                      <CardContent>
+                        <Typography variant="h5">{product.name}</Typography>
+                        <Typography>Quantidade sugerida:</Typography>
+                      </CardContent>
+                    </Card>
+                  </Link>
+                );
+              } else {
+                return (
+                  <Link
+                    href={{ pathname: `/produto/${product.id}` }}
+                    onClick={() => {
+                      setState((prevState: any) => ({
+                        ...prevState,
+                        product: product,
+                      }));
+                    }}
+                  >
+                    <Card key={index}>
+                      <CardContent>
+                        <Typography variant="h5">{product.name}</Typography>
+                        <Typography>Quantidade sugerida:</Typography>
+                      </CardContent>
+                    </Card>
+                  </Link>
+                );
+              }
             })
           }
         </ThemeProvider>

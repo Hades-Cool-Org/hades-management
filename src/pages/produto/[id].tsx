@@ -49,6 +49,24 @@ export default function Product() {
   const [stores, setStores] = useState([]);
   const [submitDisabled, setSubmitDisabled] = useState(true);
 
+  useEffect(() => {
+    const currentProduct = state.products?.filter(
+      (p: Product) => p.id == state.product.id
+    );
+    if (currentProduct.length > 0) {
+      console.log("current:", currentProduct[0]);
+      setBody((prevState) => ({
+        ...prevState,
+        totalQuantity: currentProduct[0].totalQuantity,
+        totalValue: currentProduct[0].totalValue,
+      }));
+    }
+  }, []);
+
+  useEffect(() => {
+    console.log("body", body);
+  }, [body]);
+
   const handleChange = (name: string, value: string) => {
     setBody((prevState) => ({
       ...prevState,
@@ -83,6 +101,7 @@ export default function Product() {
       [store.id]: { ...stores[store.id], courier: value?.id },
     }));
   };
+
   const handleSubmit = () => {
     const storesArray = Object.entries(stores).map(([key, value]) => ({
       ...value,
@@ -119,12 +138,14 @@ export default function Product() {
         <TextFieldStandard
           label={"Qtde. Total"}
           fieldName={"totalQuantity"}
+          value={body.totalQuantity}
           handleChange={handleChange}
           number
         />
         <TextFieldStandard
           label={"Valor Total"}
           fieldName={"totalValue"}
+          value={body.totalValue}
           handleChange={handleChange}
           number
         />

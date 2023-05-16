@@ -3,7 +3,7 @@ import { TextField, TextFieldProps } from "@mui/material";
 interface TextFieldValues {
   label: string;
   fieldName: string;
-  value?: string;
+  value?: string | number;
   handleChange: (fieldName: string, value: string) => any;
   number?: boolean;
 }
