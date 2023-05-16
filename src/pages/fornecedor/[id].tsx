@@ -17,6 +17,7 @@ import { ShoppingCart } from "@mui/icons-material";
 import { useRouter } from "next/router";
 import useFetch from "@/hooks/useFetch";
 import styles from "@/styles/BuyerPage.module.css";
+import ProductCard from "@/components/Card/ProductCard";
 
 const theme = createTheme({
   components: {
@@ -49,6 +50,13 @@ const VendorPage = () => {
     }));
   };
 
+  const handleLinkClick = (product: Product) => {
+    setState((prevState: any) => ({
+      ...prevState,
+      product: product,
+    }));
+  };
+
   if (loading) return <h1>Loading</h1>;
 
   if (error) console.log(error);
@@ -68,41 +76,20 @@ const VendorPage = () => {
                 products.filter((p: Product) => p.id === product.id).length > 0
               ) {
                 return (
-                  <Link
-                    href={{ pathname: `/produto/${product.id}` }}
-                    onClick={() => {
-                      setState((prevState: any) => ({
-                        ...prevState,
-                        product: product,
-                      }));
-                    }}
-                  >
-                    <Card key={index} style={{ backgroundColor: "#777777" }}>
-                      <CardContent>
-                        <Typography variant="h5">{product.name}</Typography>
-                        <Typography>Quantidade sugerida:</Typography>
-                      </CardContent>
-                    </Card>
-                  </Link>
+                  <ProductCard
+                    product={product}
+                    key={index}
+                    selected
+                    handleLinkClick={() => handleLinkClick(product)}
+                  />
                 );
               } else {
                 return (
-                  <Link
-                    href={{ pathname: `/produto/${product.id}` }}
-                    onClick={() => {
-                      setState((prevState: any) => ({
-                        ...prevState,
-                        product: product,
-                      }));
-                    }}
-                  >
-                    <Card key={index}>
-                      <CardContent>
-                        <Typography variant="h5">{product.name}</Typography>
-                        <Typography>Quantidade sugerida:</Typography>
-                      </CardContent>
-                    </Card>
-                  </Link>
+                  <ProductCard
+                    product={product}
+                    key={index}
+                    handleLinkClick={() => handleLinkClick(product)}
+                  />
                 );
               }
             })
