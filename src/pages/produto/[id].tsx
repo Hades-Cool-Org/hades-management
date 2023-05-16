@@ -30,7 +30,7 @@ const theme = createTheme({
 });
 
 export default function Product() {
-  const context = useContext(UserContext);
+  const { setState, state } = useContext(UserContext);
   const router = useRouter();
 
   const {
@@ -44,8 +44,6 @@ export default function Product() {
     loading: vehiclesLoading,
     error: vehiclesError,
   } = useFetch("http://localhost:3333/v1/deliveries/vehicles");
-
-  const { product } = context.state;
 
   const [body, setBody] = useState({ totalQuantity: 0, totalValue: 0 });
   const [stores, setStores] = useState([]);
@@ -85,16 +83,19 @@ export default function Product() {
       [store.id]: { ...stores[store.id], courier: value?.id },
     }));
   };
-
   const handleSubmit = () => {
     const storesArray = Object.entries(stores).map(([key, value]) => ({
       ...value,
       id: key,
     }));
-    setBody((prevState) => ({
+    setState((prevState) => ({
       ...prevState,
-      stores: storesArray,
+      products: [
+        ...prevState.products,
+        { ...body, stores: storesArray, id: state.product.id },
+      ],
     }));
+    router.back();
   };
 
   return (
@@ -102,8 +103,8 @@ export default function Product() {
       <ThemeProvider theme={theme}>
         <Card>
           <CardContent>
-            <Typography variant="h5">{product?.name}</Typography>
-            <Typography>{product?.measuring_unit}</Typography>
+            <Typography variant="h5">{state.product?.name}</Typography>
+            <Typography>{state.product?.measuring_unit}</Typography>
           </CardContent>
         </Card>
       </ThemeProvider>

@@ -1,15 +1,22 @@
 import { Product, Vendor } from "@/types/types";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
 export interface AppContextState {
   user: Object | null;
   vendor: Vendor | null;
   product: Product | null;
+  products: Product[];
   session: Object | null;
 }
 
 const UserContext = React.createContext<IUserContext>({
-  state: { user: null, vendor: null, product: null, session: null },
+  state: {
+    user: null,
+    vendor: null,
+    product: null,
+    products: [],
+    session: null,
+  },
   setState: (state: AppContextState) => {},
 });
 
@@ -27,8 +34,13 @@ export const UserContextProvider = ({ children }: UserContextProps) => {
     user: null,
     vendor: null,
     product: null,
+    products: [],
     session: null,
   });
+
+  useEffect(() => {
+    console.log(state);
+  }, [state]);
   return (
     <UserContext.Provider value={{ state, setState }}>
       {children}
