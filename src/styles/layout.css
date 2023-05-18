@@ -3,6 +3,7 @@
     background-color: #1E6CF5;
     padding: 5px;
     align-items: center;
+    justify-content: space-between;
 }
 
 .layout-footer {

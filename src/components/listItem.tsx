@@ -1,22 +1,22 @@
 import { ListItemButton, ListItemIcon, ListItemText } from "@mui/material";
-import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
+import Link from "next/link";
 
 interface ListItemValues {
-    itemText: string;
-    handleClick?: any;
+  itemText: string;
+  handleClick?: any;
+  route?: string;
 }
 
-const ListItem: React.FC<ListItemValues> = (props:ListItemValues) => {
-    const {itemText, handleClick} = props;
+const ListItem: React.FC<ListItemValues> = (props: ListItemValues) => {
+  const { itemText, handleClick, route } = props;
 
-    return(
-        <ListItemButton onClick={handleClick}>
-            <ListItemText primary={itemText} />
-            <ListItemIcon>
-                <ArrowForwardIosIcon fontSize="small"/>
-            </ListItemIcon>
-        </ListItemButton>
-    )
-}
+  return (
+    <Link href={{ pathname: route }}>
+      <ListItemButton onClick={handleClick}>
+        <ListItemText primary={itemText} />
+      </ListItemButton>
+    </Link>
+  );
+};
 
 export default ListItem;

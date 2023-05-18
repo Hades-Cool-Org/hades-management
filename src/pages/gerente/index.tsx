@@ -41,7 +41,7 @@ const Gerente = () => {
         <h1>Entrega de caminhões</h1>
         {
           // @ts-ignore: Object is possibly 'null'
-          data?.sessions.map((session, index) => {
+          data?.sessions?.map((session, index) => {
             return (
               <DriverCard
                 session={session}
