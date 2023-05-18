@@ -22,7 +22,7 @@ const UserContext = React.createContext<IUserContext>({
 
 interface IUserContext {
   state: AppContextState;
-  setState: (state: AppContextState) => any;
+  setState: (state: AppContextState) => void;
 }
 
 interface UserContextProps {

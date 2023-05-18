@@ -3,18 +3,24 @@ import { useRouter } from "next/router";
 import styles from "@/styles/AuthenticationPage.module.css";
 import Head from "next/head";
 import React, { useState, useContext, useEffect } from "react";
-import UserContext, { UserContextProvider } from "@/components/Context";
+import UserContext, {
+  AppContextState,
+  UserContextProvider,
+} from "@/components/Context";
 import useRequest from "@/hooks/useRequest";
 
 const Authentication = () => {
   const { login, tokenData, success, loadingRequest, error } = useRequest();
 
-  const [email, setEmail] = useState<string>("guilhermeXx@gmail.com");
+  const { setState } = useContext(UserContext);
+
+  const [email, setEmail] = useState<string>("guilhermeX@gmail.com");
   const [password, setPassword] = useState<string>("guilherme");
   const router = useRouter();
 
   const handleSubmit = async (event: React.MouseEvent<HTMLElement>) => {
     const body = { email, password };
+    console.log(body);
     login(body);
     event.preventDefault();
   };
@@ -22,20 +28,19 @@ const Authentication = () => {
   useEffect(() => {
     if (success) {
       console.log(tokenData);
-      switch (tokenData.roles[0]) {
-        case "admin":
-          router.push("/gerente");
-          break;
-        case "vendor":
-          router.push("/fornecedor");
-          break;
-        case "driver":
-          router.push("/motorista");
-        case "precificador":
-          router.push("/precificador");
-        default:
-        case "buyer":
-          router.push("/comprador");
+      setState((prevState: AppContextState) => ({
+        ...prevState,
+        user: {
+          email: email,
+          name: tokenData.name,
+          id: tokenData.user_id,
+          roles: tokenData.roles,
+        },
+      }));
+      if (true) {
+        router.push("login/first");
+      } else {
+        router.push("/");
       }
     }
   }, [success]);
