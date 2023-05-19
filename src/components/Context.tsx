@@ -1,5 +1,5 @@
 import { Product, Vendor } from "@/types/types";
-import React, { useEffect, useState } from "react";
+import React, { Dispatch, SetStateAction, useEffect, useState } from "react";
 
 export interface AppContextState {
   user: Object | null;
@@ -7,6 +7,7 @@ export interface AppContextState {
   product: Product | null;
   products: Product[];
   session: Object | null;
+  order: Object | null;
 }
 
 const UserContext = React.createContext<IUserContext>({
@@ -16,13 +17,14 @@ const UserContext = React.createContext<IUserContext>({
     product: null,
     products: [],
     session: null,
+    order: null,
   },
-  setState: (state: AppContextState) => {},
+  setState: (state) => {},
 });
 
 interface IUserContext {
   state: AppContextState;
-  setState: (state: AppContextState) => void;
+  setState: Dispatch<SetStateAction<Object>>;
 }
 
 interface UserContextProps {
@@ -36,6 +38,7 @@ export const UserContextProvider = ({ children }: UserContextProps) => {
     product: null,
     products: [],
     session: null,
+    order: null,
   });
 
   useEffect(() => {
