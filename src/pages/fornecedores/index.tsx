@@ -12,6 +12,8 @@ import Link from "next/link";
 import UserContext from "@/components/Context";
 import useFetch from "@/hooks/useFetch";
 import styles from "@/styles/BuyerPage.module.css";
+import useRequest from "@/hooks/useRequest";
+import { useRouter } from "next/router";
 
 const theme = createTheme({
   components: {
@@ -26,19 +28,35 @@ const theme = createTheme({
   },
 });
 
-const Comprador = () => {
+const Fornecedores = () => {
   const { data, loading, error } = useFetch("http://localhost:3333/v1/vendors");
 
-  let context = useContext(UserContext);
+  const { state, setState } = useContext(UserContext);
+
+  const { post, success, error: requestError } = useRequest();
+
+  const router = useRouter();
 
   if (loading) return <h1>Loading</h1>;
 
   if (error) console.log(error);
 
+  const postCallback = (res: any) => {
+    router.push(`/pedidos/${res.id}`);
+  };
+
+  const handleClick = (vendor: any) => {
+    const body = {
+      vendor: { id: vendor?.id },
+      user: { id: state?.user?.id },
+    };
+    post("http://localhost:3333/v1/orders", body, postCallback);
+  };
+
   return (
     <>
       <Head>
-        <title>Comprador</title>
+        <title>Fornecedores</title>
       </Head>
       <main className="main">
         <Typography variant="h5">Fornecedores</Typography>
@@ -56,7 +74,7 @@ const Comprador = () => {
                   <VendorCard
                     vendor={vendor}
                     index={index}
-                    handleClick={context.setState}
+                    handleClick={handleClick}
                   />
                 );
               })
@@ -71,4 +89,4 @@ const Comprador = () => {
   );
 };
 
-export default Comprador;
+export default Fornecedores;

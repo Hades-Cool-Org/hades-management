@@ -17,12 +17,9 @@ export default function VendorCard({
   const { name, location } = vendor;
   return (
     <Link
-      href={{ pathname: `/fornecedor/${vendor.id}` }}
+      href={{ pathname: `/fornecedores` }}
       onClick={() => {
-        handleClick((prevState: any) => ({
-          ...prevState,
-          vendor: vendor,
-        }));
+        handleClick(vendor);
       }}
     >
       <Card key={index}>

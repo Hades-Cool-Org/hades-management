@@ -14,6 +14,8 @@ import {
 import { useRouter } from "next/router";
 import ListItem from "./ListItem";
 import Logo from "./Logo";
+// @ts-ignore
+import cookieCutter from "cookie-cutter";
 
 const Header = () => {
   const router = useRouter();
@@ -79,7 +81,13 @@ const Header = () => {
             <Divider />
             <List>
               <ListItem itemText={"Editar Perfil"} />
-              <ListItem itemText={"Sair"} />
+              <ListItem
+                itemText={"Sair"}
+                route="/login"
+                handleClick={() => {
+                  cookieCutter.set("user", undefined);
+                }}
+              />
             </List>
           </Box>
         </SwipeableDrawer>

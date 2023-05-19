@@ -33,7 +33,7 @@ const theme = createTheme({
   },
 });
 
-const VendorPage = () => {
+const Order = () => {
   const [itemsList, setItemsList] = useState<any>({});
   const { setState, state } = useContext(UserContext);
   const { vendor, products } = state;
@@ -116,4 +116,4 @@ const VendorPage = () => {
   );
 };
 
-export default VendorPage;
+export default Order;

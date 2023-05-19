@@ -31,12 +31,13 @@ function useRequest() {
       });
   };
 
-  const post = (url: string, body: any) => {
+  const post = (url: string, body: any, callback?: any) => {
     setLoadingRequest(true);
     axios
       .post(url, body)
       .then((response) => {
         setSuccess(response.status === 201);
+        callback && callback(response.data);
       })
       .catch((err) => {
         setError(err);
