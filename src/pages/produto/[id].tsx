@@ -15,6 +15,7 @@ import useFetch from "@/hooks/useFetch";
 import UserContext from "@/components/Context";
 import StoreCard from "@/components/Card/StoreCard";
 import { Store } from "@/types/types";
+import Link from "next/link";
 
 const theme = createTheme({
   components: {
@@ -103,12 +104,15 @@ export default function Product() {
       id: key,
     }));
 
+    // Checar se já existem produtos na lista
     if (state.products.length > 0) {
+      //Checar se produto já está na lista
       if (
         state.products.filter((product: any) => product.id == state.product.id)
           .length > 0
       ) {
         const productsArray = state.products.map((product: any) => {
+          // Se produto existente apenas atualizar seus campos
           if (product.id == state.product.id) {
             return {
               ...product,
@@ -120,12 +124,13 @@ export default function Product() {
             return product;
           }
         });
-
+        //SetState de atualização
         setState((prevState) => ({
           ...prevState,
           products: [...productsArray],
         }));
       } else {
+        //SetState de inserção na lista
         setState((prevState) => ({
           ...prevState,
           products: [
@@ -135,6 +140,7 @@ export default function Product() {
         }));
       }
     } else {
+      //SetState de criação da lista
       setState((prevState) => ({
         ...prevState,
         products: [{ ...body, stores: storesArray, id: state.product.id }],
@@ -147,10 +153,14 @@ export default function Product() {
     <main className="main-form">
       <ThemeProvider theme={theme}>
         <Card>
-          <CardContent>
-            <Typography variant="h5">{state.product?.name}</Typography>
-            <Typography>{state.product?.measuring_unit}</Typography>
-          </CardContent>
+          <Link
+            href={`http://localhost:3000/produto/editar/${state.product?.id}`}
+          >
+            <CardContent>
+              <Typography variant="h5">{state.product?.name}</Typography>
+              <Typography>{state.product?.measuring_unit}</Typography>
+            </CardContent>
+          </Link>
         </Card>
       </ThemeProvider>
       <form className="form">

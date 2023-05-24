@@ -45,8 +45,8 @@ const Order = () => {
   );
 
   const {
-    post,
     put,
+    deleteItem,
     success,
     loadingRequest,
     error: requestError,
@@ -66,7 +66,33 @@ const Order = () => {
     }));
   };
 
-  const cartClick = () => {};
+  const handleCancelClick = () => {
+    deleteItem(
+      `http://localhost:3333/v1/orders/${state.order?.id}`,
+      deleteCallback
+    );
+  };
+
+  const deleteCallback = (res: any) => {
+    router.back();
+  };
+
+  const cartClick = () => {
+    console.log(state.products);
+    const res = state.products.map((product) => {
+      return product.stores.map((store) => {
+        return {
+          quantity: store.quantity,
+          store_id: parseInt(store.id),
+          product_id: product.id,
+          total: product.totalValue,
+        };
+      });
+    });
+    const items = { items: res.flat() };
+    console.log(items);
+    put(`http://localhost:3333/v1/orders/${state.order.id}`, items);
+  };
 
   if (loading) return <h1>Loading</h1>;
 
@@ -74,6 +100,8 @@ const Order = () => {
 
   return (
     <main className="main">
+      <Typography>{state?.order?.state}</Typography>
+      <Typography>{state?.order?.created_date}</Typography>
       <Typography variant="h5">{vendor?.name}</Typography>
       <Link href={"/produto/adicionar"}>
         <Button variant="contained">Adicionar Produto</Button>
@@ -112,6 +140,13 @@ const Order = () => {
       <IconButton onClick={cartClick} disabled={loadingRequest}>
         <ShoppingCart fontSize="small" style={{ fill: "black" }} />
       </IconButton>
+      <Button
+        variant="contained"
+        disabled={loadingRequest}
+        onClick={handleCancelClick}
+      >
+        Cancelar Pedido
+      </Button>
     </main>
   );
 };

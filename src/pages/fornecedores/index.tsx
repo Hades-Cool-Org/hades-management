@@ -44,6 +44,7 @@ const Fornecedores = () => {
   const postCallback = (res: any) => {
     setState((prevState) => ({
       ...prevState,
+      order: res,
     }));
     router.push(`/pedidos/${res.id}`);
   };

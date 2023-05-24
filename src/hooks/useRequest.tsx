@@ -47,12 +47,13 @@ function useRequest() {
       });
   };
 
-  const put = (url: string, body: any) => {
+  const put = (url: string, body: any, callback?: any) => {
     setLoadingRequest(true);
     axios
       .put(url, body)
       .then((response) => {
         setSuccess(response.status === 200);
+        callback && callback(response.data);
       })
       .catch((err) => {
         setError(err);
@@ -62,12 +63,13 @@ function useRequest() {
       });
   };
 
-  const deleteItem = (url: string, body: any) => {
+  const deleteItem = (url: string, callback?: any) => {
     setLoadingRequest(true);
     axios
-      .put(url, body)
+      .delete(url)
       .then((response) => {
         setSuccess(response.status === 200);
+        callback && callback(response.data);
       })
       .catch((err) => {
         setError(err);
