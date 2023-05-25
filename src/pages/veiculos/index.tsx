@@ -44,7 +44,10 @@ const Veiculos = () => {
   };
 
   const postSessionCallback = (res: any) => {
-    console.log(res);
+    setState((prevState) => ({
+      ...prevState,
+      session: res,
+    }));
     router.push(`/motorista/session/${res.id}`);
   };
 
@@ -71,7 +74,7 @@ const Veiculos = () => {
               // @ts-ignore: Object is possibly 'null'
               data?.vehicles?.map((vehicle: Product, index) => {
                 return (
-                  <ToggleButton value={vehicle.id}>
+                  <ToggleButton value={vehicle.id} key={index}>
                     {
                       <>
                         <h1>{vehicle.name}</h1>
