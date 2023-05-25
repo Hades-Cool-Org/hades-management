@@ -1,6 +1,6 @@
-import { TextField, TextFieldProps } from "@mui/material";
+import { TextField } from "@mui/material";
 
-interface TextFieldValues {
+interface TextFieldProps {
   label: string;
   fieldName: string;
   value?: string | number;
@@ -8,10 +8,13 @@ interface TextFieldValues {
   number?: boolean;
 }
 
-const TextFieldStandard: React.FC<TextFieldValues> = (
-  props: TextFieldValues
-) => {
-  const { fieldName, label, value, handleChange, number } = props;
+const TextFieldStandard: React.FC<TextFieldProps> = ({
+  fieldName,
+  label,
+  value,
+  handleChange,
+  number,
+}: TextFieldProps) => {
   return (
     <TextField
       id="standard-basic"
