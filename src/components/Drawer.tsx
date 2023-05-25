@@ -54,7 +54,7 @@ export default function Drawer({
           />
           <ListItem
             itemText={"Veículos"}
-            route="/"
+            route="/veiculos"
             handleClick={handleDrawerClose}
           />
           <ListItem

@@ -8,19 +8,24 @@ import {
   ToggleButtonGroup,
   Typography,
 } from "@mui/material";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import useRequest from "@/hooks/useRequest";
+import UserContext from "@/components/Context";
+import { useRouter } from "next/router";
+import Link from "next/link";
 
-const Motorista = ({ user }) => {
+const Veiculos = () => {
   const [vehicleId, setVehicleId] = useState<string>("");
 
   const { data, loading, error } = useFetch(
     "http://localhost:3333/v1/deliveries/vehicles"
   );
 
-  const request = useRequest();
+  const { state, setState } = useContext(UserContext);
 
-  const userData = JSON.parse(user);
+  const { post, success } = useRequest();
+
+  const router = useRouter();
 
   const handleVehicleChange = (
     event: React.MouseEvent<HTMLElement>,
@@ -30,26 +35,29 @@ const Motorista = ({ user }) => {
   };
 
   const handleClick = () => {
-    const body = { user: { id: userData.user_id }, vehicle: { id: vehicleId } };
-    request.post("http://localhost:3333/v1/deliveries/sessions", body);
+    const body = { user: { id: state.user.id }, vehicle: { id: vehicleId } };
+    post(
+      "http://localhost:3333/v1/deliveries/sessions",
+      body,
+      postSessionCallback
+    );
   };
 
-  useEffect(() => {
-    if (request.success) {
-      console.log("success");
-    }
-  }, [request.success]);
+  const postSessionCallback = (res: any) => {
+    console.log(res);
+    router.push(`/motorista/session/${res.id}`);
+  };
 
   if (loading) return <h1>Loading</h1>;
   if (error) console.log(error);
   return (
     <>
       <Head>
-        <title>Motorista</title>
+        <title>Veiculos</title>
       </Head>
       {data && (
         <main className={styles.main}>
-          <Typography>{userData.name}</Typography>
+          <Typography>{state.user.name}</Typography>
 
           <ToggleButtonGroup
             color="primary"
@@ -75,7 +83,12 @@ const Motorista = ({ user }) => {
               })
             }
           </ToggleButtonGroup>
-          <Button onClick={handleClick}>Iniciar Sessão</Button>
+          <Link href={"veiculos/adicionar"}>
+            <Button variant="contained">Adicionar Veiculo</Button>
+          </Link>
+          <Button onClick={handleClick} variant="contained">
+            Iniciar Sessão
+          </Button>
         </main>
       )}
     </>
@@ -88,4 +101,4 @@ export function getServerSideProps({ req, res }) {
   };
 }
 
-export default Motorista;
+export default Veiculos;
