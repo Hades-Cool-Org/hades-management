@@ -8,6 +8,7 @@ export interface AppContextState {
   products: Product[];
   session: Object | null;
   order: Object | null;
+  delivery: Object | null;
 }
 
 const UserContext = React.createContext<IUserContext>({
@@ -18,6 +19,7 @@ const UserContext = React.createContext<IUserContext>({
     products: [],
     session: null,
     order: null,
+    delivery: null,
   },
   setState: (state) => {},
 });
@@ -39,6 +41,7 @@ export const UserContextProvider = ({ children }: UserContextProps) => {
     products: [],
     session: null,
     order: null,
+    delivery: null,
   });
 
   useEffect(() => {

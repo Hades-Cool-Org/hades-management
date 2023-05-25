@@ -59,7 +59,7 @@ export default function Drawer({
           />
           <ListItem
             itemText={"Entregas"}
-            route="/"
+            route="/entregas"
             handleClick={handleDrawerClose}
           />
           <ListItem
@@ -69,7 +69,7 @@ export default function Drawer({
           />
           <ListItem
             itemText={"Acompanhamento"}
-            route="/"
+            route="/acompanhamento"
             handleClick={handleDrawerClose}
           />
           <ListItem
