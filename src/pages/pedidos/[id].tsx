@@ -77,6 +77,10 @@ const Order = () => {
     router.back();
   };
 
+  const putOrderCallback = () => {
+    router.back();
+  };
+
   const cartClick = () => {
     console.log(state.products);
     const res = state.products.map((product) => {
@@ -91,7 +95,11 @@ const Order = () => {
     });
     const items = { items: res.flat() };
     console.log(items);
-    put(`http://localhost:3333/v1/orders/${state.order.id}`, items);
+    put(
+      `http://localhost:3333/v1/orders/${state.order.id}`,
+      items,
+      putOrderCallback
+    );
   };
 
   if (loading) return <h1>Loading</h1>;

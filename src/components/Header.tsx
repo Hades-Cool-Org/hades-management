@@ -69,14 +69,46 @@ const Header = () => {
                 route="/produtos"
                 handleClick={handleDrawerClose}
               />
-              <ListItem itemText={"Pedidos"} route="/" />
-              <ListItem itemText={"Lojas"} route="/" />
-              <ListItem itemText={"Veículos"} route="/" />
-              <ListItem itemText={"Entregas"} route="/" />
-              <ListItem itemText={"Estoque"} route="/" />
-              <ListItem itemText={"Acompanhamento"} route="/" />
-              <ListItem itemText={"Ocorrências"} route="/" />
-              <ListItem itemText={"Usuários"} route="/" />
+              <ListItem
+                itemText={"Pedidos"}
+                route="/pedidos"
+                handleClick={handleDrawerClose}
+              />
+              <ListItem
+                itemText={"Lojas"}
+                route="/"
+                handleClick={handleDrawerClose}
+              />
+              <ListItem
+                itemText={"Veículos"}
+                route="/"
+                handleClick={handleDrawerClose}
+              />
+              <ListItem
+                itemText={"Entregas"}
+                route="/"
+                handleClick={handleDrawerClose}
+              />
+              <ListItem
+                itemText={"Estoque"}
+                route="/"
+                handleClick={handleDrawerClose}
+              />
+              <ListItem
+                itemText={"Acompanhamento"}
+                route="/"
+                handleClick={handleDrawerClose}
+              />
+              <ListItem
+                itemText={"Ocorrências"}
+                route="/"
+                handleClick={handleDrawerClose}
+              />
+              <ListItem
+                itemText={"Usuários"}
+                route="/"
+                handleClick={handleDrawerClose}
+              />
             </List>
             <Divider />
             <List>
@@ -86,6 +118,7 @@ const Header = () => {
                 route="/login"
                 handleClick={() => {
                   cookieCutter.set("user", undefined);
+                  setOpen(false);
                 }}
               />
             </List>
