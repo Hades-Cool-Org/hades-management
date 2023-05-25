@@ -1,3 +1,4 @@
+import OrderCard from "@/components/Card/OrderCard";
 import UserContext from "@/components/Context";
 import useFetch from "@/hooks/useFetch";
 import useRequest from "@/hooks/useRequest";
@@ -29,6 +30,28 @@ export default function Session() {
 
   return (
     <main className="main">
+      {data &&
+        data?.orders?.map(
+          (
+            order: {
+              id: string;
+              state: string;
+              user: { name: string };
+              vendor: { name: string };
+            },
+            index: number
+          ) => {
+            return (
+              <OrderCard
+                id={order.id}
+                state={order.state}
+                userName={order.user.name}
+                vendorName={order.vendor.name}
+                key={index}
+              />
+            );
+          }
+        )}
       <Button variant="contained" onClick={handleDeleteClick}>
         Fechar Sessão
       </Button>

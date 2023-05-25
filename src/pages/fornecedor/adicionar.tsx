@@ -37,7 +37,7 @@ export default function AddVendor() {
   };
 
   useEffect(() => {
-    if (success) router.push("/comprador");
+    if (success) router.push("/fornecedores");
   }, [success]);
 
   const handleSubmit = async (event: any) => {
