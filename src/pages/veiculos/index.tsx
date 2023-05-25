@@ -35,7 +35,7 @@ const Veiculos = () => {
   };
 
   const handleClick = () => {
-    const body = { user: { id: state.user.id }, vehicle: { id: vehicleId } };
+    const body = { user: { id: state?.user?.id }, vehicle: { id: vehicleId } };
     post(
       "http://localhost:3333/v1/deliveries/sessions",
       body,
@@ -60,7 +60,7 @@ const Veiculos = () => {
       </Head>
       {data && (
         <main className={styles.main}>
-          <Typography>{state.user.name}</Typography>
+          <Typography>{state?.user?.name}</Typography>
 
           <ToggleButtonGroup
             color="primary"
@@ -72,7 +72,7 @@ const Veiculos = () => {
           >
             {
               // @ts-ignore: Object is possibly 'null'
-              data?.vehicles?.map((vehicle: Product, index) => {
+              data?.vehicles?.map((vehicle: Product, index: number) => {
                 return (
                   <ToggleButton value={vehicle.id} key={index}>
                     {
