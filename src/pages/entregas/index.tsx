@@ -1,12 +1,20 @@
+import UserContext from "@/components/Context";
 import useFetch from "@/hooks/useFetch";
 import { Card, CardContent, Typography } from "@mui/material";
 import Link from "next/link";
-import React from "react";
+import React, { useContext } from "react";
 
 export default function Entregas() {
   const { data } = useFetch("http://localhost:3333/v1/deliveries");
 
-  console.log(data?.deliveries);
+  const { setState } = useContext(UserContext);
+
+  const handleLinkClick = (delivery: any) => {
+    setState((prevState: any) => ({
+      ...prevState,
+      delivery: delivery,
+    }));
+  };
 
   return (
     <main className="main">
@@ -18,7 +26,7 @@ export default function Entregas() {
               href={{ pathname: `/entregas/${delivery.id}` }}
               key={index}
               onClick={() => {
-                console.log("test");
+                handleLinkClick(delivery);
               }}
             >
               <Card key={index}>

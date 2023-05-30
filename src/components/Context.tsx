@@ -1,5 +1,6 @@
 import { Product, Vendor } from "@/types/types";
 import React, { Dispatch, SetStateAction, useEffect, useState } from "react";
+import Cookie from "js-cookie";
 
 export interface AppContextState {
   user: Object | null;
@@ -46,7 +47,9 @@ export const UserContextProvider = ({ children }: UserContextProps) => {
 
   useEffect(() => {
     console.log(state);
+    Cookie.set("state", JSON.stringify(state));
   }, [state]);
+
   return (
     <UserContext.Provider value={{ state, setState }}>
       {children}
