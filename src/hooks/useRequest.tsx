@@ -7,19 +7,17 @@ function useRequest() {
   const [loadingRequest, setLoadingRequest] = useState(false);
   const [error, setError] = useState(null);
   const [success, setSuccess] = useState(false);
-  const [tokenData, setTokenData] = useState(null);
 
-  const login = (body: any) => {
+  const login = (body: any, callback?: any) => {
     setLoadingRequest(true);
     axios
       .post("http://localhost:3333/login", body)
       .then((response) => {
         if (response.status === 200) {
           const parsedToken = parseJwt(response.data.jwt);
-          setTokenData(parsedToken);
           Cookie.set("user", JSON.stringify(parsedToken));
           setSuccess(true);
-          return response;
+          callback && callback(response.data, parsedToken);
         }
       })
       .catch((err) => {
@@ -82,7 +80,6 @@ function useRequest() {
     loadingRequest,
     error,
     success,
-    tokenData,
     login,
     post,
     put,

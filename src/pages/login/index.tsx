@@ -2,17 +2,19 @@ import { Button, Card, TextField } from "@mui/material";
 import { useRouter } from "next/router";
 import styles from "@/styles/AuthenticationPage.module.css";
 import Head from "next/head";
-import React, { useState, useContext, useEffect } from "react";
+import React, { useState, useContext, useEffect, useCallback } from "react";
 import UserContext, {
   AppContextState,
   UserContextProvider,
 } from "@/components/Context";
 import useRequest from "@/hooks/useRequest";
+import SEO from "@/components/Head";
+import Cookie from "js-cookie";
 
 const Authentication = () => {
-  const { login, tokenData, success, loadingRequest, error } = useRequest();
+  const { login, success, loadingRequest, error } = useRequest();
 
-  const { setState } = useContext(UserContext);
+  const { state, setState } = useContext(UserContext);
 
   const [email, setEmail] = useState<string>("guilhermeX@gmail.com");
   const [password, setPassword] = useState<string>("guilherme");
@@ -20,39 +22,42 @@ const Authentication = () => {
 
   const handleSubmit = async (event: React.MouseEvent<HTMLElement>) => {
     const body = { email, password };
-    console.log(body);
-    login(body);
+    login(body, postLoginCallback);
     event.preventDefault();
   };
 
-  useEffect(() => {
-    if (success) {
-      console.log(tokenData);
+  const postLoginCallback = useCallback(
+    (res: any, token: any) => {
+      console.log(token);
       setState((prevState: AppContextState) => ({
         ...prevState,
         user: {
           email: email,
-          name: tokenData.name,
-          id: tokenData.user_id,
-          roles: tokenData.roles,
+          name: token.name,
+          id: token.user_id,
+          roles: token.roles,
         },
       }));
-      if (true) {
+      if (res.first_login) {
         router.push("login/first");
       } else {
         router.push("/");
       }
-    }
-  }, [success]);
+    },
+    [success]
+  );
+
+  useEffect(() => {
+    return () => {
+      Cookie.set("state", JSON.stringify(state));
+    };
+  }, []);
 
   if (error) console.log(error);
 
   return (
     <>
-      <Head>
-        <div className={styles.head}></div>
-        <title>Login</title>
-      </Head>
+      <SEO pageTitle={"Login"} pageDescription={"Tela de login"} />
       <main className={styles.main}>
         <Card className={styles.formCard}>
           <form className={styles.form}>

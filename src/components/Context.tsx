@@ -22,7 +22,7 @@ interface UserContextProps {
   children: JSX.Element;
 }
 
-const initialState = {
+export const initialState = {
   user: null,
   vendor: null,
   product: null,
@@ -43,8 +43,19 @@ export const UserContextProvider = ({ children }: UserContextProps) => {
 
   useEffect(() => {
     console.log(state);
-    Cookie.set("state", JSON.stringify(state));
   }, [state]);
+
+  useEffect(() => {
+    if (state == initialState) {
+      const cookieState = Cookie.get("state");
+      if (typeof cookieState === "string") {
+        const parsedCookie = JSON.parse(cookieState);
+        setState((prevState) => ({
+          ...parsedCookie,
+        }));
+      }
+    }
+  }, []);
 
   return (
     <UserContext.Provider value={{ state, setState }}>

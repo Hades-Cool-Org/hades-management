@@ -6,6 +6,7 @@ import TextFieldStandard from "@/components/TextField";
 import { useRouter } from "next/router";
 import useRequest from "@/hooks/useRequest";
 import UserContext from "@/components/Context";
+import SEO from "@/components/Head";
 
 export default function AdicionarLoja() {
   const [body, setBody] = useState({
@@ -39,27 +40,33 @@ export default function AdicionarLoja() {
   }, [success]);
 
   return (
-    <main className="main-form">
-      <form className="form">
-        <TextFieldStandard
-          fieldName="name"
-          label="Nome"
-          handleChange={handleChange}
-        />
-        <TextFieldStandard
-          fieldName="address"
-          label="Endereço"
-          handleChange={handleChange}
-        />
-      </form>
+    <>
+      <SEO
+        pageTitle={"Adicionar Loja"}
+        pageDescription={"Formulário de adição de loja"}
+      />
+      <main className="main-form">
+        <form className="form">
+          <TextFieldStandard
+            fieldName="name"
+            label="Nome"
+            handleChange={handleChange}
+          />
+          <TextFieldStandard
+            fieldName="address"
+            label="Endereço"
+            handleChange={handleChange}
+          />
+        </form>
 
-      <Button
-        variant="contained"
-        onClick={handleSubmit}
-        disabled={loadingRequest}
-      >
-        Salvar
-      </Button>
-    </main>
+        <Button
+          variant="contained"
+          onClick={handleSubmit}
+          disabled={loadingRequest}
+        >
+          Salvar
+        </Button>
+      </main>
+    </>
   );
 }

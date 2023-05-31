@@ -63,11 +63,6 @@ export default function Drawer({
             handleClick={handleDrawerClose}
           />
           <ListItem
-            itemText={"Estoque"}
-            route="/"
-            handleClick={handleDrawerClose}
-          />
-          <ListItem
             itemText={"Acompanhamento"}
             route="/acompanhamento"
             handleClick={handleDrawerClose}

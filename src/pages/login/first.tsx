@@ -14,6 +14,7 @@ import UserContext, { UserContextProvider } from "@/components/Context";
 import useRequest from "@/hooks/useRequest";
 import CloseIcon from "@mui/icons-material/Close";
 import Cookie from "js-cookie";
+import SEO from "@/components/Head";
 
 const FirstLogin = () => {
   const { put, success, loadingRequest, error } = useRequest();
@@ -33,8 +34,8 @@ const FirstLogin = () => {
         email: state.user.email,
         roles: state.user.roles.map((role) => ({ name: role })),
         password,
+        first_login: false,
       };
-      console.log(body);
       put(`http://localhost:3333/v1/users/${state.user.id}`, body);
     } else {
       setNotMatchingPasswords(true);
@@ -44,7 +45,7 @@ const FirstLogin = () => {
 
   useEffect(() => {
     if (success) {
-      Cookie.set("user", undefined);
+      Cookie.remove("user");
       router.push("/login");
     }
   }, [router, success]);
@@ -53,10 +54,10 @@ const FirstLogin = () => {
 
   return (
     <>
-      <Head>
-        <div className={styles.head}></div>
-        <title>First Login</title>
-      </Head>
+      <SEO
+        pageTitle={"Login"}
+        pageDescription={"Atualização das informações após primeiro login"}
+      />
       <main className={styles.main}>
         <Card className={styles.formCard}>
           <form className={styles.form}>

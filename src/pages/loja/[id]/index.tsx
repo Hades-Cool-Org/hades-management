@@ -1,11 +1,10 @@
 import React, { useState, useEffect, useContext } from "react";
-
-import styles from "@/styles/AuthenticationPage.module.css";
 import { Button } from "@mui/material";
 import TextFieldStandard from "@/components/TextField";
 import { useRouter } from "next/router";
 import useRequest from "@/hooks/useRequest";
 import UserContext from "@/components/Context";
+import SEO from "@/components/Head";
 
 export default function EditStore() {
   const [body, setBody] = useState({
@@ -48,29 +47,35 @@ export default function EditStore() {
   }, [success]);
 
   return (
-    <main className="main-form">
-      <form className="form">
-        <TextFieldStandard
-          fieldName="name"
-          label="Nome"
-          value={body.name}
-          handleChange={handleChange}
-        />
-        <TextFieldStandard
-          fieldName="address"
-          label="Endereço"
-          value={body.address}
-          handleChange={handleChange}
-        />
-      </form>
+    <>
+      <SEO
+        pageTitle={"Editar Loja"}
+        pageDescription={"Formulário de edição de loja"}
+      />
+      <main className="main-form">
+        <form className="form">
+          <TextFieldStandard
+            fieldName="name"
+            label="Nome"
+            value={body.name}
+            handleChange={handleChange}
+          />
+          <TextFieldStandard
+            fieldName="address"
+            label="Endereço"
+            value={body.address}
+            handleChange={handleChange}
+          />
+        </form>
 
-      <Button
-        variant="contained"
-        onClick={handleSubmit}
-        disabled={loadingRequest}
-      >
-        Salvar
-      </Button>
-    </main>
+        <Button
+          variant="contained"
+          onClick={handleSubmit}
+          disabled={loadingRequest}
+        >
+          Salvar
+        </Button>
+      </main>
+    </>
   );
 }
