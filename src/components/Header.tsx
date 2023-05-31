@@ -1,21 +1,8 @@
 import React from "react";
 import { ArrowBackIos, Menu } from "@mui/icons-material";
-import {
-  Box,
-  Divider,
-  Icon,
-  IconButton,
-  List,
-  styled,
-  SvgIcon,
-  SwipeableDrawer,
-  useTheme,
-} from "@mui/material";
+import { IconButton } from "@mui/material";
 import { useRouter } from "next/router";
-import ListItem from "./ListItem";
-import Logo from "./Logo";
-// @ts-ignore
-import cookieCutter from "cookie-cutter";
+import Cookie from "js-cookie";
 import Drawer from "./Drawer";
 
 const Header = () => {
@@ -36,7 +23,8 @@ const Header = () => {
   };
 
   const handleLeaveClick = () => {
-    cookieCutter.set("user", undefined);
+    Cookie.remove("user");
+    Cookie.remove("state");
     setOpen(false);
   };
 

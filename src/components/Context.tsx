@@ -10,20 +10,8 @@ export interface AppContextState {
   session: Object | null;
   order: Object | null;
   delivery: Object | null;
+  store: Object | null;
 }
-
-const UserContext = React.createContext<IUserContext>({
-  state: {
-    user: null,
-    vendor: null,
-    product: null,
-    products: [],
-    session: null,
-    order: null,
-    delivery: null,
-  },
-  setState: (state) => {},
-});
 
 interface IUserContext {
   state: AppContextState;
@@ -34,16 +22,24 @@ interface UserContextProps {
   children: JSX.Element;
 }
 
+const initialState = {
+  user: null,
+  vendor: null,
+  product: null,
+  products: [],
+  session: null,
+  order: null,
+  delivery: null,
+  store: null,
+};
+
+const UserContext = React.createContext<IUserContext>({
+  state: initialState,
+  setState: (state) => {},
+});
+
 export const UserContextProvider = ({ children }: UserContextProps) => {
-  const [state, setState] = useState<AppContextState>({
-    user: null,
-    vendor: null,
-    product: null,
-    products: [],
-    session: null,
-    order: null,
-    delivery: null,
-  });
+  const [state, setState] = useState<AppContextState>(initialState);
 
   useEffect(() => {
     console.log(state);

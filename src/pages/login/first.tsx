@@ -13,8 +13,7 @@ import React, { useState, useContext, useEffect } from "react";
 import UserContext, { UserContextProvider } from "@/components/Context";
 import useRequest from "@/hooks/useRequest";
 import CloseIcon from "@mui/icons-material/Close";
-// @ts-ignore
-import cookieCutter from "cookie-cutter";
+import Cookie from "js-cookie";
 
 const FirstLogin = () => {
   const { put, success, loadingRequest, error } = useRequest();
@@ -45,10 +44,10 @@ const FirstLogin = () => {
 
   useEffect(() => {
     if (success) {
-      cookieCutter.set("user", undefined);
+      Cookie.set("user", undefined);
       router.push("/login");
     }
-  }, [success]);
+  }, [router, success]);
 
   if (error) console.log(error);
 

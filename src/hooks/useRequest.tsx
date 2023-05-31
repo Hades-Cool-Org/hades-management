@@ -1,8 +1,7 @@
 import axios from "axios";
 import React, { useState } from "react";
-// @ts-ignore
-import cookieCutter from "cookie-cutter";
 import parseJwt from "@/utils/parseJwt";
+import Cookie from "js-cookie";
 
 function useRequest() {
   const [loadingRequest, setLoadingRequest] = useState(false);
@@ -18,7 +17,7 @@ function useRequest() {
         if (response.status === 200) {
           const parsedToken = parseJwt(response.data.jwt);
           setTokenData(parsedToken);
-          cookieCutter.set("user", JSON.stringify(parsedToken));
+          Cookie.set("user", JSON.stringify(parsedToken));
           setSuccess(true);
           return response;
         }

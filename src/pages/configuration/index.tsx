@@ -4,11 +4,11 @@ import ListItem from "@/components/ListItem";
 import styles from "@/styles/AuthenticationPage.module.css";
 import Link from "next/link";
 import Header from "@/components/Header";
-// @ts-ignore
-import cookieCutter from "cookie-cutter";
+import Cookie from "js-cookie";
 
 export default function Configuration() {
-  const userData = JSON.parse(cookieCutter.get("user"));
+  const cookieData = Cookie.get("user");
+  const userData = JSON.parse(cookieData!);
 
   return (
     <main className={styles.main}>

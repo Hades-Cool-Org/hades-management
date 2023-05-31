@@ -1,10 +1,13 @@
 import StoreCard from "@/components/Card/StoreCard";
+import UserContext from "@/components/Context";
 import useFetch from "@/hooks/useFetch";
-import { Button } from "@mui/material";
+import { Button, Card, CardContent, Typography } from "@mui/material";
+import Link from "next/link";
 import { useRouter } from "next/router";
-import React from "react";
+import React, { useContext } from "react";
 
 export default function Lojas() {
+  const { setState } = useContext(UserContext);
   const { data } = useFetch("http://localhost:3333/v1/store");
   console.log(data);
 
@@ -14,19 +17,44 @@ export default function Lojas() {
     router.push("lojas/adicionar");
   };
 
+  const handleSetStore = (store: any) => {
+    setState((prevState: any) => ({
+      ...prevState,
+      store: store,
+    }));
+  };
+
   return (
     <main className="main">
       {data &&
-        data.stores.map((store, index: number) => {
+        data?.stores?.map((store: any, index: number) => {
           return (
-            <StoreCard
-              key={index}
-              store={store}
-              index={0}
-              handleStoresQuantity={undefined}
-              vehicles={undefined}
-              handleVehicleChange={undefined}
-            />
+            <Card key={index}>
+              <CardContent>
+                <Typography variant="h5">{store.name}</Typography>
+                <Typography variant="subtitle1">{store.name}</Typography>
+              </CardContent>
+              <Link href={{ pathname: `loja/${store.id}` }}>
+                <Button
+                  onClick={() => {
+                    handleSetStore(store);
+                  }}
+                  variant="outlined"
+                >
+                  Editar
+                </Button>
+              </Link>
+              <Link href={{ pathname: `loja/${store.id}/estoque` }}>
+                <Button
+                  onClick={() => {
+                    handleSetStore(store);
+                  }}
+                  variant="outlined"
+                >
+                  Estoque
+                </Button>
+              </Link>
+            </Card>
           );
         })}
       <Button variant="contained" onClick={handleAddStoreClick}>
