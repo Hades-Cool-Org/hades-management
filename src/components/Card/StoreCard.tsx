@@ -8,6 +8,7 @@ import {
 } from "@mui/material";
 import React, { Dispatch, SetStateAction, useEffect } from "react";
 import TextFieldStandard from "../TextField";
+import BaseCard from "./BaseCard";
 
 interface StoreCardProps {
   store: Store;
@@ -23,8 +24,8 @@ export default function StoreCard({
   const { name, id } = store;
 
   return (
-    <Card key={index}>
-      <CardContent>
+    <BaseCard>
+      <>
         <Typography variant="h5">{name}</Typography>
         <TextFieldStandard
           number
@@ -32,7 +33,7 @@ export default function StoreCard({
           fieldName={id}
           handleChange={handleStoresQuantity}
         />
-      </CardContent>
-    </Card>
+      </>
+    </BaseCard>
   );
 }

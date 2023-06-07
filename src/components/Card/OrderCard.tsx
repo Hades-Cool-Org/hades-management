@@ -1,6 +1,7 @@
 import { Card, CardContent, Typography } from "@mui/material";
 import Link from "next/link";
 import React from "react";
+import BaseCard from "./BaseCard";
 
 interface OrderCardProps {
   id: string;
@@ -17,14 +18,13 @@ export default function OrderCard({
 }: OrderCardProps) {
   return (
     <Link href={{ pathname: `/pedidos/${id}` }}>
-      <Card>
-        <CardContent>
-          <Typography>{id}</Typography>
+      <BaseCard>
+        <>
+          <Typography variant="h5">Fornecedor: {vendorName}</Typography>
           <Typography>{state}</Typography>
           <Typography>{userName}</Typography>
-          <Typography>{vendorName}</Typography>
-        </CardContent>
-      </Card>
+        </>
+      </BaseCard>
     </Link>
   );
 }

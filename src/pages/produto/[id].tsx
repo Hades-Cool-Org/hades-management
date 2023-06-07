@@ -16,6 +16,7 @@ import UserContext from "@/components/Context";
 import StoreCard from "@/components/Card/StoreCard";
 import { Store } from "@/types/types";
 import Link from "next/link";
+import BaseCard from "@/components/Card/BaseCard";
 
 const theme = createTheme({
   components: {
@@ -152,16 +153,22 @@ export default function Product() {
   return (
     <main className="main-form">
       <ThemeProvider theme={theme}>
-        <Card>
-          <Link
-            href={`http://localhost:3000/produto/editar/${state.product?.id}`}
-          >
-            <CardContent>
-              <Typography variant="h5">{state.product?.name}</Typography>
-              <Typography>{state.product?.measuring_unit}</Typography>
-            </CardContent>
-          </Link>
-        </Card>
+        <Link
+          href={`http://localhost:3000/produto/editar/${state.product?.id}`}
+        >
+          <BaseCard>
+            <>
+              <Typography variant="h5">
+                {" "}
+                Produto: {state.product?.name}
+              </Typography>
+              <Typography variant="subtitle2">
+                Unidade de medida:
+                {state.product?.measuring_unit}
+              </Typography>
+            </>
+          </BaseCard>
+        </Link>
       </ThemeProvider>
       <form className="form">
         <TextFieldStandard
