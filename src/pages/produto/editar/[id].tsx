@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 
 import styles from "@/styles/AuthenticationPage.module.css";
-import { Button, TextField } from "@mui/material";
+import { Autocomplete, Button, TextField } from "@mui/material";
 import TextFieldStandard from "@/components/TextField";
 import { useRouter } from "next/router";
 import useFetch from "@/hooks/useFetch";
@@ -12,7 +12,7 @@ export default function AddProduct() {
     name: "",
     details: "",
     image_url: "blablabla",
-    measuring_unit: "UN",
+    measuring_unit: "",
   });
   const router = useRouter();
 
@@ -24,7 +24,7 @@ export default function AddProduct() {
 
   const { success, put, loadingRequest } = useRequest();
 
-  console.log("ping");
+  console.log(body);
 
   useEffect(() => {
     setBody((prevState) => ({
@@ -32,7 +32,15 @@ export default function AddProduct() {
       name: data ? data["name"] : "",
       details: data ? data["details"] : "",
     }));
+    data && handleSelectChange(null, data.measuring_unit);
   }, [data]);
+
+  const handleSelectChange = (event: any, newValue: string | null) => {
+    setBody((prevState) => ({
+      ...prevState,
+      measuring_unit: newValue !== null ? newValue : "",
+    }));
+  };
 
   const handleChange = (name: string, value: string) => {
     setBody((prevState) => ({
@@ -53,8 +61,8 @@ export default function AddProduct() {
   }, [success]);
 
   return (
-    <main className={styles.main}>
-      <form>
+    <main className={"main-form"}>
+      <form className="form">
         <TextFieldStandard
           label="Nome"
           value={body.name}
@@ -67,14 +75,24 @@ export default function AddProduct() {
           handleChange={handleChange}
           fieldName={"details"}
         />
-        <Button
-          variant="contained"
-          onClick={handleSubmit}
-          disabled={loadingRequest}
-        >
-          Salvar
-        </Button>
+        <Autocomplete
+          disablePortal
+          id="combo-box-demo"
+          options={["Caixas", "Kilogramas", "Unidades"]}
+          sx={{ width: 300, paddingTop: 2 }}
+          onChange={handleSelectChange}
+          renderInput={(params) => (
+            <TextField {...params} label="Unidade de Medida *" />
+          )}
+        />
       </form>
+      <Button
+        variant="contained"
+        onClick={handleSubmit}
+        disabled={loadingRequest}
+      >
+        Salvar
+      </Button>
     </main>
   );
 }

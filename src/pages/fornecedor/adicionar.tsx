@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 
 import styles from "@/styles/AuthenticationPage.module.css";
-import { Button } from "@mui/material";
+import { Button, Typography } from "@mui/material";
 import TextFieldStandard from "@/components/TextField";
 import { useRouter } from "next/router";
 import useRequest from "@/hooks/useRequest";
@@ -49,6 +49,9 @@ export default function AddVendor() {
 
   return (
     <main className="main-form">
+      <Typography variant="h6" className="form-title">
+        Adicionar Fornecedor
+      </Typography>
       <form className="form">
         <TextFieldStandard
           label="Nome do Fornecedor"

@@ -10,6 +10,7 @@ import UserContext, {
 import useRequest from "@/hooks/useRequest";
 import SEO from "@/components/Head";
 import Cookie from "js-cookie";
+import Logo from "@/components/Logo";
 
 const Authentication = () => {
   const { login, success, loadingRequest, error } = useRequest();
@@ -38,7 +39,7 @@ const Authentication = () => {
           roles: token.roles,
         },
       }));
-      if (res.first_login) {
+      if (false) {
         router.push("login/first");
       } else {
         router.push("/");
@@ -59,6 +60,7 @@ const Authentication = () => {
     <>
       <SEO pageTitle={"Login"} pageDescription={"Tela de login"} />
       <main className={styles.main}>
+        <Logo />
         <Card className={styles.formCard}>
           <form className={styles.form}>
             <TextField

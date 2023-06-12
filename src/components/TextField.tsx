@@ -6,6 +6,7 @@ interface TextFieldProps {
   value?: string | number;
   handleChange: (fieldName: string, value: string) => any;
   number?: boolean;
+  required?: boolean;
 }
 
 const TextFieldStandard: React.FC<TextFieldProps> = ({
@@ -14,6 +15,7 @@ const TextFieldStandard: React.FC<TextFieldProps> = ({
   value,
   handleChange,
   number,
+  required,
 }: TextFieldProps) => {
   return (
     <TextField
@@ -25,6 +27,7 @@ const TextFieldStandard: React.FC<TextFieldProps> = ({
         handleChange(fieldName, e.target.value);
       }}
       type={number ? "number" : "text"}
+      required={required}
     />
   );
 };

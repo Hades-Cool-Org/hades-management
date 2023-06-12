@@ -1,4 +1,5 @@
 import { Box, Divider, List, SwipeableDrawer } from "@mui/material";
+import Link from "next/link";
 import React from "react";
 import ListItem from "./ListItem";
 import Logo from "./Logo";
@@ -26,12 +27,9 @@ export default function Drawer({
     >
       <Box sx={{ width: drawerWidth }}>
         <List>
-          <Logo />
-          <ListItem
-            itemText={"Carregadores"}
-            route="/"
-            handleClick={handleDrawerClose}
-          />
+          <Link href={{ pathname: "/" }} onClick={handleDrawerClose}>
+            <Logo />
+          </Link>
           <ListItem
             itemText={"Fornecedores"}
             route="/fornecedores"
@@ -69,11 +67,6 @@ export default function Drawer({
           />
           <ListItem
             itemText={"Ocorrências"}
-            route="/"
-            handleClick={handleDrawerClose}
-          />
-          <ListItem
-            itemText={"Usuários"}
             route="/"
             handleClick={handleDrawerClose}
           />

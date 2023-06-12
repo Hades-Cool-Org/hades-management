@@ -118,7 +118,7 @@ a {
 .main-form {
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: space-evenly;
   align-items: center;
   padding-bottom: 6rem;
   min-height: 95vh;
@@ -131,4 +131,46 @@ a {
   padding: 1rem;
   border: 1px solid grey;
   border-radius: 4px;
+  min-width: 20em;
+}
+
+.form-title {
+  padding-right: 5em;
+  height: auto;
+}
+
+.footer{
+  display: flex;
+  text-align: center;
+  min-height: 8vh;
+  width: 100%;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  background-color: #6d8cce;
+  justify-content: center;
+  align-items: center;
+}
+
+.main-content{
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+}
+
+.card-button-box{
+  display: flex;
+  justify-content: space-around;
+  padding-top: 1rem;
+}
+
+.card-box-content{
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+}
+
+.base-card-content{
+  height: 100%;
+  width: 100%;
 }
