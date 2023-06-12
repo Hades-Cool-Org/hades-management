@@ -50,13 +50,6 @@ const Order = () => {
     error: requestError,
   } = useRequest();
 
-  const handleItemChange = (name: string, value: string) => {
-    setItemsList((prevState: any) => ({
-      ...prevState,
-      [name]: value,
-    }));
-  };
-
   const handleLinkClick = (product: Product) => {
     setState((prevState: any) => ({
       ...prevState,

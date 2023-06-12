@@ -1,83 +1,69 @@
+import BaseCard from "@/components/Card/BaseCard";
 import UserContext from "@/components/Context";
 import TextFieldStandard from "@/components/TextField";
 import useFetch from "@/hooks/useFetch";
 import useRequest from "@/hooks/useRequest";
 import { Box, Button, Card, CardContent, Typography } from "@mui/material";
+import Link from "next/link";
 import React, { SetStateAction, useContext, useEffect, useState } from "react";
+import Cookie from "js-cookie";
 
 export default function Entrega() {
-  const { post } = useRequest();
+  const { data } = useFetch("http://localhost:3333/v1/store");
+  const [stores, setStores] = useState([]);
 
-  const [body, setBody] = useState({
-    delivery_id: "",
-    store_id: "",
-    items: [],
-  });
-  const { state } = useContext(UserContext);
+  const { state, setState } = useContext(UserContext);
 
   useEffect(() => {
-    setBody((prevState: any) => ({
+    setStores([
+      ...new Set(
+        state?.delivery?.items.map((item) =>
+          data?.stores.find((store) => {
+            return store.id === item.store_id;
+          })
+        )
+      ),
+    ]);
+  }, [state, data]);
+
+  const onClickLink = (store) => {
+    setState((prevState) => ({
       ...prevState,
-      delivery_id: state.delivery.id,
-      store_id: 1,
+      store: store,
     }));
+  };
+
+  useEffect(() => {
+    return () => {
+      Cookie.set("state", JSON.stringify(state));
+    };
   }, []);
 
-  const handleChange = (name: string, value: string) => {
-    if (
-      body.items.filter((item: any) => {
-        return item.product_id == name;
-      }).length > 0
-    ) {
-      setBody((prevState: any) => ({
-        ...prevState,
-        items: prevState.items.map((item: any) => {
-          if (item.product_id === name) {
-            return { ...item, quantity: value };
-          }
-          return item;
-        }),
-      }));
-    } else {
-      setBody((prevState: any) => ({
-        ...prevState,
-        items: [...prevState.items, { product_id: name, quantity: value }],
-      }));
-    }
-  };
-
-  const submitCallback = (res: any) => {
-    console.log(res);
-  };
-
-  const handleConferenceClick = () => {
-    post("http://localhost:3333/v1/conference", body, submitCallback);
-  };
+  console.log("stores:", stores);
 
   return (
     <main className="main">
-      <Box>
-        <Typography>Estado da entrega{state?.delivery?.state}</Typography>
-        <Typography>Início da entrega{state?.delivery?.start_date}</Typography>
+      <Box className="main-content">
+        {stores &&
+          stores.map((store, index) => {
+            return (
+              <Link
+                key={index}
+                href={{ pathname: `/entregas/loja/${store?.id}` }}
+                onClick={() => {
+                  onClickLink(store);
+                }}
+              >
+                <BaseCard>
+                  <Box className="main-content">
+                    <Typography>{store?.name}</Typography>
+                    <Typography>{store?.address}</Typography>
+                  </Box>
+                </BaseCard>
+              </Link>
+            );
+          })}
       </Box>
-      {state?.delivery?.items &&
-        state?.delivery?.items.map((item: any, index: number) => {
-          return (
-            <Card key={index}>
-              <CardContent>
-                <Typography>{item.name}</Typography>
-                <TextFieldStandard
-                  label={"Quantidade"}
-                  fieldName={item.product_id}
-                  handleChange={handleChange}
-                />
-              </CardContent>
-            </Card>
-          );
-        })}
-      <Button variant="contained" onClick={handleConferenceClick}>
-        Finalizar
-      </Button>
     </main>
   );
 }

@@ -17,6 +17,12 @@ export default function Root() {
     "http://localhost:3333/v1/deliveries/sessions?active=true"
   );
 
+  const { data: balanceData } = useFetch(
+    `http://localhost:3333/v1/balance/${state?.user?.id}`
+  );
+
+  console.log(balanceData);
+
   useEffect(() => {
     const session = data?.sessions?.find((session) => {
       return session.user.id == state?.user?.id;
@@ -43,10 +49,14 @@ export default function Root() {
         <div className={styles.head}></div>
         <title>Lojão Hortifruti</title>
       </Head>
-      <main className={styles.main}>
-        <Box>
+      <main className="main">
+        <Box className="main-content">
           <Typography variant="h6">Bem vindo {state?.user?.name}</Typography>
-          <Typography>Seu saldo é de</Typography>
+          {balanceData && (
+            <Typography variant="h4">
+              Seu saldo é de {balanceData?.Amount}
+            </Typography>
+          )}
         </Box>
         {currentSession && (
           <Link
