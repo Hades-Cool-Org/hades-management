@@ -65,6 +65,11 @@ export default function Drawer({
             route="/acompanhamento"
             handleClick={handleDrawerClose}
           />
+          <ListItem
+            itemText={"Usuários"}
+            route="/usuarios"
+            handleClick={handleDrawerClose}
+          />
         </List>
         <Divider />
         <List>

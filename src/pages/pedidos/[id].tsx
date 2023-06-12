@@ -1,10 +1,8 @@
 import UserContext from "@/components/Context";
 import {
+  Box,
   Button,
-  Card,
-  CardContent,
   createTheme,
-  IconButton,
   ThemeProvider,
   Typography,
 } from "@mui/material";
@@ -36,7 +34,7 @@ const theme = createTheme({
 const Order = () => {
   const [itemsList, setItemsList] = useState<any>({});
   const { setState, state } = useContext(UserContext);
-  const { vendor, products } = state;
+  const { products } = state;
 
   const router = useRouter();
 
@@ -119,11 +117,13 @@ const Order = () => {
 
   return (
     <main className="main">
-      <Typography>{state?.order?.state}</Typography>
+      <Typography variant="h6">
+        Estado do pedido: {state?.order?.state}
+      </Typography>
       <Typography>{state?.order?.created_date}</Typography>
-      <Typography variant="h5">{vendor?.name}</Typography>
+      {/* <Typography variant="h5">{state?.order?.vendor?.name}</Typography> */}
       <Link href={"/produto/adicionar"}>
-        <Button variant="contained">Adicionar Produto</Button>
+        <Button variant="contained">Adicionar Novo Produto</Button>
       </Link>
       <section className={styles.cards}>
         <ThemeProvider theme={theme}>
@@ -156,16 +156,24 @@ const Order = () => {
           }
         </ThemeProvider>
       </section>
-      <IconButton onClick={cartClick} disabled={loadingRequest}>
-        <ShoppingCart fontSize="small" style={{ fill: "black" }} />
-      </IconButton>
-      <Button
-        variant="contained"
-        disabled={loadingRequest}
-        onClick={handleCancelClick}
-      >
-        Cancelar Pedido
-      </Button>
+
+      <Box className="footer">
+        <Button
+          variant="contained"
+          onClick={cartClick}
+          disabled={loadingRequest}
+        >
+          Atualizar Pedido
+        </Button>
+        <Button
+          variant="contained"
+          disabled={loadingRequest}
+          onClick={handleCancelClick}
+          color="error"
+        >
+          Cancelar Pedido
+        </Button>
+      </Box>
     </main>
   );
 };
