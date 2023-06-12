@@ -20,7 +20,7 @@ export default function Entregas() {
     <main className="main">
       Entregas
       {data &&
-        data.deliveries.map((delivery: any, index: number) => {
+        data?.deliveries?.map((delivery: any, index: number) => {
           return (
             <Link
               href={{ pathname: `/entregas/${delivery.id}` }}

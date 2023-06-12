@@ -74,11 +74,21 @@ const Order = () => {
   };
 
   const deleteCallback = (res: any) => {
+    cleanState();
     router.back();
   };
 
   const putOrderCallback = () => {
     router.back();
+  };
+
+  const cleanState = () => {
+    setState((prevState: any) => ({
+      ...prevState,
+      product: null,
+      order: null,
+      products: [],
+    }));
   };
 
   const cartClick = () => {

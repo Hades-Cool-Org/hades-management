@@ -2,6 +2,7 @@ import React, { useContext } from "react";
 import Head from "next/head";
 import VendorCard from "@/components/Card/VendorCard";
 import {
+  Box,
   Button,
   createTheme,
   TextField,
@@ -63,31 +64,35 @@ const Fornecedores = () => {
         <title>Fornecedores</title>
       </Head>
       <main className="main">
-        <Typography variant="h5">Fornecedores</Typography>
-        <section className={styles.cards}>
-          <TextField
-            variant="standard"
-            label="Buscar Fornecedor"
-            className={styles.search}
-          />
-          <ThemeProvider theme={theme}>
-            {
-              // @ts-ignore: Object is possibly 'null'
-              data?.vendors.map((vendor, index) => {
-                return (
-                  <VendorCard
-                    vendor={vendor}
-                    index={index}
-                    handleClick={handleClick}
-                  />
-                );
-              })
-            }
-          </ThemeProvider>
-        </section>
-        <Link href={"/fornecedor/adicionar"}>
-          <Button variant="contained">Adicionar</Button>
-        </Link>
+        <Box>
+          <Typography variant="h5">Fornecedores</Typography>
+          <section className={styles.cards}>
+            <TextField
+              variant="standard"
+              label="Buscar Fornecedor"
+              className={styles.search}
+            />
+            <ThemeProvider theme={theme}>
+              {
+                // @ts-ignore: Object is possibly 'null'
+                data?.vendors.map((vendor, index) => {
+                  return (
+                    <VendorCard
+                      vendor={vendor}
+                      index={index}
+                      handleClick={handleClick}
+                    />
+                  );
+                })
+              }
+            </ThemeProvider>
+          </section>
+        </Box>
+        <Box className="footer">
+          <Link href={"/fornecedor/adicionar"}>
+            <Button variant="contained">Adicionar Fornecedor</Button>
+          </Link>
+        </Box>
       </main>
     </>
   );

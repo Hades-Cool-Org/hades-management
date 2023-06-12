@@ -65,11 +65,6 @@ export default function Drawer({
             route="/acompanhamento"
             handleClick={handleDrawerClose}
           />
-          <ListItem
-            itemText={"Ocorrências"}
-            route="/"
-            handleClick={handleDrawerClose}
-          />
         </List>
         <Divider />
         <List>
