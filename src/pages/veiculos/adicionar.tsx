@@ -31,24 +31,22 @@ export default function AdicionarVeiculo() {
   };
 
   return (
-    <main className="main">
-      <Box>
-        <form className="form">
-          <TextFieldStandard
-            fieldName="name"
-            label="Nome"
-            handleChange={handleChange}
-          />
-          <TextFieldStandard
-            fieldName="type"
-            label="Tipo"
-            handleChange={handleChange}
-          />
-        </form>
-        <Button variant="contained" onClick={handleClick}>
-          Salvar
-        </Button>
-      </Box>
+    <main className="main-form">
+      <form className="form">
+        <TextFieldStandard
+          fieldName="name"
+          label="Nome"
+          handleChange={handleChange}
+        />
+        <TextFieldStandard
+          fieldName="type"
+          label="Tipo"
+          handleChange={handleChange}
+        />
+      </form>
+      <Button variant="contained" onClick={handleClick}>
+        Salvar
+      </Button>
     </main>
   );
 }

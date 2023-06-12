@@ -1,8 +1,15 @@
+import BaseCard from "@/components/Card/BaseCard";
 import OrderCard from "@/components/Card/OrderCard";
 import UserContext from "@/components/Context";
 import useFetch from "@/hooks/useFetch";
 import useRequest from "@/hooks/useRequest";
-import { Button, ToggleButton, ToggleButtonGroup } from "@mui/material";
+import {
+  Box,
+  Button,
+  ToggleButton,
+  ToggleButtonGroup,
+  Typography,
+} from "@mui/material";
 import { useRouter } from "next/router";
 import React, { useContext, useEffect, useState } from "react";
 
@@ -31,7 +38,7 @@ export default function Session() {
     const body = {
       order: { id: selectedOrder.id },
       session: { id: state?.session?.id },
-      items: selectedOrder.items.map((item: any) => ({
+      items: selectedOrder?.items?.map((item: any) => ({
         product_id: item.product_id,
         store_id: item.store_id,
         quantity: item.quantity,
@@ -64,23 +71,26 @@ export default function Session() {
           return (
             <ToggleButton value={order} key={index}>
               {
-                <>
-                  <h1>{order.id}</h1>
-                  <h2>{order.state}</h2>
-                  <h2>{order.user.name}</h2>
-                  <h2>{order.vendor.name}</h2>
-                </>
+                <BaseCard>
+                  <Box>
+                    <Typography>{order.state}</Typography>
+                    <Typography>{order.user.name}</Typography>
+                    <Typography>{order.vendor.name}</Typography>
+                  </Box>
+                </BaseCard>
               }
             </ToggleButton>
           );
         })}
       </ToggleButtonGroup>
-      <Button variant="contained" onClick={handleDeliveryClick}>
-        Iniciar Entrega
-      </Button>
-      <Button variant="contained" onClick={handleDeleteClick}>
-        Fechar Sessão
-      </Button>
+      <Box className="footer">
+        <Button variant="contained" onClick={handleDeliveryClick}>
+          Iniciar Entrega
+        </Button>
+        <Button variant="contained" onClick={handleDeleteClick}>
+          Fechar Sessão
+        </Button>
+      </Box>
     </main>
   );
 }

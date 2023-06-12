@@ -3,6 +3,7 @@ import styles from "@/styles/Root.module.css";
 
 import useFetch from "@/hooks/useFetch";
 import {
+  Box,
   Button,
   ToggleButton,
   ToggleButtonGroup,
@@ -60,8 +61,6 @@ const Veiculos = () => {
       </Head>
       {data && (
         <main className={styles.main}>
-          <Typography>{state?.user?.name}</Typography>
-
           <ToggleButtonGroup
             color="primary"
             exclusive
@@ -86,12 +85,14 @@ const Veiculos = () => {
               })
             }
           </ToggleButtonGroup>
-          <Link href={"veiculos/adicionar"}>
-            <Button variant="contained">Adicionar Veiculo</Button>
-          </Link>
-          <Button onClick={handleClick} variant="contained">
-            Iniciar Sessão
-          </Button>
+          <Box className="footer">
+            <Link href={"veiculos/adicionar"}>
+              <Button variant="contained">Adicionar Veiculo</Button>
+            </Link>
+            <Button onClick={handleClick} variant="contained">
+              Iniciar Sessão
+            </Button>
+          </Box>
         </main>
       )}
     </>
