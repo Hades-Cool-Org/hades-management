@@ -8,6 +8,8 @@ interface OrderCardProps {
   state: string;
   userName: string;
   vendorName: string;
+  handleClick: any;
+  order: any;
 }
 
 export default function OrderCard({
@@ -15,9 +17,14 @@ export default function OrderCard({
   state,
   userName,
   vendorName,
+  handleClick,
+  order,
 }: OrderCardProps) {
   return (
-    <Link href={{ pathname: `/pedidos/${id}` }}>
+    <Link
+      href={{ pathname: `/pedidos/${id}` }}
+      onClick={() => handleClick(order)}
+    >
       <BaseCard>
         <>
           <Typography variant="h5">Fornecedor: {vendorName}</Typography>

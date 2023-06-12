@@ -104,10 +104,11 @@ const Order = () => {
       });
     });
     const items = { items: res.flat() };
-    console.log(items);
+    const body = { user: { id: state.user.id }, ...items };
+    console.log(body);
     put(
       `http://localhost:3333/v1/orders/${state.order.id}`,
-      items,
+      body,
       putOrderCallback
     );
   };
