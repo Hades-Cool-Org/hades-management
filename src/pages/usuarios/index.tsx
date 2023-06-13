@@ -4,14 +4,14 @@ import DeleteIcon from "@/components/DeleteIcon";
 import EditIcon from "@/components/EditIcon";
 import useFetch from "@/hooks/useFetch";
 import useRequest from "@/hooks/useRequest";
-import { User } from "@/types/types";
+import { Role, User } from "@/types/types";
 import { Box, Button, Divider, Typography } from "@mui/material";
 import Link from "next/link";
 import React, { useContext, useEffect, useState } from "react";
 import Cookie from "js-cookie";
 import { BASE_API } from "@/utils/api";
 
-const Roles = {
+const Roles: any = {
   buyer: "Comprador",
   admin: "Administrador",
   driver: "Motorista",
@@ -43,7 +43,7 @@ export default function Usuarios() {
   };
 
   const handleLinkClick = (user: Object) => {
-    setState((prevState) => ({
+    setState((prevState: any) => ({
       ...prevState,
       balanceUser: user,
     }));
@@ -53,7 +53,7 @@ export default function Usuarios() {
     <main className="main">
       <Box>
         {data &&
-          data?.users?.map((user, index: number) => {
+          data?.users?.map((user: User, index: number) => {
             return (
               <Link
                 href={{ pathname: `usuarios/adicionar-saldo/${user.id}` }}
@@ -69,7 +69,7 @@ export default function Usuarios() {
                         <Typography variant="h5">
                           Telefone: {user.phone}
                         </Typography>
-                        {user.roles.map((role, index: number) => {
+                        {user.roles.map((role: any, index: number) => {
                           return (
                             <>
                               <span key={index}>{Roles[role.name]} </span>

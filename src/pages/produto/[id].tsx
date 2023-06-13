@@ -14,7 +14,7 @@ import { useRouter } from "next/router";
 import useFetch from "@/hooks/useFetch";
 import UserContext from "@/components/Context";
 import StoreCard from "@/components/Card/StoreCard";
-import { Store } from "@/types/types";
+import { Product, Store } from "@/types/types";
 import Link from "next/link";
 import BaseCard from "@/components/Card/BaseCard";
 import { BASE_API } from "@/utils/api";
@@ -32,7 +32,7 @@ const theme = createTheme({
   },
 });
 
-export default function Product() {
+export default function ProductPage() {
   const { setState, state } = useContext(UserContext);
   const router = useRouter();
 
@@ -49,12 +49,12 @@ export default function Product() {
   } = useFetch(BASE_API + "/deliveries/vehicles");
 
   const [body, setBody] = useState({ totalQuantity: 0, totalValue: 0 });
-  const [stores, setStores] = useState([]);
+  const [stores, setStores] = useState<any[]>([]);
   const [submitDisabled, setSubmitDisabled] = useState(true);
 
   useEffect(() => {
     const currentProduct = state.products?.filter(
-      (p: Product) => p.id == state.product.id
+      (p: Product) => p.id == state?.product?.id
     );
     if (currentProduct.length > 0) {
       setBody((prevState) => ({
@@ -63,7 +63,7 @@ export default function Product() {
         totalValue: currentProduct[0].totalValue,
       }));
     }
-  }, []);
+  }, [state.products, state.product]);
 
   const handleChange = (name: string, value: string) => {
     setBody((prevState) => ({
@@ -86,15 +86,15 @@ export default function Product() {
     }
   }, [body, stores]);
 
-  const handleStoresQuantity = (id: string, value: string) => {
-    setStores((prevState) => ({
+  const handleStoresQuantity = (id: any, value: string) => {
+    setStores((prevState: any) => ({
       ...prevState,
       [id]: { ...stores[id], quantity: value },
     }));
   };
 
   const handleVehicleChange = (store: any, value: any) => {
-    setStores((prevState) => ({
+    setStores((prevState: any) => ({
       ...prevState,
       [store.id]: { ...stores[store.id], courier: value?.id },
     }));
@@ -110,12 +110,13 @@ export default function Product() {
     if (state.products.length > 0) {
       //Checar se produto já está na lista
       if (
-        state.products.filter((product: any) => product.id == state.product.id)
-          .length > 0
+        state.products.filter(
+          (product: any) => product.id == state?.product?.id
+        ).length > 0
       ) {
-        const productsArray = state.products.map((product: any) => {
+        const productsArray = state?.products?.map((product: any) => {
           // Se produto existente apenas atualizar seus campos
-          if (product.id == state.product.id) {
+          if (product.id == state?.product?.id) {
             return {
               ...product,
               totalQuantity: body.totalQuantity,
@@ -133,19 +134,19 @@ export default function Product() {
         }));
       } else {
         //SetState de inserção na lista
-        setState((prevState) => ({
+        setState((prevState: any) => ({
           ...prevState,
           products: [
             ...prevState.products,
-            { ...body, stores: storesArray, id: state.product.id },
+            { ...body, stores: storesArray, id: state?.product?.id },
           ],
         }));
       }
     } else {
       //SetState de criação da lista
-      setState((prevState) => ({
+      setState((prevState: any) => ({
         ...prevState,
-        products: [{ ...body, stores: storesArray, id: state.product.id }],
+        products: [{ ...body, stores: storesArray, id: state?.product?.id }],
       }));
     }
     router.back();
@@ -155,17 +156,17 @@ export default function Product() {
     <main className="main-form">
       <ThemeProvider theme={theme}>
         <Link
-          href={`http://localhost:3000/produto/editar/${state.product?.id}`}
+          href={`http://localhost:3000/produto/editar/${state?.product?.id}`}
         >
           <BaseCard>
             <>
               <Typography variant="h5">
                 {" "}
-                Produto: {state.product?.name}
+                Produto: {state?.product?.name}
               </Typography>
               <Typography variant="subtitle2">
                 Unidade de medida:
-                {state.product?.measuring_unit}
+                {state?.product?.measuring_unit}
               </Typography>
             </>
           </BaseCard>
@@ -192,10 +193,9 @@ export default function Product() {
         storeData?.stores?.map((store, index) => {
           return (
             <StoreCard
+              key={index}
               store={store}
               index={index}
-              vehicles={vehiclesData?.vehicles}
-              handleVehicleChange={handleVehicleChange}
               handleStoresQuantity={handleStoresQuantity}
             />
           );

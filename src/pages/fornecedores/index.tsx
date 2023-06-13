@@ -71,6 +71,7 @@ const Fornecedores = () => {
             data?.vendors.map((vendor, index) => {
               return (
                 <VendorCard
+                  key={index}
                   vendor={vendor}
                   index={index}
                   handleClick={handleClick}

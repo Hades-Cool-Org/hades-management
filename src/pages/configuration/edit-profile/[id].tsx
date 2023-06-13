@@ -18,9 +18,9 @@ export default function EditProfile() {
     password: "",
   });
 
-  const { put } = useRequest();
+  const { put, success } = useRequest();
 
-  const { state, success } = useContext(UserContext);
+  const { state } = useContext(UserContext);
 
   const router = useRouter();
 
@@ -49,7 +49,7 @@ export default function EditProfile() {
     if (success) {
       router.push("/");
     }
-  }, [success]);
+  }, [success, router]);
 
   return (
     <main className="main-form">

@@ -1,5 +1,5 @@
 export interface User {
-  userId: string;
+  id: string;
   name: string;
   email: string;
   phone: string;
@@ -12,6 +12,7 @@ export interface Store {
   address: string;
   user: User;
   couriers: Array<User>;
+  quantity: number;
 }
 
 export interface Role {
@@ -42,6 +43,9 @@ export interface Product {
   details: string;
   measuring_unit: string;
   image_url: string;
+  stores: Store[];
+  totalValue: number;
+  totalQuantity: number;
 }
 
 export interface Context {
@@ -60,4 +64,24 @@ export interface ProductBody {
 export interface LoginBody {
   email: string;
   password: string;
+}
+
+export interface Session {
+  id: string;
+  user: User;
+}
+
+export interface Order {
+  id: string;
+  state: string;
+  user: User;
+  vendor: Vendor;
+}
+
+export interface Delivery {
+  id: string;
+  state: string;
+  order: Order;
+  session: Session;
+  items: any[];
 }

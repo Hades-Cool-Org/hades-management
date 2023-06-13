@@ -1,22 +1,30 @@
-import { Product, Vendor } from "@/types/types";
+import {
+  Delivery,
+  Order,
+  Product,
+  Session,
+  Store,
+  User,
+  Vendor,
+} from "@/types/types";
 import React, { Dispatch, SetStateAction, useEffect, useState } from "react";
 import Cookie from "js-cookie";
 
 export interface AppContextState {
-  user: Object | null;
+  user: User | null;
   vendor: Vendor | null;
   product: Product | null;
   products: Product[];
-  session: Object | null;
-  order: Object | null;
-  delivery: Object | null;
-  store: Object | null;
-  balanceUser: Object | null;
+  session: Session | null;
+  order: Order | null;
+  delivery: Delivery | null;
+  store: Store | null;
+  balanceUser: User | null;
 }
 
 interface IUserContext {
   state: AppContextState;
-  setState: Dispatch<SetStateAction<Object>>;
+  setState: Dispatch<SetStateAction<AppContextState>>;
 }
 
 interface UserContextProps {

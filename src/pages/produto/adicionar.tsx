@@ -55,7 +55,7 @@ export default function AddProduct() {
     if (success) {
       router.back();
     }
-  }, [success]);
+  }, [success, router]);
 
   return (
     <main className="main-form">

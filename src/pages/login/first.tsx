@@ -31,13 +31,13 @@ const FirstLogin = () => {
   const handleSubmit = async (event: React.MouseEvent<HTMLElement>) => {
     if (password === confirmationPassword) {
       const body = {
-        name: state.user.name,
-        email: state.user.email,
-        roles: state.user.roles.map((role) => ({ name: role })),
+        name: state?.user?.name,
+        email: state?.user?.email,
+        roles: state?.user?.roles.map((role) => ({ name: role })),
         password,
         first_login: false,
       };
-      put(`${BASE_API}/users/${state.user.id}`, body);
+      put(`${BASE_API}/users/${state?.user?.id}`, body);
     } else {
       setNotMatchingPasswords(true);
     }

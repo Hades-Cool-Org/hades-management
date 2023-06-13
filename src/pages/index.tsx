@@ -8,12 +8,13 @@ import useFetch from "@/hooks/useFetch";
 import BaseCard from "@/components/Card/BaseCard";
 import Link from "next/link";
 import { BASE_API } from "@/utils/api";
+import { Session } from "@/types/types";
 
 const inter = Inter({ subsets: ["latin"] });
 
 export default function Root() {
   const { state, setState } = useContext(UserContext);
-  const [currentSession, setCurrentSession] = useState(undefined);
+  const [currentSession, setCurrentSession] = useState<any | null>(null);
   const { data, error, loading } = useFetch(
     BASE_API + "/deliveries/sessions?active=true"
   );
@@ -25,20 +26,16 @@ export default function Root() {
   console.log(balanceData);
 
   useEffect(() => {
-    const session = data?.sessions?.find((session) => {
+    const session = data?.sessions?.find((session: Session) => {
       return session.user.id == state?.user?.id;
     });
     if (session) {
       setCurrentSession(session);
     }
-  }, [data]);
-
-  useEffect(() => {
-    console.log(currentSession);
-  }, [currentSession]);
+  }, [data, state]);
 
   const handleSessionClick = () => {
-    setState((prevState) => ({
+    setState((prevState: any) => ({
       ...prevState,
       session: currentSession,
     }));

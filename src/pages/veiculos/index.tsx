@@ -69,8 +69,10 @@ const Veiculos = () => {
                   <ToggleButton value={vehicle.id} key={index}>
                     {
                       <BaseCard>
-                        <h1>{vehicle.name}</h1>
-                        <h2>{vehicle.type}</h2>
+                        <>
+                          <h1>{vehicle.name}</h1>
+                          <h2>{vehicle.type}</h2>
+                        </>
                       </BaseCard>
                     }
                   </ToggleButton>
@@ -92,7 +94,7 @@ const Veiculos = () => {
   );
 };
 
-export function getServerSideProps({ req, res }) {
+export function getServerSideProps({ req, res }: { req: any; res: any }) {
   return {
     props: { user: req.cookies.user },
   };

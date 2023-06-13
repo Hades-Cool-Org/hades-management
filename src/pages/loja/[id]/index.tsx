@@ -20,10 +20,10 @@ export default function EditStore() {
   const { loadingRequest, error, put, success } = useRequest();
 
   useEffect(() => {
-    setBody((prevState) => ({
+    setBody((prevState: any) => ({
       ...prevState,
-      name: state.store.name,
-      address: state.store.address,
+      name: state?.store?.name,
+      address: state?.store?.address,
     }));
   }, []);
 
@@ -38,7 +38,7 @@ export default function EditStore() {
     event.preventDefault();
     const reqBody = { ...body, user: { id: state?.user?.id } };
     console.log(reqBody);
-    put(`${BASE_API}/store/${state.user.id}`, reqBody);
+    put(`${BASE_API}/store/${state?.user?.id}`, reqBody);
   };
 
   useEffect(() => {

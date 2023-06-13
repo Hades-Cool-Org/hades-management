@@ -4,13 +4,16 @@ import DeleteIcon from "@/components/DeleteIcon";
 import EditIcon from "@/components/EditIcon";
 import SEO from "@/components/Head";
 import useFetch from "@/hooks/useFetch";
+import useRequest from "@/hooks/useRequest";
+import { Store } from "@/types/types";
 import { BASE_API } from "@/utils/api";
 import { Box, Card, CardContent, Divider, Typography } from "@mui/material";
 import React, { useContext } from "react";
 
 export default function Estoque() {
   const { state } = useContext(UserContext);
-  let { data } = useFetch(`${BASE_API}/stock/store/${state.store.id}`);
+  let { data } = useFetch(`${BASE_API}/stock/store/${state?.store?.id}`);
+  const { deleteItem } = useRequest();
 
   function removeItem<T>(arr: Array<T>, value: T): void {
     const index = arr.indexOf(value);
@@ -21,7 +24,7 @@ export default function Estoque() {
   }
 
   const handleDeleteStock = (stock: Store) => {
-    deleteItem(`${BASE_API}/store${store.id}`, removeItem(data?.items, stock));
+    deleteItem(`${BASE_API}/store${stock?.id}`, removeItem(data?.items, stock));
   };
 
   return (

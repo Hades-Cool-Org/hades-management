@@ -49,7 +49,7 @@ export default function AdicionarVeiculo() {
             options={["Sedan", "Hatchback", "Van"]}
             getOptionLabel={(option) => option}
             sx={{ width: 300, paddingTop: 2 }}
-            onChange={handleSelectChange}
+            onChange={handleSelectChange as any}
             renderInput={(params) => <TextField {...params} label="Tipo*" />}
           />
         </form>

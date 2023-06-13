@@ -80,7 +80,7 @@ const Order = () => {
 
   const cartClick = () => {
     console.log(state.products);
-    const res = state.products.map((product) => {
+    const res = state.products.map((product: Product) => {
       return product.stores.map((store) => {
         return {
           quantity: store.quantity,
@@ -91,9 +91,9 @@ const Order = () => {
       });
     });
     const items = { items: res.flat() };
-    const body = { user: { id: state.user.id }, ...items };
+    const body = { user: { id: state?.user?.id }, ...items };
     console.log(body);
-    put(`${BASE_API}/orders/${state.order.id}`, body, putOrderCallback);
+    put(`${BASE_API}/orders/${state?.order?.id}`, body, putOrderCallback);
   };
 
   if (loading) return <h1>Loading</h1>;

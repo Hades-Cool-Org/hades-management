@@ -8,10 +8,11 @@ import Link from "next/link";
 import React, { SetStateAction, useContext, useEffect, useState } from "react";
 import Cookie from "js-cookie";
 import { BASE_API } from "@/utils/api";
+import { Store } from "@/types/types";
 
 export default function Entrega() {
   const { data } = useFetch(BASE_API + "/store");
-  const [stores, setStores] = useState([]);
+  const [stores, setStores] = useState<any[]>([]);
 
   const { state, setState } = useContext(UserContext);
 
@@ -19,7 +20,7 @@ export default function Entrega() {
     setStores([
       ...new Set(
         state?.delivery?.items.map((item) =>
-          data?.stores.find((store) => {
+          data?.stores.find((store: Store) => {
             return store.id === item.store_id;
           })
         )
@@ -27,7 +28,7 @@ export default function Entrega() {
     ]);
   }, [state, data]);
 
-  const onClickLink = (store) => {
+  const onClickLink = (store: Store) => {
     setState((prevState) => ({
       ...prevState,
       store: store,
@@ -46,7 +47,7 @@ export default function Entrega() {
     <main className="main">
       <Box className="main-content">
         {stores &&
-          stores.map((store, index) => {
+          stores.map((store: Store, index) => {
             return (
               <Link
                 key={index}

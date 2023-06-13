@@ -30,7 +30,7 @@ const Authentication = () => {
   const postLoginCallback = useCallback(
     (res: any, token: any) => {
       console.log(token);
-      setState((prevState: AppContextState) => ({
+      setState((prevState: any) => ({
         ...prevState,
         user: {
           email: email,
