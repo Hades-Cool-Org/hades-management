@@ -1,10 +1,19 @@
 import BaseCard from "@/components/Card/BaseCard";
 import UserContext from "@/components/Context";
+import DeleteIcon from "@/components/DeleteIcon";
+import EditIcon from "@/components/EditIcon";
 import SEO from "@/components/Head";
 import useFetch from "@/hooks/useFetch";
 import useRequest from "@/hooks/useRequest";
 import { Store } from "@/types/types";
-import { Box, Button, Card, CardContent, Typography } from "@mui/material";
+import {
+  Box,
+  Button,
+  Card,
+  CardContent,
+  Divider,
+  Typography,
+} from "@mui/material";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import React, { useContext } from "react";
@@ -59,28 +68,24 @@ export default function Lojas() {
                 <BaseCard>
                   <>
                     <Typography variant="h5">{store.name}</Typography>
-                    <Typography variant="subtitle1">{store.name}</Typography>
-                    <Box>
-                      <Link href={{ pathname: `loja/${store.id}` }}>
-                        <Button
-                          onClick={() => {
-                            handleSetStore(store);
-                          }}
-                          variant="outlined"
-                        >
-                          Editar
-                        </Button>
-                      </Link>
+                    <Divider flexItem />
+                    <Box className="card-box-bottom">
+                      <Typography variant="subtitle1">{store.name}</Typography>
+                      <Box>
+                        <Link href={{ pathname: `loja/${store.id}` }}>
+                          <EditIcon
+                            handleClick={() => {
+                              handleSetStore(store);
+                            }}
+                          />
+                        </Link>
 
-                      <Button
-                        variant="contained"
-                        color="error"
-                        onClick={() => {
-                          handleDeleteStore(store);
-                        }}
-                      >
-                        Deletar
-                      </Button>
+                        <DeleteIcon
+                          handleClick={() => {
+                            handleDeleteStore(store);
+                          }}
+                        />
+                      </Box>
                     </Box>
                   </>
                 </BaseCard>

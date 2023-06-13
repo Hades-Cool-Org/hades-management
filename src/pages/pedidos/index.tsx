@@ -2,6 +2,7 @@ import OrderCard from "@/components/Card/OrderCard";
 import UserContext from "@/components/Context";
 import useFetch from "@/hooks/useFetch";
 import { Box, Button, Card, CardContent, Typography } from "@mui/material";
+import Link from "next/link";
 import React, { useContext } from "react";
 
 export default function Orders() {
@@ -19,7 +20,6 @@ export default function Orders() {
   return (
     <main className="main">
       <Box>
-        <Typography variant="h5">Lista de Pedidos</Typography>
         {data &&
           data?.orders?.map(
             (
@@ -45,9 +45,11 @@ export default function Orders() {
             }
           )}
       </Box>
-      <Box className="footer">
-        <Button variant="contained">Adicionar pedido</Button>
-      </Box>
+      <Link href={{ pathname: "/fornecedores" }}>
+        <Box className="footer">
+          <Button variant="contained">Adicionar pedido</Button>
+        </Box>
+      </Link>
     </main>
   );
 }

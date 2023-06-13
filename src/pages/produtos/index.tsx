@@ -6,6 +6,7 @@ import {
   CardContent,
   CardMedia,
   createTheme,
+  Divider,
   IconButton,
   TextField,
   ThemeProvider,
@@ -23,6 +24,8 @@ import styles from "@/styles/BuyerPage.module.css";
 import ProductCard from "@/components/Card/ProductCard";
 import BaseCard from "@/components/Card/BaseCard";
 import useRequest from "@/hooks/useRequest";
+import DeleteIcon from "@/components/DeleteIcon";
+import EditIcon from "@/components/EditIcon";
 
 const theme = createTheme({
   components: {
@@ -76,28 +79,22 @@ const VendorPage = () => {
           data?.products.map((product: Product, index) => {
             return (
               <Card key={index} style={{ margin: "1rem" }}>
-                <CardMedia
-                  sx={{ height: 140 }}
-                  image="https://media.istockphoto.com/id/173242750/pt/foto/cacho-de-bananas.jpg?s=612x612&w=0&k=20&c=V-t2KAV-myQK5WugvB8wxfi69iP3sce0A-TYFJuL3Tg="
-                  title="green iguana"
-                />
                 <CardContent>
                   <Box className="card-box-content">
                     <Typography variant="h5">{product.name}</Typography>
+                    <Divider flexItem />
+                  </Box>
+                  <Box className="card-box-bottom">
                     <Typography>Medida: {product.measuring_unit}</Typography>
-                    <Box className="card-button-box">
+                    <Box>
                       <Link
                         href={{ pathname: `/produto/editar/${product.id}` }}
                       >
-                        <Button variant="contained">Editar</Button>
+                        <EditIcon />
                       </Link>
-                      <Button
-                        variant="contained"
-                        color="error"
-                        onClick={() => handleDeleteClick(product)}
-                      >
-                        Remover
-                      </Button>
+                      <DeleteIcon
+                        handleClick={() => handleDeleteClick(product)}
+                      />
                     </Box>
                   </Box>
                 </CardContent>

@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 
 import styles from "@/styles/AuthenticationPage.module.css";
-import { Button, Typography } from "@mui/material";
+import { Box, Button, Typography } from "@mui/material";
 import TextFieldStandard from "@/components/TextField";
 import { useRouter } from "next/router";
 import useRequest from "@/hooks/useRequest";
@@ -49,64 +49,64 @@ export default function AddVendor() {
 
   return (
     <main className="main-form">
-      <Typography variant="h6" className="form-title">
-        Adicionar Fornecedor
-      </Typography>
-      <form className="form">
-        <TextFieldStandard
-          label="Nome do Fornecedor"
-          fieldName="name"
-          handleChange={handleChange}
-        />
-        <TextFieldStandard
-          label="Email do Fornecedor"
-          fieldName="email"
-          handleChange={handleChange}
-        />
-        <TextFieldStandard
-          label="Telefone do Fornecedor"
-          fieldName="phone"
-          handleChange={handleChange}
-        />
-        <TextFieldStandard
-          label="CNPJ do Fornecedor"
-          fieldName="cnpj"
-          handleChange={handleChange}
-        />
-        <TextFieldStandard
-          label="Tipo do Fornecedor"
-          fieldName="type"
-          handleChange={handleChange}
-        />
-        <TextFieldStandard
-          label="Local do Fornecedor"
-          fieldName="location"
-          handleChange={handleChange}
-        />
-        <TextFieldStandard
-          label="Nome de Contato"
-          fieldName="name"
-          handleChange={handleContactChange}
-        />
-        <TextFieldStandard
-          label="Telefone de Contato"
-          fieldName="phone"
-          handleChange={handleContactChange}
-        />
-        <TextFieldStandard
-          label="Email de Contato"
-          fieldName="email"
-          handleChange={handleContactChange}
-        />
-      </form>
-
-      <Button
-        variant="contained"
-        onClick={handleSubmit}
-        disabled={loadingRequest}
-      >
-        Salvar
-      </Button>
+      <Box className="form-container">
+        <form className="form">
+          <TextFieldStandard
+            label="Nome do Fornecedor"
+            fieldName="name"
+            handleChange={handleChange}
+          />
+          <TextFieldStandard
+            label="Email do Fornecedor"
+            fieldName="email"
+            handleChange={handleChange}
+          />
+          <TextFieldStandard
+            label="Telefone do Fornecedor"
+            fieldName="phone"
+            handleChange={handleChange}
+          />
+          <TextFieldStandard
+            label="CNPJ do Fornecedor"
+            fieldName="cnpj"
+            handleChange={handleChange}
+          />
+          <TextFieldStandard
+            label="Tipo do Fornecedor"
+            fieldName="type"
+            handleChange={handleChange}
+          />
+          <TextFieldStandard
+            label="Local do Fornecedor"
+            fieldName="location"
+            handleChange={handleChange}
+          />
+          <TextFieldStandard
+            label="Nome de Contato"
+            fieldName="name"
+            handleChange={handleContactChange}
+          />
+          <TextFieldStandard
+            label="Telefone de Contato"
+            fieldName="phone"
+            handleChange={handleContactChange}
+          />
+          <TextFieldStandard
+            label="Email de Contato"
+            fieldName="email"
+            handleChange={handleContactChange}
+          />
+        </form>
+      </Box>
+      <Box className="footer">
+        <Button
+          variant="contained"
+          onClick={handleSubmit}
+          disabled={loadingRequest}
+        >
+          Salvar
+        </Button>
+      </Box>
     </main>
   );
 }

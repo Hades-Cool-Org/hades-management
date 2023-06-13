@@ -1,4 +1,4 @@
-import { Card, CardContent, Typography } from "@mui/material";
+import { Box, Card, CardContent, Divider, Typography } from "@mui/material";
 import Link from "next/link";
 import React from "react";
 import BaseCard from "./BaseCard";
@@ -26,11 +26,12 @@ export default function OrderCard({
       onClick={() => handleClick(order)}
     >
       <BaseCard>
-        <>
+        <Box className="card-box">
           <Typography variant="h5">Fornecedor: {vendorName}</Typography>
-          <Typography>{state}</Typography>
-          <Typography>{userName}</Typography>
-        </>
+          <Divider flexItem />
+          <Typography>Estado: {state}</Typography>
+          <Typography>Criador: {userName}</Typography>
+        </Box>
       </BaseCard>
     </Link>
   );

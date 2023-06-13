@@ -1,7 +1,8 @@
+import BaseCard from "@/components/Card/BaseCard";
 import UserContext from "@/components/Context";
 import SEO from "@/components/Head";
 import useFetch from "@/hooks/useFetch";
-import { Box, Card, CardContent, Typography } from "@mui/material";
+import { Box, Card, CardContent, Divider, Typography } from "@mui/material";
 import React, { useContext } from "react";
 
 export default function Estoque() {
@@ -21,13 +22,14 @@ export default function Estoque() {
           {data ? (
             data?.items?.map((item: any, index: number) => {
               return (
-                <Card key={index}>
+                <BaseCard key={index}>
                   <CardContent>
                     <Typography>Nome: {item.name}</Typography>
+                    <Divider flexItem />
                     <Typography>Preço médio: {item.avg_price}</Typography>
                     <Typography>Quantidade atual: {item.current}</Typography>
                   </CardContent>
-                </Card>
+                </BaseCard>
               );
             })
           ) : (

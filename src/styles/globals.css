@@ -90,7 +90,7 @@ body {
   background: linear-gradient(
       to bottom,
       transparent,
-      rgb(var(--background-end-rgb))
+      rgb(var(--background-start-rgb))
     )
     rgb(var(--background-start-rgb));
 }
@@ -127,11 +127,11 @@ a {
 .form{
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
+  justify-content: flex-start;
   padding: 1rem;
   border: 1px solid grey;
   border-radius: 4px;
-  min-width: 20em;
+  min-width: 90vw;
 }
 
 .form-title {
@@ -162,16 +162,35 @@ a {
 .card-button-box{
   display: flex;
   justify-content: space-around;
+  flex-direction: column;
   padding-top: 1rem;
 }
 
 .card-box-content{
+  width: 20em;
   display: flex;
   flex-direction: column;
   justify-content: space-around;
+  padding-bottom: 0;
 }
 
 .base-card-content{
   height: 100%;
   width: 100%;
+}
+
+.card-box-bottom{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.card-box{
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+}
+
+.form-container{
+  height: 180vw;
 }
