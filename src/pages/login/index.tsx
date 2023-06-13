@@ -17,8 +17,8 @@ const Authentication = () => {
 
   const { state, setState } = useContext(UserContext);
 
-  const [email, setEmail] = useState<string>("guilhermeX@gmail.com");
-  const [password, setPassword] = useState<string>("guilherme");
+  const [email, setEmail] = useState<string>("caioX");
+  const [password, setPassword] = useState<string>("caio");
   const router = useRouter();
 
   const handleSubmit = async (event: React.MouseEvent<HTMLElement>) => {
@@ -39,7 +39,7 @@ const Authentication = () => {
           roles: token.roles,
         },
       }));
-      if (res.first_login) {
+      if (false) {
         router.push("login/first");
       } else {
         router.push("/");

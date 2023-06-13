@@ -46,7 +46,7 @@ export default function Session() {
       })),
     };
     post(`http://localhost:3333/v1/deliveries`, body, (res: any) => {
-      router.push("entregas");
+      router.push("/entregas");
     });
   };
 

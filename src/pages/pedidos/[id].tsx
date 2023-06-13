@@ -110,16 +110,28 @@ const Order = () => {
 
   return (
     <main className="main">
-      <Typography variant="h6">
-        Estado do pedido: {state?.order?.state}
-      </Typography>
-      <Typography>{state?.order?.created_date}</Typography>
-      {/* <Typography variant="h5">{state?.order?.vendor?.name}</Typography> */}
-      <Link href={"/produto/adicionar"}>
-        <Button variant="contained">Adicionar Novo Produto</Button>
-      </Link>
-      <section className={styles.cards}>
-        <ThemeProvider theme={theme}>
+      <Box
+        sx={{
+          display: "flex",
+          flexDirection: "column",
+          alignContent: "center",
+        }}
+      >
+        <Box
+          sx={{
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+          }}
+        >
+          <Typography variant="h6">
+            Estado do pedido: {state?.order?.state}
+          </Typography>
+          <Link href={"/produto/adicionar"}>
+            <Button variant="contained">Adicionar Novo Produto</Button>
+          </Link>
+        </Box>
+        <Box>
           {
             // @ts-ignore: Object is possibly 'null'
             data?.products.map((product: Product, index) => {
@@ -127,28 +139,38 @@ const Order = () => {
                 products.filter((p: Product) => p.id === product.id).length > 0
               ) {
                 return (
-                  <ProductCard
-                    product={product}
+                  <Box
                     key={index}
-                    selected
-                    handleLinkClick={() => handleLinkClick(product)}
-                    index={index}
-                  />
+                    className="card-box-content"
+                    sx={{ margin: "1rem" }}
+                  >
+                    <ProductCard
+                      product={product}
+                      selected
+                      handleLinkClick={() => handleLinkClick(product)}
+                      index={index}
+                    />
+                  </Box>
                 );
               } else {
                 return (
-                  <ProductCard
-                    product={product}
+                  <Box
                     key={index}
-                    handleLinkClick={() => handleLinkClick(product)}
-                    index={index}
-                  />
+                    className="card-box-content"
+                    sx={{ margin: "1rem" }}
+                  >
+                    <ProductCard
+                      product={product}
+                      handleLinkClick={() => handleLinkClick(product)}
+                      index={index}
+                    />
+                  </Box>
                 );
               }
             })
           }
-        </ThemeProvider>
-      </section>
+        </Box>
+      </Box>
 
       <Box className="footer">
         <Button

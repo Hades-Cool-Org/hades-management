@@ -43,7 +43,7 @@ export default function AdicionarSaldo() {
 
   return (
     <main className="main-form">
-      <Typography>Saldo atual R${data.Amount}</Typography>
+      <Typography>Saldo atual R${data?.Amount}</Typography>
       <Box className="form-container">
         <form className="form">
           <TextFieldStandard

@@ -1,3 +1,4 @@
+import { Divider } from "@mui/material";
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import Typography from "@mui/material/Typography";
@@ -26,6 +27,7 @@ const ProductCard = ({
         <Card key={index} style={{ backgroundColor: "#777777" }}>
           <CardContent>
             <Typography variant="h5">{product.name}</Typography>
+            <Divider flexItem />
             <Typography>Unidade de medida:{product.measuring_unit}</Typography>
           </CardContent>
         </Card>
@@ -33,6 +35,7 @@ const ProductCard = ({
         <Card key={index}>
           <CardContent>
             <Typography variant="h5">{product.name}</Typography>
+            <Divider flexItem />
             <Typography>Unidade de medida:{product.measuring_unit}</Typography>
           </CardContent>
         </Card>
