@@ -1,11 +1,12 @@
 import BaseCard from "@/components/Card/BaseCard";
 import useFetch from "@/hooks/useFetch";
+import { BASE_API } from "@/utils/api";
 import { Box, Divider, Typography } from "@mui/material";
 import React from "react";
 
 export default function Acompanhamento() {
-  const { data } = useFetch(`http://localhost:3333/v1/conference/occurrences`);
-  const { data: storeData } = useFetch(`http://localhost:3333/v1/store`);
+  const { data } = useFetch(`${BASE_API}/conference/occurrences`);
+  const { data: storeData } = useFetch(`${BASE_API}/store`);
 
   return (
     <main className="main">

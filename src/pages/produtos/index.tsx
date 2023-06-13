@@ -26,6 +26,7 @@ import BaseCard from "@/components/Card/BaseCard";
 import useRequest from "@/hooks/useRequest";
 import DeleteIcon from "@/components/DeleteIcon";
 import EditIcon from "@/components/EditIcon";
+import { BASE_API } from "@/utils/api";
 
 const theme = createTheme({
   components: {
@@ -48,7 +49,7 @@ const theme = createTheme({
 });
 
 const VendorPage = () => {
-  let { data, loading, error } = useFetch("http://localhost:3333/v1/products");
+  let { data, loading, error } = useFetch(BASE_API + "/products");
 
   const { deleteItem, success, loadingRequest } = useRequest();
 
@@ -62,7 +63,7 @@ const VendorPage = () => {
 
   const handleDeleteClick = (product: Product) => {
     deleteItem(
-      `http://localhost:3333/v1/products/${product.id}`,
+      `${BASE_API}/products/${product.id}`,
       removeItem(data?.products, product)
     );
   };

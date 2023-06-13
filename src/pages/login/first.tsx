@@ -15,6 +15,7 @@ import useRequest from "@/hooks/useRequest";
 import CloseIcon from "@mui/icons-material/Close";
 import Cookie from "js-cookie";
 import SEO from "@/components/Head";
+import { BASE_API } from "@/utils/api";
 
 const FirstLogin = () => {
   const { put, success, loadingRequest, error } = useRequest();
@@ -36,7 +37,7 @@ const FirstLogin = () => {
         password,
         first_login: false,
       };
-      put(`http://localhost:3333/v1/users/${state.user.id}`, body);
+      put(`${BASE_API}/users/${state.user.id}`, body);
     } else {
       setNotMatchingPasswords(true);
     }

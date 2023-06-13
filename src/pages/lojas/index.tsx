@@ -6,6 +6,7 @@ import SEO from "@/components/Head";
 import useFetch from "@/hooks/useFetch";
 import useRequest from "@/hooks/useRequest";
 import { Store } from "@/types/types";
+import { BASE_API } from "@/utils/api";
 import {
   Box,
   Button,
@@ -20,7 +21,7 @@ import React, { useContext } from "react";
 
 export default function Lojas() {
   const { setState } = useContext(UserContext);
-  let { data } = useFetch("http://localhost:3333/v1/store");
+  let { data } = useFetch(BASE_API + "/store");
 
   const { deleteItem } = useRequest();
 
@@ -46,10 +47,7 @@ export default function Lojas() {
   };
 
   const handleDeleteStore = (store: Store) => {
-    deleteItem(
-      `http://localhost:3333/v1/store${store.id}`,
-      removeItem(data?.stores, store)
-    );
+    deleteItem(`${BASE_API}/store${store.id}`, removeItem(data?.stores, store));
   };
 
   return (

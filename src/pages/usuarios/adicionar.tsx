@@ -1,5 +1,6 @@
 import TextFieldStandard from "@/components/TextField";
 import useRequest from "@/hooks/useRequest";
+import { BASE_API } from "@/utils/api";
 import { Autocomplete, Box, Button, TextField } from "@mui/material";
 import { useRouter } from "next/router";
 import React, { useState } from "react";
@@ -37,7 +38,7 @@ export default function AdicionarUsuario() {
   };
 
   const handleSaveUserClick = () => {
-    post("http://localhost:3333/v1/users", body, postSaveUserCallback);
+    post(BASE_API + "/users", body, postSaveUserCallback);
   };
 
   return (

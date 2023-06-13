@@ -1,12 +1,13 @@
 import OrderCard from "@/components/Card/OrderCard";
 import UserContext from "@/components/Context";
 import useFetch from "@/hooks/useFetch";
+import { BASE_API } from "@/utils/api";
 import { Box, Button, Card, CardContent, Typography } from "@mui/material";
 import Link from "next/link";
 import React, { useContext } from "react";
 
 export default function Orders() {
-  const { data, error, loading } = useFetch("http://localhost:3333/v1/orders");
+  const { data, error, loading } = useFetch(BASE_API + "/orders");
 
   const { setState } = useContext(UserContext);
 

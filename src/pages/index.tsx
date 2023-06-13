@@ -7,6 +7,7 @@ import { Box, Card, Typography } from "@mui/material";
 import useFetch from "@/hooks/useFetch";
 import BaseCard from "@/components/Card/BaseCard";
 import Link from "next/link";
+import { BASE_API } from "@/utils/api";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -14,11 +15,11 @@ export default function Root() {
   const { state, setState } = useContext(UserContext);
   const [currentSession, setCurrentSession] = useState(undefined);
   const { data, error, loading } = useFetch(
-    "http://localhost:3333/v1/deliveries/sessions?active=true"
+    BASE_API + "/deliveries/sessions?active=true"
   );
 
   const { data: balanceData } = useFetch(
-    `http://localhost:3333/v1/balance/${state?.user?.id}`
+    `${BASE_API}/balance/${state?.user?.id}`
   );
 
   console.log(balanceData);

@@ -2,6 +2,7 @@ import UserContext from "@/components/Context";
 import TextFieldStandard from "@/components/TextField";
 import useFetch from "@/hooks/useFetch";
 import useRequest from "@/hooks/useRequest";
+import { BASE_API } from "@/utils/api";
 import { Box, Button, Typography } from "@mui/material";
 import { useRouter } from "next/router";
 import React, { useContext, useEffect, useState } from "react";
@@ -9,9 +10,7 @@ import React, { useContext, useEffect, useState } from "react";
 export default function AdicionarSaldo() {
   const [body, setBody] = useState({ balance: "" });
   const { state } = useContext(UserContext);
-  const { data } = useFetch(
-    `http://localhost:3333/v1/balance/${state.balanceUser.id}`
-  );
+  const { data } = useFetch(`${BASE_API}/balance/${state.balanceUser.id}`);
   const { post, success } = useRequest();
   const router = useRouter();
 
@@ -22,10 +21,7 @@ export default function AdicionarSaldo() {
       amount: body.balance,
       userId: state?.balanceUser?.id,
     };
-    post(
-      `http://localhost:3333/v1/balance/${state.balanceUser.id}`,
-      requestBody
-    );
+    post(`${BASE_API}/balance/${state.balanceUser.id}`, requestBody);
   };
 
   const handleChange = (name: string, value: string) => {

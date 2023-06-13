@@ -6,6 +6,7 @@ import TextFieldStandard from "@/components/TextField";
 import { useRouter } from "next/router";
 import useFetch from "@/hooks/useFetch";
 import useRequest from "@/hooks/useRequest";
+import { BASE_API } from "@/utils/api";
 
 export default function AddProduct() {
   const [body, setBody] = useState({
@@ -18,9 +19,7 @@ export default function AddProduct() {
 
   const { id } = router.query;
 
-  const { data, loading, error } = useFetch(
-    `http://localhost:3333/v1/products/${id}`
-  );
+  const { data, loading, error } = useFetch(`${BASE_API}/products/${id}`);
 
   const { success, put, loadingRequest } = useRequest();
 
@@ -51,7 +50,7 @@ export default function AddProduct() {
 
   const handleSubmit = async (event: React.MouseEvent<HTMLElement>) => {
     event.preventDefault();
-    put(`http://localhost:3333/v1/products/${id}`, body);
+    put(`${BASE_API}/products/${id}`, body);
   };
 
   useEffect(() => {

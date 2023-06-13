@@ -1,7 +1,7 @@
 import { Vendor } from "@/types/types";
-import { Box, Card, CardContent, Divider, Typography } from "@mui/material";
+import { Box, Divider, Typography } from "@mui/material";
 import Link from "next/link";
-import React, { Dispatch, SetStateAction } from "react";
+import React from "react";
 import BaseCard from "./BaseCard";
 
 interface VendorCardProps {
@@ -24,15 +24,15 @@ export default function VendorCard({
       }}
     >
       <BaseCard key={index}>
-        <CardContent>
+        <>
           <Box>
             <Typography variant="h5">{name}</Typography>
           </Box>
           <Divider flexItem />
-          <Box className="card-box-bottom">
+          <Box>
             <Typography>Local: {location}</Typography>
           </Box>
-        </CardContent>
+        </>
       </BaseCard>
     </Link>
   );

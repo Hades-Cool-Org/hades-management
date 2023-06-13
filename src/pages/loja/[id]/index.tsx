@@ -5,6 +5,7 @@ import { useRouter } from "next/router";
 import useRequest from "@/hooks/useRequest";
 import UserContext from "@/components/Context";
 import SEO from "@/components/Head";
+import { BASE_API } from "@/utils/api";
 
 export default function EditStore() {
   const [body, setBody] = useState({
@@ -37,7 +38,7 @@ export default function EditStore() {
     event.preventDefault();
     const reqBody = { ...body, user: { id: state?.user?.id } };
     console.log(reqBody);
-    put(`http://localhost:3333/v1/store/${state.user.id}`, reqBody);
+    put(`${BASE_API}/store/${state.user.id}`, reqBody);
   };
 
   useEffect(() => {

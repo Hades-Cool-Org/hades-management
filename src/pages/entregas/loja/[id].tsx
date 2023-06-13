@@ -2,6 +2,7 @@ import UserContext from "@/components/Context";
 import TextFieldStandard from "@/components/TextField";
 import useFetch from "@/hooks/useFetch";
 import useRequest from "@/hooks/useRequest";
+import { BASE_API } from "@/utils/api";
 import { Box, Button, Card, CardContent, Typography } from "@mui/material";
 import { useRouter } from "next/router";
 import React, { SetStateAction, useContext, useEffect, useState } from "react";
@@ -54,7 +55,7 @@ export default function Entrega() {
   };
 
   const handleConferenceClick = () => {
-    post("http://localhost:3333/v1/conference", body, submitCallback);
+    post(BASE_API + "/conference", body, submitCallback);
   };
 
   return (

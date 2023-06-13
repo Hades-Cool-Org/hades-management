@@ -1,15 +1,28 @@
 import BaseCard from "@/components/Card/BaseCard";
 import UserContext from "@/components/Context";
+import DeleteIcon from "@/components/DeleteIcon";
+import EditIcon from "@/components/EditIcon";
 import SEO from "@/components/Head";
 import useFetch from "@/hooks/useFetch";
+import { BASE_API } from "@/utils/api";
 import { Box, Card, CardContent, Divider, Typography } from "@mui/material";
 import React, { useContext } from "react";
 
 export default function Estoque() {
   const { state } = useContext(UserContext);
-  const { data } = useFetch(
-    `http://localhost:3333/v1/stock/store/${state.store.id}`
-  );
+  let { data } = useFetch(`${BASE_API}/stock/store/${state.store.id}`);
+
+  function removeItem<T>(arr: Array<T>, value: T): void {
+    const index = arr.indexOf(value);
+    if (index > -1) {
+      arr.splice(index, 1);
+    }
+    data = arr;
+  }
+
+  const handleDeleteStock = (stock: Store) => {
+    deleteItem(`${BASE_API}/store${store.id}`, removeItem(data?.items, stock));
+  };
 
   return (
     <>
@@ -26,8 +39,22 @@ export default function Estoque() {
                   <CardContent>
                     <Typography>Nome: {item.name}</Typography>
                     <Divider flexItem />
-                    <Typography>Preço médio: {item.avg_price}</Typography>
-                    <Typography>Quantidade atual: {item.current}</Typography>
+                    <Box className="card-box-bottom">
+                      <Box>
+                        <Typography>Preço médio: {item.avg_price}</Typography>
+                        <Typography>
+                          Quantidade atual: {item.current}
+                        </Typography>
+                      </Box>
+                      <Box className="card-button-box">
+                        <EditIcon />
+                        <DeleteIcon
+                          handleClick={() => {
+                            handleDeleteStock(item);
+                          }}
+                        />
+                      </Box>
+                    </Box>
                   </CardContent>
                 </BaseCard>
               );

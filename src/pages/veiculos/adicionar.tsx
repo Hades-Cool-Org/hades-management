@@ -1,5 +1,6 @@
 import TextFieldStandard from "@/components/TextField";
 import useRequest from "@/hooks/useRequest";
+import { BASE_API } from "@/utils/api";
 import { Autocomplete, Box, Button, TextField } from "@mui/material";
 import { useRouter } from "next/router";
 import React, { useState } from "react";
@@ -23,11 +24,7 @@ export default function AdicionarVeiculo() {
   };
 
   const handleClick = () => {
-    post(
-      "http://localhost:3333/v1/deliveries/vehicles",
-      body,
-      postVehicleCallback
-    );
+    post(BASE_API + "/deliveries/vehicles", body, postVehicleCallback);
   };
 
   const handleSelectChange = (event: any, newValue: string[]) => {

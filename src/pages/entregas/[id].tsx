@@ -7,9 +7,10 @@ import { Box, Button, Card, CardContent, Typography } from "@mui/material";
 import Link from "next/link";
 import React, { SetStateAction, useContext, useEffect, useState } from "react";
 import Cookie from "js-cookie";
+import { BASE_API } from "@/utils/api";
 
 export default function Entrega() {
-  const { data } = useFetch("http://localhost:3333/v1/store");
+  const { data } = useFetch(BASE_API + "/store");
   const [stores, setStores] = useState([]);
 
   const { state, setState } = useContext(UserContext);

@@ -3,6 +3,7 @@ import OrderCard from "@/components/Card/OrderCard";
 import UserContext from "@/components/Context";
 import useFetch from "@/hooks/useFetch";
 import useRequest from "@/hooks/useRequest";
+import { BASE_API } from "@/utils/api";
 import {
   Box,
   Button,
@@ -21,7 +22,7 @@ export default function Session() {
   const { state, setState } = useContext(UserContext);
 
   const [selectedOrder, setSelectedOrder] = useState<any>({});
-  const { data, error, loading } = useFetch("http://localhost:3333/v1/orders");
+  const { data, error, loading } = useFetch(BASE_API + "/orders");
 
   const handleOrderSelect = (
     event: React.MouseEvent<HTMLElement>,
@@ -45,14 +46,14 @@ export default function Session() {
         total: item.total,
       })),
     };
-    post(`http://localhost:3333/v1/deliveries`, body, (res: any) => {
+    post(`${BASE_API}/deliveries`, body, (res: any) => {
       router.push("/entregas");
     });
   };
 
   const handleDeleteClick = () => {
     deleteItem(
-      `http://localhost:3333/v1/deliveries/sessions/${state?.session?.id}`,
+      `${BASE_API}/deliveries/sessions/${state?.session?.id}`,
       deleteSessionCallBack
     );
   };

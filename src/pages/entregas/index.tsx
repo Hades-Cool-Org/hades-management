@@ -5,9 +5,10 @@ import { Box, Card, CardContent, Typography } from "@mui/material";
 import Link from "next/link";
 import React, { useContext, useEffect } from "react";
 import Cookie from "js-cookie";
+import { BASE_API } from "@/utils/api";
 
 export default function Entregas() {
-  const { data } = useFetch("http://localhost:3333/v1/deliveries");
+  const { data } = useFetch(BASE_API + "/deliveries");
 
   const { state, setState } = useContext(UserContext);
 

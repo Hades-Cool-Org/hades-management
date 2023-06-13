@@ -15,6 +15,7 @@ import useFetch from "@/hooks/useFetch";
 import styles from "@/styles/BuyerPage.module.css";
 import useRequest from "@/hooks/useRequest";
 import { useRouter } from "next/router";
+import { BASE_API } from "@/utils/api";
 
 const theme = createTheme({
   components: {
@@ -30,7 +31,7 @@ const theme = createTheme({
 });
 
 const Fornecedores = () => {
-  const { data, loading, error } = useFetch("http://localhost:3333/v1/vendors");
+  const { data, loading, error } = useFetch(BASE_API + "/vendors");
 
   const { state, setState } = useContext(UserContext);
 
@@ -55,7 +56,7 @@ const Fornecedores = () => {
       vendor: { id: vendor?.id },
       user: { id: state?.user?.id },
     };
-    post("http://localhost:3333/v1/orders", body, postCallback);
+    post(BASE_API + "/orders", body, postCallback);
   };
 
   return (

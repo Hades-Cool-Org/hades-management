@@ -19,6 +19,7 @@ import useFetch from "@/hooks/useFetch";
 import styles from "@/styles/BuyerPage.module.css";
 import ProductCard from "@/components/Card/ProductCard";
 import useRequest from "@/hooks/useRequest";
+import { BASE_API } from "@/utils/api";
 
 const theme = createTheme({
   components: {
@@ -40,9 +41,7 @@ const VendorPage = () => {
 
   const router = useRouter();
 
-  const { data, loading, error } = useFetch(
-    "http://localhost:3333/v1/products"
-  );
+  const { data, loading, error } = useFetch(BASE_API + "/products");
 
   const {
     post,

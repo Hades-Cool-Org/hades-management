@@ -5,6 +5,7 @@ import TextFieldStandard from "@/components/TextField";
 import useRequest from "@/hooks/useRequest";
 import UserContext from "@/components/Context";
 import { useRouter } from "next/router";
+import { BASE_API } from "@/utils/api";
 interface Role {
   name: string;
 }
@@ -41,7 +42,7 @@ export default function EditProfile() {
 
   const handleSubmit = async (event: any) => {
     event.preventDefault();
-    put("http://localhost:3333/v1/users/1", body);
+    put(BASE_API + "/users/1", body);
   };
 
   useEffect(() => {

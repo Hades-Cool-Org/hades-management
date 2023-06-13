@@ -17,6 +17,7 @@ import useFetch from "@/hooks/useFetch";
 import styles from "@/styles/BuyerPage.module.css";
 import ProductCard from "@/components/Card/ProductCard";
 import useRequest from "@/hooks/useRequest";
+import { BASE_API } from "@/utils/api";
 
 const theme = createTheme({
   components: {
@@ -38,9 +39,7 @@ const Order = () => {
 
   const router = useRouter();
 
-  const { data, loading, error } = useFetch(
-    "http://localhost:3333/v1/products"
-  );
+  const { data, loading, error } = useFetch(BASE_API + "/products");
 
   const {
     put,
@@ -58,10 +57,7 @@ const Order = () => {
   };
 
   const handleCancelClick = () => {
-    deleteItem(
-      `http://localhost:3333/v1/orders/${state.order?.id}`,
-      deleteCallback
-    );
+    deleteItem(`${BASE_API}/orders/${state.order?.id}`, deleteCallback);
   };
 
   const deleteCallback = (res: any) => {
@@ -97,11 +93,7 @@ const Order = () => {
     const items = { items: res.flat() };
     const body = { user: { id: state.user.id }, ...items };
     console.log(body);
-    put(
-      `http://localhost:3333/v1/orders/${state.order.id}`,
-      body,
-      putOrderCallback
-    );
+    put(`${BASE_API}/orders/${state.order.id}`, body, putOrderCallback);
   };
 
   if (loading) return <h1>Loading</h1>;

@@ -7,10 +7,11 @@ import useFetch from "@/hooks/useFetch";
 import DriverCard from "@/components/Card/DriverCard";
 import { useContext } from "react";
 import UserContext from "@/components/Context";
+import { BASE_API } from "@/utils/api";
 
 const Gerente = () => {
   const { data, loading, error } = useFetch(
-    "http://localhost:3333/v1/deliveries/sessions?active=true"
+    BASE_API + "/deliveries/sessions?active=true"
   );
 
   const { setState } = useContext(UserContext);

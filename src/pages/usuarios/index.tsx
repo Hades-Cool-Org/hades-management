@@ -9,6 +9,7 @@ import { Box, Button, Divider, Typography } from "@mui/material";
 import Link from "next/link";
 import React, { useContext, useEffect, useState } from "react";
 import Cookie from "js-cookie";
+import { BASE_API } from "@/utils/api";
 
 const Roles = {
   buyer: "Comprador",
@@ -18,7 +19,7 @@ const Roles = {
 };
 
 export default function Usuarios() {
-  let { data } = useFetch("http://localhost:3333/v1/users");
+  let { data } = useFetch(BASE_API + "/users");
   const { deleteItem } = useRequest();
 
   const { state, setState } = useContext(UserContext);
@@ -38,10 +39,7 @@ export default function Usuarios() {
   }
 
   const handleDeleteClick = (user: User) => {
-    deleteItem(
-      `http://localhost:3333/v1/users/${user.id}`,
-      removeItem(data?.users, user)
-    );
+    deleteItem(`${BASE_API}/users/${user.id}`, removeItem(data?.users, user));
   };
 
   const handleLinkClick = (user: Object) => {

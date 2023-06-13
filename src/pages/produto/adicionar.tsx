@@ -14,6 +14,7 @@ import {
 import TextFieldStandard from "@/components/TextField";
 import { useRouter } from "next/router";
 import useRequest from "@/hooks/useRequest";
+import { BASE_API } from "@/utils/api";
 
 export default function AddProduct() {
   const [body, setBody] = useState({
@@ -43,7 +44,7 @@ export default function AddProduct() {
 
   const handleSubmit = async (event: React.MouseEvent<HTMLElement>) => {
     event.preventDefault();
-    post("http://localhost:3333/v1/products", body);
+    post(BASE_API + "/products", body);
   };
 
   useEffect(() => {

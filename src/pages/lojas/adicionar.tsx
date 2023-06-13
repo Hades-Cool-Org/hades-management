@@ -7,6 +7,7 @@ import { useRouter } from "next/router";
 import useRequest from "@/hooks/useRequest";
 import UserContext from "@/components/Context";
 import SEO from "@/components/Head";
+import { BASE_API } from "@/utils/api";
 
 export default function AdicionarLoja() {
   const [body, setBody] = useState({
@@ -30,7 +31,7 @@ export default function AdicionarLoja() {
   const handleSubmit = async (event: React.MouseEvent<HTMLElement>) => {
     event.preventDefault();
     const reqBody = { ...body, user: { id: state?.user?.id } };
-    post("http://localhost:3333/v1/store", reqBody);
+    post(BASE_API + "/store", reqBody);
   };
 
   useEffect(() => {

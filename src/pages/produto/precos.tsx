@@ -1,11 +1,10 @@
 import ProductCard from "@/components/Card/ProductCard";
 import useFetch from "@/hooks/useFetch";
+import { BASE_API } from "@/utils/api";
 import React from "react";
 
 const ProductPrices = () => {
-  const { data, loading, error } = useFetch(
-    "http://localhost:3333/v1/products"
-  );
+  const { data, loading, error } = useFetch(BASE_API + "/products");
   // console.log(data);
   return (
     <>
@@ -13,7 +12,7 @@ const ProductPrices = () => {
         // @ts-ignore: Object is possibly 'null'
         data?.products.map((product, index) => {
           console.log(product);
-          return <ProductCard product={product} index={index} />;
+          return <ProductCard key={index} product={product} index={index} />;
         })
       }
     </>

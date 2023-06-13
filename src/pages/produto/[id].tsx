@@ -17,6 +17,7 @@ import StoreCard from "@/components/Card/StoreCard";
 import { Store } from "@/types/types";
 import Link from "next/link";
 import BaseCard from "@/components/Card/BaseCard";
+import { BASE_API } from "@/utils/api";
 
 const theme = createTheme({
   components: {
@@ -39,13 +40,13 @@ export default function Product() {
     data: storeData,
     loading: storeLoading,
     error: storeError,
-  } = useFetch("http://localhost:3333/v1/store");
+  } = useFetch(BASE_API + "/store");
 
   const {
     data: vehiclesData,
     loading: vehiclesLoading,
     error: vehiclesError,
-  } = useFetch("http://localhost:3333/v1/deliveries/vehicles");
+  } = useFetch(BASE_API + "/deliveries/vehicles");
 
   const [body, setBody] = useState({ totalQuantity: 0, totalValue: 0 });
   const [stores, setStores] = useState([]);

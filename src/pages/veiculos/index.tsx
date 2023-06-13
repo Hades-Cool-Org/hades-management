@@ -15,13 +15,12 @@ import UserContext from "@/components/Context";
 import { useRouter } from "next/router";
 import Link from "next/link";
 import BaseCard from "@/components/Card/BaseCard";
+import { BASE_API } from "@/utils/api";
 
 const Veiculos = () => {
   const [vehicleId, setVehicleId] = useState<string>("");
 
-  const { data, loading, error } = useFetch(
-    "http://localhost:3333/v1/deliveries/vehicles"
-  );
+  const { data, loading, error } = useFetch(BASE_API + "/deliveries/vehicles");
 
   const { state, setState } = useContext(UserContext);
 
@@ -38,11 +37,7 @@ const Veiculos = () => {
 
   const handleClick = () => {
     const body = { user: { id: state?.user?.id }, vehicle: { id: vehicleId } };
-    post(
-      "http://localhost:3333/v1/deliveries/sessions",
-      body,
-      postSessionCallback
-    );
+    post(BASE_API + "/deliveries/sessions", body, postSessionCallback);
   };
 
   const postSessionCallback = (res: any) => {
