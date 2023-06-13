@@ -14,6 +14,7 @@ import useRequest from "@/hooks/useRequest";
 import UserContext from "@/components/Context";
 import { useRouter } from "next/router";
 import Link from "next/link";
+import BaseCard from "@/components/Card/BaseCard";
 
 const Veiculos = () => {
   const [vehicleId, setVehicleId] = useState<string>("");
@@ -56,11 +57,8 @@ const Veiculos = () => {
   if (error) console.log(error);
   return (
     <>
-      <Head>
-        <title>Veiculos</title>
-      </Head>
       {data && (
-        <main className={styles.main}>
+        <main className="main">
           <ToggleButtonGroup
             color="primary"
             exclusive
@@ -75,10 +73,10 @@ const Veiculos = () => {
                 return (
                   <ToggleButton value={vehicle.id} key={index}>
                     {
-                      <>
+                      <BaseCard>
                         <h1>{vehicle.name}</h1>
                         <h2>{vehicle.type}</h2>
-                      </>
+                      </BaseCard>
                     }
                   </ToggleButton>
                 );

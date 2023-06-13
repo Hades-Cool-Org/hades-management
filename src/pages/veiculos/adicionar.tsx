@@ -1,6 +1,6 @@
 import TextFieldStandard from "@/components/TextField";
 import useRequest from "@/hooks/useRequest";
-import { Box, Button } from "@mui/material";
+import { Autocomplete, Box, Button, TextField } from "@mui/material";
 import { useRouter } from "next/router";
 import React, { useState } from "react";
 
@@ -30,6 +30,13 @@ export default function AdicionarVeiculo() {
     );
   };
 
+  const handleSelectChange = (event: any, newValue: string[]) => {
+    setBody((prevState) => ({
+      ...prevState,
+      type: newValue,
+    }));
+  };
+  console.log(body);
   return (
     <main className="main-form">
       <Box className="form-container">
@@ -39,10 +46,14 @@ export default function AdicionarVeiculo() {
             label="Nome"
             handleChange={handleChange}
           />
-          <TextFieldStandard
-            fieldName="type"
-            label="Tipo"
-            handleChange={handleChange}
+          <Autocomplete
+            disablePortal
+            id="combo-box"
+            options={["Sedan", "Hatchback", "Van"]}
+            getOptionLabel={(option) => option}
+            sx={{ width: 300, paddingTop: 2 }}
+            onChange={handleSelectChange}
+            renderInput={(params) => <TextField {...params} label="Tipo*" />}
           />
         </form>
       </Box>

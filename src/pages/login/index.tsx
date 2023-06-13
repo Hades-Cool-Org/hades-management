@@ -39,7 +39,7 @@ const Authentication = () => {
           roles: token.roles,
         },
       }));
-      if (false) {
+      if (res.first_login) {
         router.push("login/first");
       } else {
         router.push("/");

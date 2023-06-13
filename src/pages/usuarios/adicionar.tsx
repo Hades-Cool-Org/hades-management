@@ -1,6 +1,6 @@
 import TextFieldStandard from "@/components/TextField";
 import useRequest from "@/hooks/useRequest";
-import { Autocomplete, Button, TextField } from "@mui/material";
+import { Autocomplete, Box, Button, TextField } from "@mui/material";
 import { useRouter } from "next/router";
 import React, { useState } from "react";
 
@@ -26,7 +26,6 @@ export default function AdicionarUsuario() {
 
   const handleSelectChange = (event: any, newValue: { value: string }[]) => {
     const rolesBody = newValue.map((role) => ({ name: role.value }));
-    console.log(rolesBody);
     setBody((prevState) => ({
       ...prevState,
       roles: rolesBody,
@@ -43,54 +42,58 @@ export default function AdicionarUsuario() {
 
   return (
     <main className="main-form">
-      <form className="form">
-        <TextFieldStandard
-          label={"Nome"}
-          fieldName={"name"}
-          handleChange={handleChange}
-          required
-        />
-        <TextFieldStandard
-          label={"Email"}
-          fieldName={"email"}
-          handleChange={handleChange}
-          required
-        />
-        <TextFieldStandard
-          label={"Telefone"}
-          fieldName={"phone"}
-          handleChange={handleChange}
-          required
-        />
-        <TextFieldStandard
-          label={"Senha"}
-          fieldName={"password"}
-          handleChange={handleChange}
-          required
-        />
-        <Autocomplete
-          disablePortal
-          multiple
-          id="combo-box-demo"
-          options={[
-            { name: "Administrador", value: "admin" },
-            { name: "Comprador", value: "buyer" },
-            { name: "Motorista", value: "driver" },
-            { name: "Gerente", value: "manager" },
-          ]}
-          getOptionLabel={(option) => option.name}
-          sx={{ width: 300, paddingTop: 2 }}
-          onChange={handleSelectChange}
-          renderInput={(params) => <TextField {...params} label="Papéis *" />}
-        />
-      </form>
-      <Button
-        variant="contained"
-        disabled={loadingRequest}
-        onClick={handleSaveUserClick}
-      >
-        Salvar
-      </Button>
+      <Box className="form-container">
+        <form className="form">
+          <TextFieldStandard
+            label={"Nome"}
+            fieldName={"name"}
+            handleChange={handleChange}
+            required
+          />
+          <TextFieldStandard
+            label={"Email"}
+            fieldName={"email"}
+            handleChange={handleChange}
+            required
+          />
+          <TextFieldStandard
+            label={"Telefone"}
+            fieldName={"phone"}
+            handleChange={handleChange}
+            required
+          />
+          <TextFieldStandard
+            label={"Senha"}
+            fieldName={"password"}
+            handleChange={handleChange}
+            required
+          />
+          <Autocomplete
+            disablePortal
+            multiple
+            id="combo-box-demo"
+            options={[
+              { name: "Administrador", value: "admin" },
+              { name: "Comprador", value: "buyer" },
+              { name: "Motorista", value: "driver" },
+              { name: "Gerente", value: "manager" },
+            ]}
+            getOptionLabel={(option) => option.name}
+            sx={{ width: 300, paddingTop: 2 }}
+            onChange={handleSelectChange}
+            renderInput={(params) => <TextField {...params} label="Papéis *" />}
+          />
+        </form>
+      </Box>
+      <Box className="footer">
+        <Button
+          variant="contained"
+          disabled={loadingRequest}
+          onClick={handleSaveUserClick}
+        >
+          Salvar
+        </Button>
+      </Box>
     </main>
   );
 }

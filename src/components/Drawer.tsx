@@ -1,6 +1,7 @@
 import { Box, Divider, List, SwipeableDrawer } from "@mui/material";
 import Link from "next/link";
-import React from "react";
+import React, { useContext } from "react";
+import UserContext from "./Context";
 import ListItem from "./ListItem";
 import Logo from "./Logo";
 
@@ -18,6 +19,8 @@ export default function Drawer({
   handleDrawerClose,
   handleLeaveClick,
 }: DrawerProps) {
+  const { state } = useContext(UserContext);
+
   return (
     <SwipeableDrawer
       anchor="right"
@@ -73,7 +76,11 @@ export default function Drawer({
         </List>
         <Divider />
         <List>
-          <ListItem itemText={"Editar Perfil"} />
+          <ListItem
+            itemText={"Editar Perfil"}
+            route={`configuration/edit-profile/${state?.user?.id}`}
+            handleClick={handleDrawerClose}
+          />
           <ListItem
             itemText={"Sair"}
             route="/login"

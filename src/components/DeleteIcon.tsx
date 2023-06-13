@@ -3,7 +3,7 @@ import { IconButton } from "@mui/material";
 import React from "react";
 
 interface DeleteIconProps {
-  handleClick: () => void;
+  handleClick?: () => void;
 }
 
 export default function DeleteIcon({
