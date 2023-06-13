@@ -54,7 +54,7 @@ export default function Root() {
           <Typography variant="h6">Bem vindo {state?.user?.name}</Typography>
           {balanceData && (
             <Typography variant="h4">
-              Seu saldo é de {balanceData?.Amount}
+              Seu saldo é de R${balanceData?.Amount}
             </Typography>
           )}
         </Box>

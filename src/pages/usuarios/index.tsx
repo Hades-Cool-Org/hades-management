@@ -7,7 +7,8 @@ import useRequest from "@/hooks/useRequest";
 import { User } from "@/types/types";
 import { Box, Button, Divider, Typography } from "@mui/material";
 import Link from "next/link";
-import React, { useContext } from "react";
+import React, { useContext, useEffect, useState } from "react";
+import Cookie from "js-cookie";
 
 const Roles = {
   buyer: "Comprador",
@@ -19,6 +20,14 @@ const Roles = {
 export default function Usuarios() {
   let { data } = useFetch("http://localhost:3333/v1/users");
   const { deleteItem } = useRequest();
+
+  const { state, setState } = useContext(UserContext);
+
+  useEffect(() => {
+    return () => {
+      Cookie.set("state", JSON.stringify(state));
+    };
+  }, [state]);
 
   function removeItem<T>(arr: Array<T>, value: T): void {
     const index = arr.indexOf(value);
@@ -35,39 +44,58 @@ export default function Usuarios() {
     );
   };
 
+  const handleLinkClick = (user: Object) => {
+    setState((prevState) => ({
+      ...prevState,
+      balanceUser: user,
+    }));
+  };
+
   return (
     <main className="main">
       <Box>
         {data &&
           data?.users?.map((user, index: number) => {
             return (
-              <BaseCard key={index}>
-                <Typography variant="h5">{user.name}</Typography>
-                <Divider flexItem />
-                <Box className="card-box-bottom">
-                  <Box>
-                    <Typography variant="h5">Telefone: {user.phone}</Typography>
-                    {user.roles.map((role, index: number) => {
-                      return (
-                        <>
-                          <span key={index}>{Roles[role.name]} </span>
-                          <br />
-                        </>
-                      );
-                    })}
-                  </Box>
-                  <Box className="card-box">
-                    <Link
-                      href={{
-                        pathname: `configuration/edit-profile/${user.id}`,
-                      }}
-                    >
-                      <EditIcon />
-                    </Link>
-                    <DeleteIcon handleClick={() => handleDeleteClick(user)} />
-                  </Box>
-                </Box>
-              </BaseCard>
+              <Link
+                href={{ pathname: `usuarios/adicionar-saldo/${user.id}` }}
+                key={index}
+                onClick={() => handleLinkClick(user)}
+              >
+                <BaseCard>
+                  <>
+                    <Typography variant="h5">{user.name}</Typography>
+                    <Divider flexItem />
+                    <Box className="card-box-bottom">
+                      <Box>
+                        <Typography variant="h5">
+                          Telefone: {user.phone}
+                        </Typography>
+                        {user.roles.map((role, index: number) => {
+                          return (
+                            <>
+                              <span key={index}>{Roles[role.name]} </span>
+                              <br />
+                            </>
+                          );
+                        })}
+                      </Box>
+                      <Box className="card-box">
+                        <Link
+                          href={{
+                            pathname: `configuration/edit-profile/${user.id}`,
+                          }}
+                        >
+                          <EditIcon />
+                        </Link>
+                        <DeleteIcon
+                          handleClick={() => handleDeleteClick(user)}
+                        />
+                      </Box>
+                    </Box>
+                  </>
+                </BaseCard>
+              </Link>
             );
           })}
       </Box>

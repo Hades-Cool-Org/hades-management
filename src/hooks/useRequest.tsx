@@ -33,7 +33,7 @@ function useRequest() {
     axios
       .post(url, body)
       .then((response) => {
-        setSuccess(response.status === 201);
+        setSuccess(response.status === 200 || response.status === 201);
         callback && callback(response.data);
       })
       .catch((err) => {

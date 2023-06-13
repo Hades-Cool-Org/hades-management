@@ -11,6 +11,7 @@ export interface AppContextState {
   order: Object | null;
   delivery: Object | null;
   store: Object | null;
+  balanceUser: Object | null;
 }
 
 interface IUserContext {
@@ -31,6 +32,7 @@ export const initialState = {
   order: null,
   delivery: null,
   store: null,
+  balanceUser: null,
 };
 
 const UserContext = React.createContext<IUserContext>({
