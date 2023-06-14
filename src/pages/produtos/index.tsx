@@ -48,7 +48,7 @@ const theme = createTheme({
   },
 });
 
-const VendorPage = () => {
+const Products = () => {
   let { data, loading, error } = useFetch(BASE_API + "/products");
 
   const { deleteItem, success, loadingRequest } = useRequest();
@@ -113,4 +113,4 @@ const VendorPage = () => {
   );
 };
 
-export default VendorPage;
+export default Products;

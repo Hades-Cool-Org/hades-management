@@ -1,0 +1,20 @@
+
+# Ignore development-specific files
+node_modules
+.cache
+out
+.next
+
+# Ignore build artifacts and temporary files
+*.log
+.DS_Store
+*.swp
+*.swo
+
+# Ignore version control system files
+.git
+.gitignore
+
+Dockerfile
+.dockerignore
+README.md

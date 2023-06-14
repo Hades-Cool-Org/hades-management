@@ -194,3 +194,124 @@ a {
 .form-container{
   height: 180vw;
 }
+
+/* Estilos básicos */
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: #f8f8f8;
+}
+
+h1 {
+  text-align: center;
+  color: #fff;
+  margin: 0;
+  padding: 15px;
+  background-color: #0C1B32;
+  margin-bottom: 10px;
+}
+
+/* Estilos para a lista de produtos */
+.product-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.product-item {
+  margin-bottom: 10px;
+  background-color: #fff;
+  border-radius: 4px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px;
+  position: relative;
+  margin-top: 10px;
+}
+
+.product-info {
+  flex: 1;
+}
+
+.product-name {
+  font-size: 16px;
+  font-weight: bold;
+  color: #333;
+  margin-bottom: 6px;
+  padding-bottom: 6px;
+  border-bottom: 1px solid #ddd;
+}
+
+.product-unit {
+  font-size: 14px;
+  color: #666;
+  margin-top: 6px;
+}
+
+.product-quantity {
+  font-size: 14px;
+  color: #888;
+  margin-top: 6px;
+}
+
+.actions {
+  display: flex;
+  align-items: center;
+  position: absolute;
+  right: 12px;
+  bottom: 12px;
+}
+
+.edit-button, .delete-button {
+  padding: 6px;
+  font-size: 16px;
+  background-color: transparent;
+  border: none;
+  color: #555;
+  cursor: pointer;
+  transition: color 0.3s ease;
+}
+
+.edit-button:hover, .delete-button:hover {
+  color: #2980b9;
+}
+
+.add-button {
+  width: 100%;
+  padding: 10px;
+  font-size: 14px;
+  font-weight: bold;
+  text-align: center;
+  background-color: #2980b9;
+  border: none;
+  color: #fff;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.add-button:hover {
+  background-color: #1c6384;
+}
+
+.menu {
+  position: fixed;
+  top: 0;
+  right: 0;
+  background-color: #0C1B32;
+  padding: 10px;
+}
+
+.menu-button {
+  display: block;
+  width: 40px;
+  height: 40px;
+  color: #fff;
+  font-size: 24px;
+  text-align: center;
+  line-height: 40px;
+  cursor: pointer;
+}
