@@ -11,9 +11,29 @@ import useRequest from "@/hooks/useRequest";
 import SEO from "@/components/Head";
 import Cookie from "js-cookie";
 import Logo from "@/components/Logo";
+import { BASE_API } from "@/utils/api";
 
-const Authentication = () => {
+export async function getStaticProps() {
+  try {
+    const data = await fetch(BASE_API + "/users");
+    const users = await data.json();
+
+    console.log("Server:", users);
+    return {
+      props: { users },
+    };
+  } catch (error) {
+    console.error("Error fetching data:", error);
+    return {
+      props: { users: [] }, // Provide an empty array as fallback data
+    };
+  }
+}
+
+const Authentication = ({ users }: any) => {
   const { login, success, loadingRequest, error } = useRequest();
+
+  console.log("test: ", users);
 
   const { state, setState } = useContext(UserContext);
 
