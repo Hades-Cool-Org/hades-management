@@ -155,9 +155,7 @@ export default function ProductPage() {
   return (
     <main className="main-form">
       <ThemeProvider theme={theme}>
-        <Link
-          href={`http://localhost:3000/produto/editar/${state?.product?.id}`}
-        >
+        <Link href={{ pathname: `/produto/editar/${state?.product?.id}` }}>
           <BaseCard>
             <>
               <Typography variant="h5">

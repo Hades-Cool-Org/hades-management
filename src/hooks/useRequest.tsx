@@ -11,7 +11,7 @@ function useRequest() {
   const login = (body: any, callback?: any) => {
     setLoadingRequest(true);
     axios
-      .post("http://localhost:3333/login", body)
+      .post("http://hades.vps-kinghost.net:3333/login", body)
       .then((response) => {
         if (response.status === 200) {
           const parsedToken = parseJwt(response.data.jwt);
