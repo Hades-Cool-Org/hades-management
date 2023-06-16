@@ -23,8 +23,28 @@ const Authentication = () => {
 
   const handleSubmit = async (event: React.MouseEvent<HTMLElement>) => {
     const body = { email, password };
-    login(body, postLoginCallback);
+    // login(body, postLoginCallback);
     event.preventDefault();
+    try {
+      const response = await fetch("/api/login", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(body),
+      });
+      if (response.ok) {
+        const data = await response.json();
+        // Handle the response data
+        console.log(data);
+      } else {
+        // Handle the error
+        console.error("Error:", response.statusText);
+      }
+    } catch (error) {
+      // Handle the network error
+      console.error("Error:", error);
+    }
   };
 
   const postLoginCallback = useCallback(
