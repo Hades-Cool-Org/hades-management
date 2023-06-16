@@ -22,19 +22,20 @@ export async function getStaticProps() {
     return {
       props: { users },
     };
-  } catch (error) {
+  } catch (error: any) {
     console.error("Error fetching data:", error);
     return {
-      props: { users: [] }, // Provide an empty array as fallback data
+      props: { users: [], err: String(error) }, // Provide an empty array as fallback data
     };
   }
 }
 
-const Authentication = ({ users }: any) => {
+const Authentication = ({ users, err }: any) => {
   const { login, success, loadingRequest, error } = useRequest();
 
-  console.log("test: ", users);
+  console.log(err);
 
+  console.log("test: ", users);
   const { state, setState } = useContext(UserContext);
 
   const [email, setEmail] = useState<string>("caioX");
