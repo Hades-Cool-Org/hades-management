@@ -37,41 +37,57 @@ export default function Drawer({
             itemText={"Fornecedores"}
             route="/fornecedores"
             handleClick={handleDrawerClose}
+            userRoles={state.user?.roles}
+            permissions={["admin", "buyer"]}
           />
           <ListItem
             itemText={"Produtos"}
             route="/produtos"
             handleClick={handleDrawerClose}
+            userRoles={state.user?.roles}
+            permissions={["admin", "manager"]}
           />
           <ListItem
             itemText={"Pedidos"}
             route="/pedidos"
             handleClick={handleDrawerClose}
+            userRoles={state.user?.roles}
+            permissions={["admin", "driver", "manager", "buyer"]}
           />
           <ListItem
             itemText={"Lojas"}
             route="/lojas"
             handleClick={handleDrawerClose}
+            userRoles={state.user?.roles}
+            permissions={["admin", "driver", "manager", "buyer"]}
           />
           <ListItem
             itemText={"Veículos"}
             route="/veiculos"
             handleClick={handleDrawerClose}
+            userRoles={state.user?.roles}
+            permissions={["admin", "driver"]}
           />
           <ListItem
             itemText={"Entregas"}
             route="/entregas"
             handleClick={handleDrawerClose}
+            userRoles={state.user?.roles}
+            permissions={["admin", "driver", "manager"]}
           />
           <ListItem
             itemText={"Acompanhamento"}
             route="/acompanhamento"
             handleClick={handleDrawerClose}
+            userRoles={state.user?.roles}
+            permissions={["admin", "driver", "manager"]}
           />
           <ListItem
             itemText={"Usuários"}
             route="/usuarios"
             handleClick={handleDrawerClose}
+            userRoles={state.user?.roles}
+            permissions={["admin"]}
           />
         </List>
         <Divider />
@@ -80,11 +96,15 @@ export default function Drawer({
             itemText={"Editar Perfil"}
             route={`configuration/edit-profile/${state?.user?.id}`}
             handleClick={handleDrawerClose}
+            userRoles={state.user?.roles}
+            permissions={["admin", "driver", "manager", "buyer"]}
           />
           <ListItem
             itemText={"Sair"}
             route="/login"
             handleClick={handleLeaveClick}
+            userRoles={state.user?.roles}
+            permissions={["admin", "driver", "manager", "buyer"]}
           />
         </List>
       </Box>
